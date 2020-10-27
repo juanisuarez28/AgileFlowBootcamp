@@ -1,0 +1,8 @@
+{
+	"app": {
+		"TITLE": "Bienvenidos al FrontEnd Bootcamp 2020!",
+		"menu": {
+			"HOME": "Home"
+		}
+	}
+}
