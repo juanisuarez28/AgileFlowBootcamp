@@ -2,10 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { MaterialModule } from '../material/material.module';
+import {ContentComponent} from './components/content/content.component';
 
 
 @NgModule({
-	declarations: [],
+	declarations: [ContentComponent],
 	imports: [
 		MaterialModule,
 		CommonModule,
@@ -14,7 +15,8 @@ import { MaterialModule } from '../material/material.module';
 	exports: [
 		MaterialModule,
 		CommonModule,
-		TranslateModule
+		TranslateModule,
+		ContentComponent
 	],
 	providers: []
 })
