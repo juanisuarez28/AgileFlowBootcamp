@@ -1,4 +1,4 @@
-# Welcome to FrontEnd Bootcamp 2020!
+# Welcome to FrontEnd Bootcamp 2021!
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.7.
 
@@ -16,7 +16,8 @@ Run `ng generate component component-name` to generate a new component. You can 
 ### New module without routing
 > `ng generate module modules/api-rest --module app.module`
 
-### Nuevo endpoint
+### Nuevo servicio
+Asociado al UsersController 
 > `ng g s modules/api-rest/services/users`
 
 ### Nuevo componente ruteado
@@ -52,9 +53,9 @@ La aplicación está compuesta por distintos módulos que se pueden agrupar en m
 
 Los módulos de infraestructura son utilizados por los del dominio para poder implementar la funcionalidad requerida por el usuario. Proveen acceso al API REST, componentes y funcionalidad de uso común. 
 
-1. `api-rest`: permite acceder a los Endpoints que expone el API REST. Los servicios expuestos y sus métodos mantienen el mismo nombre que los Controllers en el backend para permitir una búsqueda rápida. Además, este módulo expone las interfaces en TypeScript de los tipos de datos de cada Endpoint, tanto para la Petición como para la Respuesta. Dichas interfaces son generadas automáticamente. 
+1. `api-rest`: permite acceder a los Endpoints que expone el API REST. Los servicios expuestos y sus métodos mantienen el mismo nombre que los Controllers en el backend para permitir una búsqueda rápida. Además, este módulo expone las interfaces en TypeScript de los tipos de datos de cada Endpoint, tanto para la Petición como para la Respuesta. Dichas interfaces son generadas automáticamente y se encuentran en el archivo api-model.d.ts. 
 2. `material`: declara y permite acceder a los componentes de [Material](https://material.angular.io/). Para cada nuevo desarrollo de componentes visuales se deberá evaluar resolver en primera instancia con lo ofrecido por *Material* antes de aplicar un desarrollo custom o inclusión de nuevas librerías. Este módulo será importado y exportado por el módulo `core` 
-3. `presentation`: contiene los componentes visuales diseñados específicamente para este sistema.
+3. `presentation`: contiene los componentes visuales sin funcionalidad especifica relacionada al dominio.
 4. `core`: contiene funcionalidad central y reutilizable, como por ejemplo Guards, Directivas, Servicios, etc.
 
 El resto de los módulos corresponden al dominio, como por ejemplo camas, historia-clinica, pacientes, etc. 
@@ -63,7 +64,7 @@ La estructura de estos módulos está formada por una división en carpetas que 
 1. `routes`: siempre requerido, corresponde a los componentes directamente relacionados con cada pagina de la aplicación a la que le 
 corresponde una ruta particular.
 2. `components`: depende del reuso y/o modularización dentro del propio módulo, son utilizados por los componentes de *routes*.
-3. `services`: Estarán presentes dependiendo si es requerido algún servicio propio del módulo.
+3. `services`: Estarán presentes dependiendo si es necesario encapsular logica de una funcionalidad en otro archivo o bien para realizan una comunicacion entre componentes. 
 
 ##### Idioma 
 El código debe estar por defecto escrito en idioma inglés, tener en cuenta principalmente nombres de clases, metodos y variables. Pueden existir excepciones en caso que algun nombre o denominación esté intrinsecamente relacionado con el dominio del sistema.
@@ -100,11 +101,11 @@ En la carpeta `styles` se encuentran los archivos *.scss* correspondientes a los
 
 ## Objetivos / User Stories 
 
-Este Bootcamp consiste en realizar una SPA utilizando Angular que permita a un usuario llevar a cabo las funcionalidades mínimas que permiten implementarse a través de la API de Taiga.
+Este Bootcamp consiste en realizar una SPA(Single-page Application) utilizando Angular que permita a un usuario llevar a cabo las funcionalidades mínimas que permiten implementarse a través de la API de Taiga.
 
 En esta primer etapa del Bootcamp disponemos de una estructura de proyecto básica tal como se describió anteriormente. A medida que se vayan desarrollando las distintas UserStories se deberá analizarse mediante alguna grooming la estrategia a utilizar para llevar a cabo su solución, definiendo las posibles creaciones o modificaciones de módulos, componentes y servicios. Ante cualquier duda siempre revisar la [documentación](https://angular.io/docs) o consultar con el referente asignado.
 
-La obtención de datos la realizaremos por medio de la api de nuestro tracker de tareas [Taiga](https://www.taiga.io/) instalado en nuestros servidores (http://taiga.pladema.net/). La documentacion de la api esta disponible [aquí](https://taigaio.github.io/taiga-doc/dist/api.html).
+La obtención de datos la realizaremos por medio de la api de nuestro tracker de tareas [Taiga](https://www.taiga.io/) instalado en nuestros servidores (http://taiga.lamansys.com/). La documentacion de la api esta disponible [aquí](https://taigaio.github.io/taiga-doc/dist/api.html).
 
 
 ##### Consideraciones:
@@ -138,8 +139,7 @@ Endpoint: /home
 	
 
 ### Construir listado de U. Stories disponibles
-Crear una tabla (utilizar lo que provee Material) del [listado de User Stories](https://taigaio.github.io/taiga-doc/dist/api.html#user-stories-list) sin cerrar, pertenecientes al sprint actual del usuario logueado, donde cada fila de la tabla tendra un boton  
-*'Ver'* que redireccionará a una siguiente página (siguiente US).
+Crear una tabla (utilizar lo que provee Material) del [listado de User Stories](https://taigaio.github.io/taiga-doc/dist/api.html#user-stories-list) sin cerrar, pertenecientes al sprint actual del usuario logueado, donde cada fila de la tabla tendra un boton *'Ver'* que redireccionará a una siguiente página (siguiente US).
 Para llevar a cabo este objetivo se deberá crear un módulo *us* y un componente Home ubicado en la carpeta *routes* de dicho módulo. 
 
 Endpoint: /project/:projectId/userstory
