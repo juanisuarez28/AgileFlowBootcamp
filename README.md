@@ -73,9 +73,9 @@ Endpoint: /login
 
 ### Construir listado de proyectos disponibles
 Mensaje de bienvenida con el nombre completo de usuario (obtenido en la respuesta del login). 
-Crear una tabla (utilizar lo que provee Material) del [listado de proyectos](https://taigaio.github.io/taiga-doc/dist/api.html#projects-list) pertenecientes al usuario logueado donde cada fila de la tabla tenga un botón *'Ver'* que redireccionará a una 
-siguiente pagina (siguiente US).
-Para llevar a cabo este objetivo se deberá crear un modulo *Home* 
+Crear una tabla (utilizar lo que provee Material) del [listado de proyectos](https://taigaio.github.io/taiga-doc/dist/api.html#projects-list) pertenecientes al usuario logueado donde cada fila de la tabla tenga un botón *'Ver'* el cual abrirá un pop-up que contendrá el [Listado de sprints](https://docs.taiga.io/api.html#milestones-list) sin cerrar que pertenezcan al proyecto.
+Al seleccionar uno de los sprints nos redireccionará a la siguiente página (siguiente US).
+Para llevar a cabo este objetivo se deberá crear un modulo *Home*.
 
 Endpoint: /home
 	
@@ -84,7 +84,7 @@ Endpoint: /home
 Crear una tabla (utilizar lo que provee Material) del [listado de User Stories](https://taigaio.github.io/taiga-doc/dist/api.html#user-stories-list) sin cerrar, pertenecientes al sprint actual del usuario logueado, donde cada fila de la tabla tendra un boton *'Ver'* que redireccionará a una siguiente página (siguiente US).
 Para llevar a cabo este objetivo se deberá crear un módulo *us* y un componente Home ubicado en la carpeta *routes* de dicho módulo. 
 
-Endpoint: /project/:projectId/userstory
+Endpoint: /project/:projectId/milestone/:milestoneId/userstory
 	
 ### Construir listado de tareas disponibles
 La página deberá tener un titulo y la descripción correspondiente al de la US seleccionada. 
