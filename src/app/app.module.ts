@@ -9,10 +9,8 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { registerLocaleData } from '@angular/common';
 import localeEsAr from '@angular/common/locales/es-AR';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { CoreModule } from './modules/core/core.module';
 import { MaterialModule } from './modules/material/material.module';
 import { PresentationModule } from './modules/presentation/presentation.module';
-import { ApiRestModule } from './modules/api-rest/api-rest.module';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -21,21 +19,19 @@ registerLocaleData(localeEsAr, 'es-AR');
     AppComponent
   ],
   imports: [
-    ApiRestModule,
-    MaterialModule,
     AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
-    CoreModule,
     HttpClientModule,
-    PresentationModule,
+    MaterialModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
-        useFactory: createTranslateLoader,
+        useFactory: (http: HttpClient) => new TranslateHttpLoader(http, './assets/i18n/', '.json'),
         deps: [HttpClient]
       }
-    })
+    }),
+    PresentationModule,
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'es-AR' }
@@ -43,8 +39,4 @@ registerLocaleData(localeEsAr, 'es-AR');
   bootstrap: [AppComponent]
 })
 export class AppModule {
-}
-
-export function createTranslateLoader(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
