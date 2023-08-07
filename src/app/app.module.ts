@@ -11,6 +11,7 @@ import localeEsAr from '@angular/common/locales/es-AR';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MaterialModule } from './modules/material/material.module';
 import { PresentationModule } from './modules/presentation/presentation.module';
+import { Router, RouterModule } from '@angular/router';
 
 registerLocaleData(localeEsAr, 'es-AR');
 
@@ -21,6 +22,7 @@ registerLocaleData(localeEsAr, 'es-AR');
   imports: [
     AppRoutingModule,
     BrowserModule,
+    RouterModule,
     BrowserAnimationsModule,
     HttpClientModule,
     MaterialModule,
@@ -32,6 +34,9 @@ registerLocaleData(localeEsAr, 'es-AR');
       }
     }),
     PresentationModule,
+  ],
+  exports:[
+    RouterModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'es-AR' }
