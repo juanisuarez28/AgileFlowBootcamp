@@ -7,15 +7,16 @@ import { EpicComponent } from './epic/epic.component';
 import { ProyectComponent } from './proyect/proyect.component';
 import { StorieComponent } from './storie/storie.component';
 import { TaskComponent } from './task/task.component';
-import { RouterModule } from '@angular/router';
 import { PresentationModule } from '../presentation.module';
+import { RouterModule } from '@angular/router';
 
 
 
 @NgModule({
   imports: [
     CommonModule,
-    PresentationModule
+    PresentationModule,
+    RouterModule
   ],
   declarations: [
     MainComponent,
@@ -28,7 +29,12 @@ import { PresentationModule } from '../presentation.module';
   ],
   exports:[
     MainComponent,
-    HomeComponent
+    HomeComponent,
+    ProyectComponent,
+    ProyectListComponent,
+    EpicComponent,
+    StorieComponent,
+    TaskComponent
   ]
 })
 export class FeaturesModule { }

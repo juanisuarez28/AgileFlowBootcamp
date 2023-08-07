@@ -9,15 +9,15 @@ import { StorieComponent } from './modules/presentation/features/storie/storie.c
 import { TaskComponent } from './modules/presentation/features/task/task.component';
 
 const routes: Routes = [
-  { path: '', component: MainComponent, children:[
-    { path: '', component: HomeComponent  },
-    { path: 'my-proyects', component: ProyectListComponent  },
-    { path: 'my-proyects/:proyectId', component: ProyectComponent  },
-    { path: 'my-proyects/:proyectId/:epicId', component: EpicComponent  },
-    { path: 'my-proyects/:proyectId/:epicId/:storieId', component: StorieComponent  },
-    { path: 'my-proyects/:proyectId/:epicId/:storieId/:taskId', component: TaskComponent  },
-
-  ]  },
+  // { path: '', component: MainComponent, children:[
+    
+  // ]  },
+  { path: '', component: HomeComponent  },
+  { path: 'my-proyects', component: ProyectListComponent  },
+  { path: 'my-proyects/:proyectId', component: ProyectComponent  },
+  { path: 'my-proyects/:proyectId/:epicId', component: EpicComponent  },
+  { path: 'my-proyects/:proyectId/:epicId/:storieId', component: StorieComponent  },
+  { path: 'my-proyects/:proyectId/:epicId/:storieId/:taskId', component: TaskComponent  },
   
 
 
