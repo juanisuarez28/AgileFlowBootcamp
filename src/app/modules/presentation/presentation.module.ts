@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { LabelComponent } from './components/label/label.component';
 import { RouterModule } from '@angular/router';
+import { AppRoutingModule } from 'src/app/app-routing.module';
 
 
 @NgModule({
@@ -11,6 +12,7 @@ import { RouterModule } from '@angular/router';
 	imports: [
 		CommonModule,
 		FlexLayoutModule,
+		AppRoutingModule,
 		RouterModule
 	],
 	exports: [
