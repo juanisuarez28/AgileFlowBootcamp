@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-label',
@@ -7,4 +7,7 @@ import { Component } from '@angular/core';
 })
 export class LabelComponent {
 
+  @Input() text: string = 'vacio';
+  @Input() tachadoBoolan: boolean = false;
+  @Input() pointerCursor: boolean = false;
 }
