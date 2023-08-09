@@ -18,6 +18,13 @@ import { TaskCardComponent } from './task-card/task-card.component';
   ],
   imports: [
     CommonModule
+  ],
+  exports:[
+    ButtonComponent,
+    LabelComponent,
+    GenericCardComponent,
+    ProyectCardComponent,
+    TaskCardComponent
   ]
 })
 export class SharedModule { }

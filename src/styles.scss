@@ -1,4 +1,54 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+body,html {
+    height: 100%;
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+label,h1,h2,h3,a,input {
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+:root {
+    font-size: 16px;
+    --darkColor: #004242;
+    --darkColorSoft: #3d6f6f;
+    --mediumColor: #7b9b9b;
+    --lightColorStrong:#b8c8c8;
+    --lightColor: #e1e6e6;
+}
+
+* {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+}
+
+@media (prefers-color-scheme: light) {
+    :root { 
+      --backgroundcolor : var(--lightColor);
+      --iconColor :var(--darkColor);
+      --textColor : var(--darkColor);
+      --borderColor : var(--darkColor); 
+      --elementBackgroundColor : var(--mediumColor); 
+      
+    }
+    body {
+      background-color: var(--backgroundcolor);
+    }
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --backgroundcolor :var(--darkColor);
+      --iconColor : var(--lightColor);
+      --textColor : var(--lightColor);
+      --borderColor : var(--lightColor); 
+      --elementBackgroundColor : var(--mediumColor); 
+    }
+    body {
+      background-color: var(--backgroundcolor);
+    }
+  }
+  
