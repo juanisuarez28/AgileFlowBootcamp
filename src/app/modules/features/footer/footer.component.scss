@@ -1,0 +1,19 @@
+
+footer{
+    background-color: var(--darkColorSoft);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    color: var(--textColor);
+    display: flex;
+    justify-content: space-around;
+
+
+    div{
+
+
+        ul{
+            list-style: none;
+        }
+    }
+}
