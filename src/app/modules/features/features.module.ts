@@ -9,7 +9,7 @@ import { ProyectComponent } from './proyect/proyect.component';
 import { ProyectListComponent } from './proyect-list/proyect-list.component';
 import { SettingsComponent } from './settings/settings.component';
 import { TaskComponent } from './task/task.component';
-
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -23,7 +23,8 @@ import { TaskComponent } from './task/task.component';
   ],
   imports: [
     CommonModule,
-    FeaturesRoutingModule
+    FeaturesRoutingModule,
+    SharedModule
   ]
 })
 export class FeaturesModule { }
