@@ -1,0 +1,71 @@
+@use '@angular/material' as mat;
+
+mat-sidenav{
+    width: 20rem;
+    border-radius: 0.5rem;
+    
+    
+    @media (max-width:560px) {
+        width: 80dvw;
+        
+    }
+    @media (prefers-color-scheme: light) {
+        background-color: var(--lightColorStrong);
+    }
+    @media (prefers-color-scheme: dark) {
+        background-color: var(--darkColorSoft);
+    }
+}
+
+.flex-container{
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    height: 100%;
+}
+.logo{
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--darkColor);
+}
+.navigation{
+    display: flex;
+    flex-direction: column;
+    flex: 4;
+    flex-grow: 10;
+    row-gap: 0.5rem;
+    align-items: center;
+    padding: 1rem;
+}
+.settings{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--mediumColor);
+}
+
+.appContainer{
+    background-color: var(--backgroundcolor);
+    height: 100dvh;   
+}
+
+.nav-button{
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    width: 100%;
+    height: 3rem;
+    border-radius: 0.5rem;
+
+    @media (prefers-color-scheme: light) {
+        background-color: var(--mediumColor);
+    }
+    @media (prefers-color-scheme: dark) {
+        background-color: var(--mediumColor);
+    }
+}
