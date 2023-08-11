@@ -11,9 +11,11 @@ import {NgIf} from '@angular/common';
   
 })
 export class MainComponent {
-  opened: boolean= false;
 
-  toggle(){
-    this.opened= !this.opened;
+  rutaActual: string= "Home";
+
+  changeRutaActual(rutaActual : string){
+    this.rutaActual=rutaActual;
   }
+
 }
