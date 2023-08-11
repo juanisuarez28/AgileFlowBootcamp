@@ -7,6 +7,8 @@ import { ProyectComponent } from './proyect/proyect.component';
 import { EpicComponent } from './epic/epic.component';
 import { StorieComponent } from './storie/storie.component';
 import { TaskComponent } from './task/task.component';
+import { SettingsComponent } from './settings/settings.component';
+import { MyStoriesComponent } from './my-stories/my-stories.component';
 
 const routes: Routes = [
   {
@@ -16,7 +18,10 @@ const routes: Routes = [
       { path: 'my-proyects/:proyectId', component: ProyectComponent },
       { path: 'my-proyects/:proyectId/:epicId', component: EpicComponent },
       { path: 'my-proyects/:proyectId/:epicId/:storieId', component: StorieComponent },
-      { path: 'my-proyects/:proyectId/:epicId/:storieId/:taskId', component: TaskComponent }
+      { path: 'my-proyects/:proyectId/:epicId/:storieId/:taskId', component: TaskComponent },
+      { path: 'settings', component: SettingsComponent },
+      { path: 'my-stories', component: MyStoriesComponent },
+
     ]
   } 
   ,];

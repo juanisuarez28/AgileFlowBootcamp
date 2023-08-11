@@ -15,6 +15,7 @@ import { MaterialModule } from '../material/material.module';
 import { SharedModule } from '../shared/shared.module';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
+import { MyStoriesComponent } from './my-stories/my-stories.component';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { MatButtonModule } from '@angular/material/button';
     TaskComponent,
     HeaderComponent,
     FooterComponent,
+    MyStoriesComponent,
   ],
   imports: [
     CommonModule,
