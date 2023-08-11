@@ -9,6 +9,9 @@ import { ProyectComponent } from './proyect/proyect.component';
 import { ProyectListComponent } from './proyect-list/proyect-list.component';
 import { SettingsComponent } from './settings/settings.component';
 import { TaskComponent } from './task/task.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { SharedModule } from '../shared/shared.module';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @NgModule({
@@ -19,11 +22,14 @@ import { TaskComponent } from './task/task.component';
     ProyectComponent,
     ProyectListComponent,
     SettingsComponent,
-    TaskComponent
+    TaskComponent,
   ],
   imports: [
     CommonModule,
-    FeaturesRoutingModule
+    FeaturesRoutingModule,
+    MatSidenavModule,
+    MatButtonModule,
+    SharedModule
   ]
 })
 export class FeaturesModule { }

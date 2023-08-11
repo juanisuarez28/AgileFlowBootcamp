@@ -1,4 +1,36 @@
-<p>main works!</p>
-navbar
 
-<router-outlet ></router-outlet>
+<mat-sidenav-container class="appContainer" >
+    <mat-sidenav #sidenav mode="side" [mode]="'over'" [(opened)]="opened" >
+        <div class="flex-container">
+
+          <div class="logo">App Logo</div>
+          
+          <div class=" navigation">
+            <div class="nav-button">
+              <app-label [text]="'HOME'" [pointerCursor]="true" [routerLink]="[ '/']"></app-label>
+            </div>
+            <div class="nav-button">
+              <app-label [text]="'My Proyects'" [routerLink]="[ '/my-proyects']" [pointerCursor]="true"></app-label>
+            </div>
+            <div class="nav-button">
+              <app-label [text]="'My Stories'" [routerLink]="[ '/my-stories']" [pointerCursor]="true" ></app-label>
+            </div>
+            
+          </div>
+          
+          <div class="nav-button">
+            <app-label [text]="'Settings'" [routerLink]="[ '/settings']" [pointerCursor]="true" ></app-label>
+          </div>
+        </div>
+      </mat-sidenav>
+
+    
+    <mat-sidenav-content>
+        <p><button mat-button (click)="sidenav.toggle()">sidenav.toggle()</button></p>
+      <router-outlet ></router-outlet>
+     
+
+
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+
