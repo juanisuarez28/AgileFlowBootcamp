@@ -13,6 +13,9 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { MaterialModule } from '../material/material.module';
 import { SharedModule } from '../shared/shared.module';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatButtonModule } from '@angular/material/button';
+
 
 @NgModule({
   declarations: [
@@ -30,6 +33,8 @@ import { SharedModule } from '../shared/shared.module';
     CommonModule,
     FeaturesRoutingModule,
     MaterialModule,
+    MatSidenavModule,
+    MatButtonModule,
     SharedModule
   ]
 })
