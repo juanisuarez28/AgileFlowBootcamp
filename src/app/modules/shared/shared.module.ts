@@ -5,6 +5,8 @@ import { LabelComponent } from './label/label.component';
 import { GenericCardComponent } from './generic-card/generic-card.component';
 import { ProyectCardComponent } from './proyect-card/proyect-card.component';
 import { TaskCardComponent } from './task-card/task-card.component';
+import {MatCardModule} from '@angular/material/card';
+
 
 
 
@@ -17,7 +19,8 @@ import { TaskCardComponent } from './task-card/task-card.component';
     TaskCardComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    MatCardModule
   ],
   exports:[
     ButtonComponent,

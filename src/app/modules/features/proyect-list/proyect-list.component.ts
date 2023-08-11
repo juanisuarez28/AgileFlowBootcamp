@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-proyect-list',
   templateUrl: './proyect-list.component.html',
   styleUrls: ['./proyect-list.component.scss']
-})
+})  
 export class ProyectListComponent {
-
+  
 }

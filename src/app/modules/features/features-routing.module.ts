@@ -18,7 +18,7 @@ const routes: Routes = [
       { path: 'my-proyects/:proyectId/:epicId/:storieId', component: StorieComponent },
       { path: 'my-proyects/:proyectId/:epicId/:storieId/:taskId', component: TaskComponent }
     ]
-  }
+  } 
   ,];
 
 @NgModule({
