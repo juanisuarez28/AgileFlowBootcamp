@@ -1,0 +1,20 @@
+mat-card{
+    @media (prefers-color-scheme: light) {
+        background-color: var(--lightColorStrong);
+    }
+    @media (prefers-color-scheme: dark) {
+        background-color: var(--lightColorStrong);
+    }
+    color: black;
+    i{
+        font-size: 1.5rem;
+        
+        
+
+    }
+    mat-card-actions{
+        display: flex;
+        flex-direction: row;
+        column-gap: 1rem;
+    }
+}
