@@ -7,6 +7,6 @@ import { Component, Input } from '@angular/core';
 export class ProyectCardComponent {
   @Input() title='';
   @Input() description='';
-  @Input() members='';
+  @Input() members=[''];
 
 }

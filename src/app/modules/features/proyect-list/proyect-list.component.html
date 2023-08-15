@@ -1,2 +1,7 @@
-<p>proyect-list works!</p>
-<app-proyect-card></app-proyect-card>
+<div>
+    <ul>
+        <li *ngFor="let project of projects">
+            <app-proyect-card [title]="project.getName()"  [members]="project.getMembers()"  [description]="project.getDescription()"></app-proyect-card>
+        </li>
+    </ul>
+</div>
