@@ -1,1 +1,17 @@
 <p>proyect works!</p>
+<div class="proyect">
+    <app-generic-card [title]="'proyect info'" [description]="'proyect.description cambiar por proyect card'"></app-generic-card>
+    <app-divider></app-divider>
+    <app-button [text]="'Add epic'" [icon]="'plus'" (buttonEvent)="newEpicDialog()" ></app-button>
+    <ul  *ngFor="let epica of epics; index as i;">
+        <li>
+            <app-generic-card 
+                [title]="epica.name" 
+                [description]="epica.description" 
+                (editOutPut)="editDialog(epica,i)"
+                (deleteOutPut)="deleteDialog(epica,i)"
+            ></app-generic-card>
+        </li>
+        
+    </ul>
+</div>
