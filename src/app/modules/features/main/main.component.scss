@@ -69,3 +69,12 @@ mat-sidenav{
         background-color: var(--mediumColor);
     }
 }
+mat-sidenav-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    app-header{
+        width: 100%;
+    }
+}
