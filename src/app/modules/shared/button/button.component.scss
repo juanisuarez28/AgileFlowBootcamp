@@ -11,33 +11,27 @@ button {
     align-items: center;
     column-gap: 0.5rem;
 
-    background: transparent;
-
+    
     border-radius: 0.25rem;
     box-sizing: border-box;
-
+    
     @media (prefers-color-scheme: light) {
-        border-color: black;    
+        color: var(--darkColor);
+        border-color: var(--darkColor);
+        background: var(--mediumColor);
     }
     @media (prefers-color-scheme: dark) {  
         
-        border-color: white;
-        img{
-            filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(200deg) brightness(107%) contrast(101%);
-        }
+        border-color: var(--lightColor);
+        color: var(--lightColor);
+        background: var(--darkColorSoft);
+       
     }
     &:active{
         border-color: rgba(172, 255, 47, 0.529);
     }
 
-    .text{
-        @media (prefers-color-scheme: light) {
-                color: black;
-        }
-        @media (prefers-color-scheme: dark) {        
-                // color: white;
-        }
-    }
+    
 }
 
 button i::before {
