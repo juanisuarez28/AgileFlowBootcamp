@@ -14,11 +14,11 @@ const routes: Routes = [
   {
     path: '', component: MainComponent, children: [
       { path: '', component: HomeComponent },
-      { path: 'my-proyects', component: ProyectListComponent },
-      { path: 'my-proyects/:proyectId', component: ProyectComponent },
-      { path: 'my-proyects/:proyectId/:epicId', component: EpicComponent },
-      { path: 'my-proyects/:proyectId/:epicId/:storieId', component: StorieComponent },
-      { path: 'my-proyects/:proyectId/:epicId/:storieId/:taskId', component: TaskComponent },
+      { path: 'my-projects', component: ProyectListComponent },
+      { path: 'my-projects/:projectId', component: ProyectComponent },
+      { path: 'my-projects/:projectId/:epicId', component: EpicComponent },
+      { path: 'my-projects/:projectId/:epicId/:storieId', component: StorieComponent },
+      { path: 'my-projects/:projectId/:epicId/:storieId/:taskId', component: TaskComponent },
       { path: 'settings', component: SettingsComponent },
       { path: 'my-stories', component: MyStoriesComponent },
 
