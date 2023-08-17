@@ -6,6 +6,7 @@ import { GenericCardComponent } from './generic-card/generic-card.component';
 import { ProyectCardComponent } from './proyect-card/proyect-card.component';
 import { TaskCardComponent } from './task-card/task-card.component';
 import {MatCardModule} from '@angular/material/card';
+import { DividerComponent } from './divider/divider.component';
 
 
 
@@ -16,7 +17,8 @@ import {MatCardModule} from '@angular/material/card';
     LabelComponent,
     GenericCardComponent,
     ProyectCardComponent,
-    TaskCardComponent
+    TaskCardComponent,
+    DividerComponent
   ],
   imports: [
     CommonModule,
@@ -27,7 +29,8 @@ import {MatCardModule} from '@angular/material/card';
     LabelComponent,
     GenericCardComponent,
     ProyectCardComponent,
-    TaskCardComponent
+    TaskCardComponent,
+    DividerComponent
   ]
 })
 export class SharedModule { }

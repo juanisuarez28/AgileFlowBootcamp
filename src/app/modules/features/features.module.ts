@@ -13,31 +13,33 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { MaterialModule } from '../material/material.module';
 import { SharedModule } from '../shared/shared.module';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatButtonModule } from '@angular/material/button';
 import { MyStoriesComponent } from './my-stories/my-stories.component';
-
+import { EpicFormComponent } from './proyect/epic-form/epic-form.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DeleteDialogComponent } from './proyect/delete-dialog/delete-dialog.component';
 
 @NgModule({
   declarations: [
     EpicComponent,
     HomeComponent,
     MainComponent,
-    ProyectComponent,
+    ProyectComponent ,
     ProyectListComponent,
     SettingsComponent,
     TaskComponent,
     HeaderComponent,
     FooterComponent,
     MyStoriesComponent,
+    EpicFormComponent,
+    DeleteDialogComponent,
   ],
   imports: [
     CommonModule,
     FeaturesRoutingModule,
     MaterialModule,
-    MatSidenavModule,
-    MatButtonModule,
-    SharedModule
+    SharedModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class FeaturesModule { }

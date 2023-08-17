@@ -5,6 +5,10 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
 	declarations: [],
@@ -15,6 +19,10 @@ import { MatButtonModule } from '@angular/material/button';
 		MatToolbarModule,
 		MatIconModule,
 		MatButtonModule,
+		MatSidenavModule,
+		MatInputModule,
+		MatFormFieldModule,
+		MatDialogModule,
 	],
 	exports: [
 		MatCardModule,
@@ -22,6 +30,10 @@ import { MatButtonModule } from '@angular/material/button';
 		MatToolbarModule,
 		MatIconModule,
 		MatButtonModule,
+		MatSidenavModule,
+		MatInputModule,
+		MatFormFieldModule,
+		MatDialogModule,
 	]
 })
 export class MaterialModule {
