@@ -7,14 +7,16 @@ import { Project } from 'src/app/modules/models/cproject.model';
 })
 export class ProjectService {
  
+ 
   private projects : Project[]= [];
+  
   private projects$ = new Subject<Project[]>();
 
   constructor() {
 
   }
 
-  newProject(value: any) {
+  public newProject(value: any) {
     let newId=this.projects[this.projects.length-1].getId()+1;
     let aux= new Project(value.members, newId, value.name, value.description, "x", "messi", 2);
 
@@ -30,6 +32,23 @@ export class ProjectService {
     this.projects.push(project);
     this.projects$.next(this.projects); // emitimos el nuevo valor
   }
+
+  public editProject(result: any, idToEdit: number) {    
+
+    const updatedProjects=this.projects.map(proj =>{
+      if(proj['_id']=== idToEdit){
+        return new Project (result.members,proj['_id'],result.name,result.description,"x","messi",2);
+        }
+        return proj;
+      }
+    );
+    
+    this.projects=updatedProjects;
+    this.projects$.next(this.projects);
+  }
+  
+
+
 
   public deleteProject(id:number){
 

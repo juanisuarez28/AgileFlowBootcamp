@@ -2,7 +2,7 @@
 <div>
     <ul>
         <li *ngFor="let project of projects">
-            <app-proyect-card [title]="project.getName()"  [members]="project.getMembers()"  [description]="project.getDescription()" (editOutPut)="editProjectDialog()" (deleteOutPut)="deleteProject(project)" ></app-proyect-card>
+            <app-proyect-card [title]="project.getName()"  [members]="project.getMembers()"  [description]="project.getDescription()" (editOutPut)="editProjectDialog(project, project.getId())" (deleteOutPut)="deleteProject(project)" ></app-proyect-card>
         </li>
     </ul>
 </div>
