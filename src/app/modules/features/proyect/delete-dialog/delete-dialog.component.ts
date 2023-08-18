@@ -11,7 +11,7 @@ export class DeleteDialogComponent {
 
   constructor(
     public dialogRef: MatDialogRef<ProyectComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: string,
+    @Inject(MAT_DIALOG_DATA) public data: deleteData,
 
 
   ) { }
@@ -20,4 +20,9 @@ export class DeleteDialogComponent {
     console.log("Delete epic");
     this.dialogRef.close(this.data);
   }
+}
+
+export interface deleteData{
+  type: string;
+  name: string;
 }
