@@ -1,7 +1,6 @@
-<h1 mat-dialog-title>Delete Epic</h1>
+<h1 mat-dialog-title>Delete {{data.type}}</h1>
 <div class="displayContent" mat-dialog-content>
     <p>Estas seguro de eliminar: {{data.type}} {{data.name}}?</p>
-
 
     <div class="dialog-actions" mat-dialog-actions>
       <button mat-button cdkFocusInitial (click)="deleteEpic()">Delete</button>

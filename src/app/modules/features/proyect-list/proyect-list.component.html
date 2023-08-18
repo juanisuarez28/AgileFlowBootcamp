@@ -1,5 +1,6 @@
-<button mat-raised-button (click)="newProjectDialog()">Agregar proyecto</button>
-<div>
+<div class="proyect">
+    <app-button [text]="'Add project'" [icon]="'plus'" (buttonEvent)="newProjectDialog()" ></app-button>
+    <app-divider></app-divider>
     <ul>
         <li *ngFor="let project of projects">
             <app-proyect-card [title]="project.getName()"  [members]="project.getMembers()"  [description]="project.getDescription()" (editOutPut)="editProjectDialog(project, project.getId())" (deleteOutPut)="deleteProject(project)" ></app-proyect-card>
