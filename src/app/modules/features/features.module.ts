@@ -15,7 +15,7 @@ import { SharedModule } from '../shared/shared.module';
 import { MyStoriesComponent } from './my-stories/my-stories.component';
 
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { EpicFormComponent } from './proyect/epic-form/epic-form.component';
 import { MaterialModule } from '../material/material.module';
 import { StoryFormComponent } from './story-form/story-form.component';
 
@@ -23,7 +23,6 @@ import {
   ErrorStateMatcher,
   ShowOnDirtyErrorStateMatcher,
 } from '@angular/material/core';
-import { EpicFormComponent } from './proyect/epic-form/epic-form.component';
 
 @NgModule({
   declarations: [
@@ -37,8 +36,8 @@ import { EpicFormComponent } from './proyect/epic-form/epic-form.component';
     HeaderComponent,
     FooterComponent,
     MyStoriesComponent,
-    EpicFormComponent,
     StoryFormComponent,
+    EpicFormComponent
   ],
   imports: [
     CommonModule,
