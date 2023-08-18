@@ -5,7 +5,7 @@ import { Project } from 'src/app/modules/models/cproject.model';
 @Injectable({
   providedIn: 'root'
 })
-export class ProjectService {
+export class ProjectsService {
  
  
   private projects : Project[]= [];
@@ -42,7 +42,7 @@ export class ProjectService {
         return proj;
       }
     );
-    
+
     this.projects=updatedProjects;
     this.projects$.next(this.projects);
   }

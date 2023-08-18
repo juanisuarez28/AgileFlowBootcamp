@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Project } from '../../models/cproject.model';
 import { Observable } from 'rxjs';
-import { ProjectService } from '../../core/services/projects/project.service';
+import { ProjectsService } from '../../core/services/projects/projects.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteDialogComponent } from '../proyect/delete-dialog/delete-dialog.component';
 import { ProjectDialogComponent } from './project-dialog/project.dialog.component';
@@ -15,12 +15,12 @@ export class ProyectListComponent implements OnInit{
   projects : Project[]=[];
   projects$: Observable<Project[]> = new Observable<Project[]>();
 
-  constructor( public projectService : ProjectService, public dialog : MatDialog){
+  constructor( public projectsService : ProjectsService, public dialog : MatDialog){
     
   }
 
   ngOnInit(): void {
-    this.projects$ = this.projectService.getProjects$(); // se accede al observable
+    this.projects$ = this.projectsService.getProjects$(); // se accede al observable
     this.projects$.subscribe(projects => this.projects = projects);// nos suscribimos a los cambios
 
     const project1= new Project(["Juani", " Lauta", " Facu"], 1, "Grupo 1", "Trabajo final del bootcamp de front", "x", "messi", 2);
@@ -29,11 +29,11 @@ export class ProyectListComponent implements OnInit{
     const project4= new Project(["Gonzalo"], 4, "Grupo 4", "Trabajo final del bootcamp de front individual", "x", "messi", 2);
     const project5= new Project(["Ignacio"], 5, "Grupo 5", "Trabajo final del bootcamp de front individual", "x", "messi", 2);
 
-    this.projectService.addProject(project1);
-    this.projectService.addProject(project2);
-    this.projectService.addProject(project3);
-    this.projectService.addProject(project4);
-    this.projectService.addProject(project5);
+    this.projectsService.addProject(project1);
+    this.projectsService.addProject(project2);
+    this.projectsService.addProject(project3);
+    this.projectsService.addProject(project4);
+    this.projectsService.addProject(project5);
 
   }
 
@@ -55,7 +55,7 @@ export class ProyectListComponent implements OnInit{
 
     dialogRef.afterClosed().subscribe(result =>{
       console.log(result.value);
-      this.projectService.editProject(result.value, id);
+      this.projectsService.editProject(result.value, id);
     })
   }
 
@@ -67,12 +67,12 @@ export class ProyectListComponent implements OnInit{
     dialogRef.afterClosed().subscribe(result => {
       console.log('The DELETE dialog was closed');
       console.log('result: ' + result.name);
-      this.projectService.deleteProject(project.getId());
+      this.projectsService.deleteProject(project.getId());
     });
   }
 
   newProject(value: string){
-    this.projectService.newProject(value);
+    this.projectsService.newProject(value);
   }
 }
 
