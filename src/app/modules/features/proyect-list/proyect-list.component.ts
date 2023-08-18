@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Project } from '../../models/cproject.model';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { ProjectService } from '../../core/services/projects/project.service';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteDialogComponent } from '../proyect/delete-dialog/delete-dialog.component';
+import { ProjectDialogComponent } from './project-dialog/project.dialog.component';
 
 @Component({
   selector: 'app-proyect-list',
@@ -12,12 +15,46 @@ export class ProyectListComponent implements OnInit{
   projects : Project[]=[];
   projects$: Observable<Project[]> = new Observable<Project[]>();
 
-  constructor( public projectService : ProjectService){
+  constructor( public projectService : ProjectService, public dialog : MatDialog){
     
   }
 
-  addProject(){
-    //this.projectService.addProject()
+  newProjectDialog(): void{
+    let dialogRef=this.dialog.open(ProjectDialogComponent,{
+      data: {option: " Agregar nuevo",name: "", members: [""], description: "", }
+    });
+
+    dialogRef.afterClosed().subscribe(result =>{
+      console.log(result.value);
+      this.newProject(result.value);
+    })
+  }
+
+  editProjectDialog(): void{
+    let dialogRef=this.dialog.open(ProjectDialogComponent,{
+      data: { option: " Editar", name: "", members: [""], description: "",}
+    });
+
+    dialogRef.afterClosed().subscribe(result =>{
+      console.log(result.value);
+      this.newProject(result.value);
+    })
+  }
+
+  deleteProject(project : Project){
+    const dialogRef = this.dialog.open(DeleteDialogComponent, {
+      data: {type: "Proyecto ", name:project.getName()},
+    });
+    
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The DELETE dialog was closed');
+      console.log('result: ' + result.name);
+      this.projectService.deleteProject(project.getId());
+    });
+  }
+
+  newProject(value: string){
+    this.projectService.newProject(value);
   }
 
   ngOnInit(): void {
@@ -30,15 +67,13 @@ export class ProyectListComponent implements OnInit{
     const project4= new Project(["Gonzalo"], 4, "Grupo 4", "Trabajo final del bootcamp de front individual", "x", "messi", 2);
     const project5= new Project(["Ignacio"], 5, "Grupo 5", "Trabajo final del bootcamp de front individual", "x", "messi", 2);
 
-
-
     this.projectService.addProject(project1);
     this.projectService.addProject(project2);
     this.projectService.addProject(project3);
     this.projectService.addProject(project4);
     this.projectService.addProject(project5);
 
-
-
   }
 }
+
+

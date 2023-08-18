@@ -11,43 +11,38 @@ import { SettingsComponent } from './settings/settings.component';
 import { TaskComponent } from './task/task.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { MaterialModule } from '../material/material.module';
 import { SharedModule } from '../shared/shared.module';
 import { MyStoriesComponent } from './my-stories/my-stories.component';
-
-import { ReactiveFormsModule } from '@angular/forms';
 import { EpicFormComponent } from './proyect/epic-form/epic-form.component';
-import { MaterialModule } from '../material/material.module';
-import { StoryFormComponent } from './story-form/story-form.component';
-
-import {
-  ErrorStateMatcher,
-  ShowOnDirtyErrorStateMatcher,
-} from '@angular/material/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DeleteDialogComponent } from './proyect/delete-dialog/delete-dialog.component';
+import { ProjectDialogComponent } from './proyect-list/project-dialog/project.dialog.component';
 
 @NgModule({
   declarations: [
     EpicComponent,
     HomeComponent,
     MainComponent,
-    ProyectComponent,
+    ProyectComponent ,
     ProyectListComponent,
     SettingsComponent,
     TaskComponent,
     HeaderComponent,
     FooterComponent,
     MyStoriesComponent,
-    StoryFormComponent,
-    EpicFormComponent
+    EpicFormComponent,
+    DeleteDialogComponent,
+    ProjectDialogComponent
+    
   ],
   imports: [
     CommonModule,
     FeaturesRoutingModule,
     MaterialModule,
     SharedModule,
-    ReactiveFormsModule,
-  ],
-  providers: [
-    { provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher },
-  ],
+    FormsModule,
+    ReactiveFormsModule
+  ]
 })
-export class FeaturesModule {}
+export class FeaturesModule { }

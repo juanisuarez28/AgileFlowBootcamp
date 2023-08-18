@@ -1,7 +1,8 @@
+<button mat-raised-button (click)="newProjectDialog()">Agregar proyecto</button>
 <div>
     <ul>
         <li *ngFor="let project of projects">
-            <app-proyect-card [title]="project.getName()"  [members]="project.getMembers()"  [description]="project.getDescription()"></app-proyect-card>
+            <app-proyect-card [title]="project.getName()"  [members]="project.getMembers()"  [description]="project.getDescription()" (editOutPut)="editProjectDialog()" (deleteOutPut)="deleteProject(project)" ></app-proyect-card>
         </li>
     </ul>
 </div>

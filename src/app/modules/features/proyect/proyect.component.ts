@@ -58,23 +58,23 @@ export class ProyectComponent implements OnInit, OnDestroy {
       }
     });
   }
+
   deleteDialog(epica: epica,i:number): void {    
     
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
-      data: epica.name,
+      data:{type:" Epica", name: epica.name},
     });
     
     dialogRef.afterClosed().subscribe(result => {
       console.log('The DELETE dialog was closed');
-      console.log('result: ' + result);
-      this.projectService.deleteEpic(result,i, epica.project)
+      console.log('result: ' + result.name);
+      this.projectService.deleteEpic(result.name ,i, epica.project)
     });
   }
   
   ngOnDestroy(): void {
     this.projectServiceSubscription.unsubscribe();
   }
-
 }
 
 interface epica {

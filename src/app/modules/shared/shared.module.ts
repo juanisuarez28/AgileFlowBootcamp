@@ -10,6 +10,7 @@ import { DividerComponent } from './divider/divider.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { MaterialModule } from '../material/material.module';
 
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { MaterialModule } from '../material/material.module';
   ],
   imports: [
     CommonModule,
+    MatDialogModule,
     MaterialModule
   ],
   exports:[
