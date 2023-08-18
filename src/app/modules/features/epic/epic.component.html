@@ -34,25 +34,24 @@
           <a routerLink="">
             <mat-card-header class="card-header">
               <h3>{{ story.name }}</h3>
-              <p>Assigned: {{story.assignedTo}}</p>
+              <p>Assigned: {{ story.assignedTo }}</p>
             </mat-card-header>
             <mat-divider></mat-divider>
-     
+
             <mat-card-content>
               <p>
-                {{ story.description }} 
+                {{ story.description }}
               </p>
             </mat-card-content>
           </a>
 
           <div class="card-footer">
             <div class="dates">
-              <p >Created at: {{story.created | date:'shortDate'}}</p>
-              <p >Due: {{story.due | date:'shortDate'}}</p>
-              <p >Finished: {{story.finished | date:'shortDate'}}</p>
-              
+              <p>Created at: {{ story.created | date : "shortDate" }}</p>
+              <p>Due: {{ story.due | date : "shortDate" }}</p>
+              <p>Finished: {{ story.finished | date : "shortDate" }}</p>
             </div>
-          <mat-card-actions >
+            <mat-card-actions>
               <button
                 mat-icon-button
                 class="example-icon"
@@ -60,12 +59,15 @@
               >
                 <mat-icon>delete</mat-icon>
               </button>
-              <button mat-icon-button class="example-icon" (click)="updateStory(story, i)">
+              <button
+                mat-icon-button
+                class="example-icon"
+                (click)="updateStory(story, i)"
+              >
                 <mat-icon>edit</mat-icon>
               </button>
             </mat-card-actions>
           </div>
-
         </mat-card>
       </li>
     </ul>
