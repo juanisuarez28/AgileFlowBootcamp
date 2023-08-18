@@ -23,6 +23,7 @@ import {
   ErrorStateMatcher,
   ShowOnDirtyErrorStateMatcher,
 } from '@angular/material/core';
+import { EpicFormComponent } from './proyect/epic-form/epic-form.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import {
     HeaderComponent,
     FooterComponent,
     MyStoriesComponent,
+    EpicFormComponent,
     StoryFormComponent,
   ],
   imports: [

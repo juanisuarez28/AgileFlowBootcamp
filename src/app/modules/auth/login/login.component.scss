@@ -1,0 +1,17 @@
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem auto;
+    padding: 1rem;
+    background-color: var(--mediumColor);
+    width: 80%;
+    border-radius: 0.5rem;
+    .displayContent{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        
+    }
+}
