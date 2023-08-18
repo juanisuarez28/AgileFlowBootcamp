@@ -1,0 +1,37 @@
+
+.epic-card{
+    background-color: var(--darkColorSoft);
+}
+
+mat-card{
+    margin: 16px;
+    background-color: var(--elementBackgroundColor);
+}
+
+ul{
+    list-style: none;
+    padding: 0;
+}
+
+a{
+    color: var(--textColor);
+}
+
+.card-header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-footer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dates{
+    
+
+    p{
+        margin: 0;
+    }
+}

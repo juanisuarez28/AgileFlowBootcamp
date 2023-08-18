@@ -5,9 +5,10 @@ import { LabelComponent } from './label/label.component';
 import { GenericCardComponent } from './generic-card/generic-card.component';
 import { ProyectCardComponent } from './proyect-card/proyect-card.component';
 import { TaskCardComponent } from './task-card/task-card.component';
-import {MatCardModule} from '@angular/material/card';
 import { DividerComponent } from './divider/divider.component';
 
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { MaterialModule } from '../material/material.module';
 
 
 
@@ -18,11 +19,12 @@ import { DividerComponent } from './divider/divider.component';
     GenericCardComponent,
     ProyectCardComponent,
     TaskCardComponent,
-    DividerComponent
+    DividerComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     CommonModule,
-    MatCardModule
+    MaterialModule
   ],
   exports:[
     ButtonComponent,

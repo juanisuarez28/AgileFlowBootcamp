@@ -1,1 +1,73 @@
-<p>epic works!</p>
+<div class="container">
+  <mat-card class="epic-card">
+    <mat-card-header>
+      <h1>
+        <!-- {{epic.name}} -->
+        epica
+      </h1>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        <!-- {{epic.description}} -->
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur dicta
+        repellat quidem. Aut repudiandae quo, consequuntur soluta corrupti harum
+        aliquid assumenda ipsam voluptas reprehenderit dolorem tempore eius
+        voluptatum explicabo perspiciatis.
+      </p>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button mat-icon-button class="example-icon">
+        <mat-icon>edit</mat-icon>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+
+  <mat-divider></mat-divider>
+
+  <button mat-icon-button class="example-icon" (click)="addStory()">
+    <mat-icon>add</mat-icon>
+  </button>
+  <div>
+    <ul>
+      <li *ngFor="let story of stories; let i = index">
+        <mat-card>
+          <a routerLink="">
+            <mat-card-header class="card-header">
+              <h3>{{ story.name }}</h3>
+              <p>Assigned: {{story.assignedTo}}</p>
+            </mat-card-header>
+            <mat-divider></mat-divider>
+     
+            <mat-card-content>
+              <p>
+                {{ story.description }} 
+              </p>
+            </mat-card-content>
+          </a>
+
+          <div class="card-footer">
+            <div class="dates">
+              <p >Created at: {{story.created | date:'shortDate'}}</p>
+              <p >Due: {{story.due | date:'shortDate'}}</p>
+              <p >Finished: {{story.finished | date:'shortDate'}}</p>
+              
+            </div>
+          <mat-card-actions >
+              <button
+                mat-icon-button
+                class="example-icon"
+                (click)="deleteStory(i, 'historia')"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+              <button mat-icon-button class="example-icon" (click)="updateStory(story, i)">
+                <mat-icon>edit</mat-icon>
+              </button>
+            </mat-card-actions>
+          </div>
+
+        </mat-card>
+      </li>
+    </ul>
+  </div>
+</div>
