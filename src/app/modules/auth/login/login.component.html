@@ -1,5 +1,5 @@
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <div class="displayContent" mat-dialog-content>
+    <div class="displayContent">
       <h2>LogIn into Lemansys-Taiga</h2>
   
       <mat-form-field>
@@ -14,11 +14,8 @@
         <mat-hint *ngIf="loginForm.value.Password != ''">Enter your password</mat-hint>
       </mat-form-field>
   
-  
-      <div class="dialog-actions" mat-dialog-actions>
-        <button mat-button cdkFocusInitial type="submit">Log In</button>
-        <button mat-button mat-dialog-close >Close</button>
-  
+      <div>
+        <button mat-button cdkFocusInitial type="submit">Log In</button>  
       </div>
     </div>
   </form>
