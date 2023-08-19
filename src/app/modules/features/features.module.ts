@@ -17,8 +17,8 @@ import { MyStoriesComponent } from './my-stories/my-stories.component';
 import { EpicFormComponent } from './proyect/epic-form/epic-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DeleteDialogComponent } from './proyect/delete-dialog/delete-dialog.component';
-import { ProjectDialogComponent } from './proyect-list/project-dialog/project.dialog.component';
 import { StoryFormComponent } from './story-form/story-form.component';
+import { ProjectDialogComponent } from './proyect-list/project-dialog/project-dialog.component';
 
 @NgModule({
   declarations: [
@@ -34,8 +34,8 @@ import { StoryFormComponent } from './story-form/story-form.component';
     MyStoriesComponent,
     EpicFormComponent,
     DeleteDialogComponent,
-    ProjectDialogComponent,
-    StoryFormComponent
+    StoryFormComponent,
+    ProjectDialogComponent
   ],
   imports: [
     CommonModule,

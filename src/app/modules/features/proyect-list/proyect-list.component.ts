@@ -4,8 +4,7 @@ import { Observable, Subscription } from 'rxjs';
 import { ProjectsService } from '../../core/services/projects/projects.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteDialogComponent } from '../proyect/delete-dialog/delete-dialog.component';
-import { ProjectDialogComponent } from './project-dialog/project.dialog.component';
-
+import { ProjectDialogComponent } from './project-dialog/project-dialog.component';
 @Component({
   selector: 'app-proyect-list',
   templateUrl: './proyect-list.component.html',
