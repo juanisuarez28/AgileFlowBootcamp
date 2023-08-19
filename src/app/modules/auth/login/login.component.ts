@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../../api-rest/services/auth.service';
+import { TokenStorageService } from '../token-storage.service';
 
 @Component({
   selector: 'app-login',
@@ -7,18 +9,11 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-
   loginForm! : FormGroup;
   hide = true;
+  respuesta: any;
 
-
-  constructor(
-    private formBuilder : FormBuilder,
-  ) { 
-
-  }
-
-
+  constructor(private formBuilder : FormBuilder, private authService: AuthService, private tokenService : TokenStorageService) {}
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -29,17 +24,31 @@ export class LoginComponent {
 
   onSubmit(){
     if(this.loginForm.valid){
-      console.log("Form is valid, form:", this.loginForm," close dialog");
-      
+      console.log("Form is valid, form:", this.loginForm);
+      this.authService.postLogin(this.loginForm.value).subscribe(
+        (response)=>{
+          this.respuesta = response; 
+          console.log(this.respuesta.success);
+          
+          if(this.respuesta.success){
+            this.tokenService.saveToken(this.respuesta.token);//guarda el token
+            this.tokenService.saveUser(this.respuesta.user._id);//guarda id del user
+            console.log(this.respuesta.token);
+            
+           }else{
+              console.log("Usuario no autorizado/registrado");
+           }
+        }
+     ); 
     }else{
       
       console.log("this form is not valid");
     }
   }
 
-  get passwordInput() { 
-                          return this.loginForm.get('password');
-                        }  
+  getpasswordInput() { 
+    return this.loginForm.get('password');
+  }  
 
 }
 
@@ -49,6 +58,11 @@ export interface epicaForm {
   description: string;
   icon: string;
   option: string
+}
+
+export interface User{
+  username: string;
+  password: string;
 }
 
 
