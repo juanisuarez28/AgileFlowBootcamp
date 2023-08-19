@@ -11,6 +11,7 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
 import { MaterialModule } from '../material/material.module';
 
 import { MatDialogModule } from '@angular/material/dialog';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { MatDialogModule } from '@angular/material/dialog';
   imports: [
     CommonModule,
     MatDialogModule,
-    MaterialModule
+    MaterialModule,
+    RouterModule
   ],
   exports:[
     ButtonComponent,

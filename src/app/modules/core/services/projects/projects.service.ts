@@ -1,19 +1,23 @@
-import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Injectable, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { Project } from 'src/app/modules/models/cproject.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProjectsService {
- 
+export class ProjectsService implements OnInit{
  
   private projects : Project[]= [];
-  
+  private  baseUrl: string = " https://lamansysfaketaskmanagerapi.onrender.com/api";
   private projects$ = new Subject<Project[]>();
 
-  constructor() {
+  constructor(private http: HttpClient) {
+    
+  }
 
+  ngOnInit(): void {
+    console.log(this.http.get(this.baseUrl+'/projects'));
   }
 
   public newProject(value: any) {
@@ -33,6 +37,11 @@ export class ProjectsService {
     this.projects$.next(this.projects); // emitimos el nuevo valor
   }
 
+
+  public getProjectApi(){
+    return this.http.get(this.baseUrl+'/projects');
+
+  }
   public editProject(result: any, idToEdit: number) {    
 
     const updatedProjects=this.projects.map(proj =>{
@@ -47,11 +56,7 @@ export class ProjectsService {
     this.projects$.next(this.projects);
   }
   
-
-
-
   public deleteProject(id:number){
-
     this.projects=this.projects.filter(project => project.getId()!==id);
     console.log("Proyecto con id ", id, " eliminado");
     this.projects$.next(this.projects);

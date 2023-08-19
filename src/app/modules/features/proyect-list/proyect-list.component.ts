@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Project } from '../../models/cproject.model';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { ProjectsService } from '../../core/services/projects/projects.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteDialogComponent } from '../proyect/delete-dialog/delete-dialog.component';
@@ -11,30 +11,19 @@ import { ProjectDialogComponent } from './project-dialog/project.dialog.componen
   templateUrl: './proyect-list.component.html',
   styleUrls: ['./proyect-list.component.scss']
 })  
-export class ProyectListComponent implements OnInit{
+export class ProyectListComponent implements OnInit, OnDestroy{
   projects : Project[]=[];
   projects$: Observable<Project[]> = new Observable<Project[]>();
+  projectsServiceSubscription: Subscription = new Subscription();
 
   constructor( public projectsService : ProjectsService, public dialog : MatDialog){
     
   }
 
   ngOnInit(): void {
-    this.projects$ = this.projectsService.getProjects$(); // se accede al observable
-    this.projects$.subscribe(projects => this.projects = projects);// nos suscribimos a los cambios
-
-    const project1= new Project(["Juani", " Lauta", " Facu"], 1, "Grupo 1", "Trabajo final del bootcamp de front", "x", "messi", 2);
-    const project2= new Project(["Ximena", " Luciana"], 2, "Grupo 2", "Trabajo final del bootcamp de front", "x", "messi", 2);
-    const project3= new Project(["Thomas"], 3, "Grupo 3", "Trabajo final del bootcamp de front individual", "x", "messi", 2);
-    const project4= new Project(["Gonzalo"], 4, "Grupo 4", "Trabajo final del bootcamp de front individual", "x", "messi", 2);
-    const project5= new Project(["Ignacio"], 5, "Grupo 5", "Trabajo final del bootcamp de front individual", "x", "messi", 2);
-
-    this.projectsService.addProject(project1);
-    this.projectsService.addProject(project2);
-    this.projectsService.addProject(project3);
-    this.projectsService.addProject(project4);
-    this.projectsService.addProject(project5);
-
+    this.projectsService.getProjectApi();
+    //this.projects$ = this.projectsService.getProjects$(); // se accede al observable
+    //this.projectsServiceSubscription=this.projects$.subscribe(projects => this.projects = projects);// nos suscribimos a los cambios
   }
 
   newProjectDialog(): void{
@@ -73,6 +62,10 @@ export class ProyectListComponent implements OnInit{
 
   newProject(value: string){
     this.projectsService.newProject(value);
+  }
+
+  ngOnDestroy(): void {
+    this.projectsServiceSubscription.unsubscribe();
   }
 }
 
