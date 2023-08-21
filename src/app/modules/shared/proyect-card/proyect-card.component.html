@@ -1,14 +1,14 @@
 <mat-card>
     <mat-card-header>
-        <mat-card-title>
-            {{title}}
+        <mat-card-title [routerLink]="'/my-projects/'+project._id ">
+            {{project.name}}
         </mat-card-title>
         <mat-card-subtitle>
-            {{members}}
+            {{project.members}}
         </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-        {{description}}
+        {{project.description}}
     </mat-card-content>
     <mat-card-actions align="end">
         <i class="fa-regular fa-pen-to-square" (click)="editEvent()"></i>

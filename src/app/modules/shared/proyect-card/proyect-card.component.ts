@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output} from '@angular/core';
+import { Project } from '../../models/cproject.model';
 @Component({
   selector: 'app-proyect-card',
   templateUrl: './proyect-card.component.html',
@@ -8,6 +9,7 @@ export class ProyectCardComponent {
   @Input() title='';
   @Input() description='';
   @Input() members=[''];
+  @Input() project!: Project;
   @Output() editOutPut = new EventEmitter();
   @Output() deleteOutPut = new EventEmitter();
 
