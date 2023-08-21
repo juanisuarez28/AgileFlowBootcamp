@@ -35,4 +35,13 @@ export class TokenStorageService {
 
     return {};
   }
+
+  isLoggedIn(){
+    let user = this.getUser();
+    let token =  this.getToken();
+    if (user && token){
+      return true;
+    }
+    return false;
+  }
 }
