@@ -3,7 +3,10 @@
     <app-divider></app-divider>
     <ul>
         <li *ngFor="let project of projects">
-            <app-proyect-card [title]="project.getName()"  [members]="project.getMembers()"  [description]="project.getDescription()" (editOutPut)="editProjectDialog(project, project.getId())" (deleteOutPut)="deleteProject(project)" ></app-proyect-card>
+            <app-proyect-card [title]="project.getName()"  [members]="project.getMembers()"  [description]="project.getDescription()" (editOutPut)="editProjectDialog(project)" (deleteOutPut)="deleteProject(project)" ></app-proyect-card>
         </li>
     </ul>
+    <app-label [text]="'Loading projects...'" *ngIf="projects.length == 0 && !cantProjectsIsZero && !errorGetProjects"></app-label>
+    <app-label [text]="'No existen proyectos'" *ngIf="cantProjectsIsZero"></app-label>
+    <app-label [text]="'Error to get projects'" *ngIf="errorGetProjects"></app-label>
 </div>

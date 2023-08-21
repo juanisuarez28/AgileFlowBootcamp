@@ -1,65 +1,72 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { Project } from 'src/app/modules/models/cproject.model';
+import { map, catchError } from 'rxjs/operators';
+import { GetProjectsResponse, PostProjectsResponse, Project } from 'src/app/modules/models/cproject.model';
+import { TokenStorageService } from '../../../auth/token-storage.service';
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProjectsService implements OnInit{
+export class ProjectsService {
  
   private projects : Project[]= [];
   private  baseUrl: string = " https://lamansysfaketaskmanagerapi.onrender.com/api";
-  private projects$ = new Subject<Project[]>();
+  
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private tokenStorageService :TokenStorageService) {
+    
+  }
+ 
+
+  
+  
+  public getProjectApi(){
+    return this.http.get<GetProjectsResponse>
+    (this.baseUrl+'/projects',{ headers: {'auth': this.tokenStorageService.getToken()||""}
+  }).pipe(
+    map( resp => {
+      if (resp.status == "success"){
+        resp.data = resp.data.map(projects => {
+          return Project.projectFromJson(projects)
+        });
+      }
+      return resp
+      
+    })
+    );
     
   }
 
-  ngOnInit(): void {
-    console.log(this.http.get(this.baseUrl+'/projects'));
-  }
+  public newProject(newProject: any): Observable<any> {
 
-  public newProject(value: any) {
-    let newId=this.projects[this.projects.length-1].getId()+1;
-    let aux= new Project(value.members, newId, value.name, value.description, "x", "messi", 2);
-
-    this.projects.push(aux);
-    this.projects$.next(this.projects);
-  }
-
-  public getProjects$(): Observable<Project[]> {
-    return this.projects$.asObservable();
-  }
-
-  public addProject(project: Project) {
-    this.projects.push(project);
-    this.projects$.next(this.projects); // emitimos el nuevo valor
-  }
-
-
-  public getProjectApi(){
-    return this.http.get(this.baseUrl+'/projects');
-
-  }
-  public editProject(result: any, idToEdit: number) {    
-
-    const updatedProjects=this.projects.map(proj =>{
-      if(proj['_id']=== idToEdit){
-        return new Project (result.members,proj['_id'],result.name,result.description,"x","messi",2);
-        }
-        return proj;
-      }
+    console.log("Project Service, newProject:", newProject);
+    
+    return this.http.post<PostProjectsResponse>(this.baseUrl+'/projects', newProject, {headers: {'auth': this.tokenStorageService.getToken()||""}}).pipe( result =>{
+      console.log("result: ", result);
+      return result;
+    }
+    
     );
-
-    this.projects=updatedProjects;
-    this.projects$.next(this.projects);
+  }
+  public editProject(editProject: any, idToEdit: string): Observable<any> {
+    
+    console.log("Project Service, EDIT project JSON",JSON.stringify(editProject), " sin json: ", editProject);
+    return this.http.put<PostProjectsResponse>(this.baseUrl+'/projects/'+idToEdit, editProject, {headers: {'auth': this.tokenStorageService.getToken()||""}}).pipe( result =>{
+      console.log("result: ", result);
+      return result;
+    });
   }
   
-  public deleteProject(id:number){
-    this.projects=this.projects.filter(project => project.getId()!==id);
-    console.log("Proyecto con id ", id, " eliminado");
-    this.projects$.next(this.projects);
+  public deleteProject(projectId:string): Observable<any> {
+    console.log("Project Service, delete Project id: ", projectId);
+    //Comprobar que no posea epicas
+    return this.http.delete(this.baseUrl+'/projects/'+projectId, {headers: {'auth': this.tokenStorageService.getToken()||""}}).pipe( result =>{
+      console.log("result of delete: ", result);
+      return result;
+    });
+    
   }
 
 }

@@ -1,23 +1,41 @@
-export class Project{
-    private members:string[];
-    private _id: number;
-    private name: string;
-    private description: string;
-    private owner: string;
-    private icon: string;
-    private __v: number;
 
-    constructor(members : string[], _id: number, name: string, description: string, owner: string,icon: string, __v: number ){
-        this.members=members;
-        this._id=_id;
-        this.name=name;
-        this.description=description;
-        this.owner=owner;
-        this.icon=icon;
-        this.__v=__v;
+
+export interface GetProjectsResponse {
+    status: string;
+    data:   Project[];
+}
+
+export interface ProjectResponse {
+    members:     string[];
+    _id:         string;
+    name:        string;
+    description: string;
+    owner:       string;
+    icon:        string;
+    __v:         number;
+}
+
+export interface PostProjectsResponse {
+    status: string;
+    data:   Project;
+}
+
+
+
+export class Project{
+    
+    constructor(
+        public members:string[],
+        public _id: string,
+        public name: string,
+        public description: string,
+        public owner: string,
+        public icon: string,
+        public __v: number){
+            
     }
 
-    getName():string {
+    public getName():string {
         return this.name;
     }
 
@@ -29,8 +47,20 @@ export class Project{
         return this.description;
     }
     
-    getId():number{
+    getId():string{
         return this._id;
+    }
+
+    public static projectFromJson(obj : ProjectResponse){
+        return new Project(
+            obj['members'],
+            obj['_id'],
+            obj['name'],
+            obj['description'],
+            obj['owner'],
+            obj['icon'],
+            obj['__v']
+        )
     }
 
 }

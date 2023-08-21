@@ -1,10 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Project } from '../../models/cproject.model';
+
 import { Observable, Subscription } from 'rxjs';
 import { ProjectsService } from '../../core/services/projects/projects.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteDialogComponent } from '../proyect/delete-dialog/delete-dialog.component';
 import { ProjectDialogComponent } from './project-dialog/project-dialog.component';
+import { Project } from '../../models/cproject.model';
 @Component({
   selector: 'app-proyect-list',
   templateUrl: './proyect-list.component.html',
@@ -14,15 +15,32 @@ export class ProyectListComponent implements OnInit, OnDestroy{
   projects : Project[]=[];
   projects$: Observable<Project[]> = new Observable<Project[]>();
   projectsServiceSubscription: Subscription = new Subscription();
+  errorGetProjects : boolean = false;
+  cantProjectsIsZero : boolean = false;
+  
 
   constructor( public projectsService : ProjectsService, public dialog : MatDialog){
     
   }
 
   ngOnInit(): void {
-    this.projectsService.getProjectApi();
+    this.getProjects();
     //this.projects$ = this.projectsService.getProjects$(); // se accede al observable
     //this.projectsServiceSubscription=this.projects$.subscribe(projects => this.projects = projects);// nos suscribimos a los cambios
+  }
+  
+  getProjects(){
+    this.projectsService.getProjectApi().subscribe( resp => {
+      console.log("RESPUESTA API (get) /projects : ",resp);
+      if( resp.status == "success"){
+        this.projects = resp.data;
+        if(this.projects.length == 0){
+          this.cantProjectsIsZero = true;
+        } 
+      }else{
+        this.errorGetProjects = true;
+      }
+    });
   }
 
   newProjectDialog(): void{
@@ -31,19 +49,26 @@ export class ProyectListComponent implements OnInit, OnDestroy{
     });
 
     dialogRef.afterClosed().subscribe(result =>{
-      console.log(result.value);
+      console.log("dialog close, result value: ", result.value);
       this.newProject(result.value);
     })
   }
 
-  editProjectDialog(project: Project, id:number): void{
+  editProjectDialog(project: Project): void{
     let dialogRef=this.dialog.open(ProjectDialogComponent,{
-      data: { option: " Editar", name: project.getName(), members: project.getMembers(), description: project.getDescription(),}
+      data: { option: " Editar", name: project.getName(), 
+              members: project.getMembers(), description: project.getDescription(),
+              icon: project.icon}
     });
 
     dialogRef.afterClosed().subscribe(result =>{
-      console.log(result.value);
-      this.projectsService.editProject(result.value, id);
+      console.log("dialog EDIT close, result value: ",result.value);
+      this.projectsService.editProject(result.value, project.getId()).subscribe( resp =>{
+        console.log( "respuesta de EDICION de nuyevo projecto: ", resp)
+        if (resp.success = "success"){
+          this.getProjects();
+        }
+      });;
     })
   }
 
@@ -53,14 +78,25 @@ export class ProyectListComponent implements OnInit, OnDestroy{
     });
     
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The DELETE dialog was closed');
-      console.log('result: ' + result.name);
-      this.projectsService.deleteProject(project.getId());
+      this.projectsService.deleteProject(project.getId()).subscribe(resp => {
+        if (resp.success = "success"){
+          console.log( "Exito al eliminar proyecto: ", resp)
+          this.getProjects();
+        }else{
+          console.log("Error al eliminar proyecto ", resp);
+          
+        }
+      });
     });
   }
 
-  newProject(value: string){
-    this.projectsService.newProject(value);
+  newProject(newProject: formProject){
+    this.projectsService.newProject(newProject).subscribe( resp =>{
+      console.log( "respuesta de crearcion de nuevo projecto: ", resp)
+      if (resp.success = "success"){
+        this.getProjects();
+      }
+    });
   }
 
   ngOnDestroy(): void {
@@ -68,4 +104,9 @@ export class ProyectListComponent implements OnInit, OnDestroy{
   }
 }
 
-
+export interface formProject{
+  name: string;
+  members: string[];
+  description: string;
+  icon: string;
+}
