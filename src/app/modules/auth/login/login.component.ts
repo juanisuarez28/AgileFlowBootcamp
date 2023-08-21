@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../api-rest/services/auth.service';
 import { TokenStorageService } from '../token-storage.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -12,8 +13,13 @@ export class LoginComponent {
   loginForm! : FormGroup;
   hide = true;
   respuesta: any;
+  wrongLogin =false;
 
-  constructor(private formBuilder : FormBuilder, private authService: AuthService, private tokenService : TokenStorageService) {}
+  constructor(  private formBuilder : FormBuilder, 
+                private authService: AuthService, 
+                private tokenService : TokenStorageService,
+                private router : Router,
+                ) {}
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -34,9 +40,10 @@ export class LoginComponent {
             this.tokenService.saveToken(this.respuesta.token);//guarda el token
             this.tokenService.saveUser(this.respuesta.user._id);//guarda id del user
             console.log(this.respuesta.token);
-            
+            this.router.navigateByUrl('/');
            }else{
               console.log("Usuario no autorizado/registrado");
+              this.wrongLogin = true;
            }
         }
      ); 

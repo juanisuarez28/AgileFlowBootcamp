@@ -12,6 +12,23 @@ form{
         display: flex;
         flex-direction: column;
         width: 100%;
+        justify-content: center;
         
+        .loginForm-buttons{
+            display: flex;
+            flex-direction: row;
+            
+            align-items: center;
+            justify-content: center;
+            button{
+                width: 100%;
+            }
+        }
     }
+
+}
+.alert{
+    color: red;
+    padding: 0;
+    margin: 0;
 }
