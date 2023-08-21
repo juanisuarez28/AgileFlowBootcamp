@@ -5,11 +5,7 @@
     <ul *ngFor="let task of tasks; index as i;">
         <li>
             <app-task-card
-            [title]="task.name"
-            [description]="task.description"
-            [created]="task.created"
-            [due]="task.due"
-            [done]="task.done"
+            [task]="task"
             (editOutPut)="updateTask(task,i)"
             (deleteOutPut)="deleteTask(i, 'task')"
             (doneToggle)="toggleTask(i)"

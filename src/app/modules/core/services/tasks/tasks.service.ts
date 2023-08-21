@@ -31,4 +31,8 @@ export class TasksService {
 
   }
 
+  public toggleTask(id : number){
+    
+  }
+
 }

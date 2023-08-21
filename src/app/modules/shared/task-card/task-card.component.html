@@ -1,28 +1,27 @@
 <mat-card>
     <a routerLink="">
       <mat-card-header class="card-header">
-        <h3>{{ title }}</h3>
+        <h3>{{ task.name }}</h3>
         
       </mat-card-header>
       <mat-divider></mat-divider>
 
       <mat-card-content>
         <p>
-          {{ description }}
+          {{ task.description }}
         </p>
       </mat-card-content>
     </a>
 
     <div class="card-footer">
       <div class="dates">
-        <p>Created at: {{created | date : "shortDate" }}</p>
-        <p>Due: {{ due | date : "shortDate" }}</p>
-        <p *ngIf="done == true">Done: Done</p>
+        <p>Created at: {{task.created | date : "shortDate" }}</p>
+        <p>Due: {{ task.due | date : "shortDate" }}</p>
         
       </div>
       <mat-card-actions>
 
-        <mat-checkbox color="primary" (click)="doneToggle()"></mat-checkbox>
+        <mat-checkbox color="primary" (click)="doneToggle()" [checked]="task.done"></mat-checkbox>
         
         <button
           mat-icon-button
