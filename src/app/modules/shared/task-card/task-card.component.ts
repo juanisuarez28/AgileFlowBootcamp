@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Task } from '../../models/ctask.model';
 
 @Component({
   selector: 'app-task-card',
@@ -6,11 +7,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['./task-card.component.scss']
 })
 export class TaskCardComponent {
-  @Input() title = ""; 
-  @Input() description = ""; 
-  @Input() created !: Date; 
-  @Input() due !: Date;
-  @Input() done : boolean = false; 
+  @Input() task !: Task; 
 
   @Output() editOutPut = new EventEmitter();
   @Output() deleteOutPut = new EventEmitter();
@@ -28,6 +25,7 @@ export class TaskCardComponent {
 
   doneToggle(){
     this.toggleOutPut.emit();
+    
   }
 
 

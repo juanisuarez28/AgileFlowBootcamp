@@ -65,7 +65,7 @@ deleteTask(id: number, type :string){
 }
 
 toggleTask(id : number ){
-  
+  this.ts.toggleTask(id);
 }
 
 ngOnDestroy(){
