@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { Story } from 'src/app/modules/models/cstory.model';
-import { StoriesService } from '../../api-rest/services/stories/stories.service';
+import { StoriesService } from '../../core/services/stories/stories.service';
 import {
   MatDialog,
   MatDialogRef,
@@ -36,9 +36,7 @@ export class EpicComponent implements OnInit {
       data : {name : '', description : '', epic : this.epic ,sprint: '', owner : '',assignedTo : [], points : '',created: new Date(), due :'', start :'', end :'', status : '', option : 'Add new story'}
     })
 
-    dialogRef.afterClosed().subscribe(result =>{
-      console.log(result.value);
-      
+    dialogRef.afterClosed().subscribe(result =>{      
       if (result.value != undefined){
         this.ss.addStory(result.value)
       }
@@ -58,7 +56,7 @@ export class EpicComponent implements OnInit {
   })
   }
 
-  deleteStory(id: number, type : string): void {
+  deleteStory(id: number, type : string) {
     let dialogRef = this.dialog.open(ConfirmDialogComponent, {
       data : {
         id : id,

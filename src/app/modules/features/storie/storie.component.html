@@ -1,1 +1,19 @@
-<p>storie works!</p>
+<div class="task">
+
+    <app-button [text]="'Add Task'" [icon]="'plus'" (buttonEvent)="addTask()" ></app-button>
+    
+    <ul *ngFor="let task of tasks; index as i;">
+        <li>
+            <app-task-card
+            [title]="task.name"
+            [description]="task.description"
+            [created]="task.created"
+            [due]="task.due"
+            [done]="task.done"
+            (editOutPut)="updateTask(task,i)"
+            (deleteOutPut)="deleteTask(i, 'task')"
+            (doneToggle)="toggleTask(i)"
+            ></app-task-card>
+        </li>
+    </ul>
+</div>

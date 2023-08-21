@@ -49,7 +49,7 @@
             <div class="dates">
               <p>Created at: {{ story.created | date : "shortDate" }}</p>
               <p>Due: {{ story.due | date : "shortDate" }}</p>
-              <p>Finished: {{ story.finished | date : "shortDate" }}</p>
+              <p>Status: {{ story.status }}</p>
             </div>
             <mat-card-actions>
               <button

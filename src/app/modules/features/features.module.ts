@@ -19,6 +19,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DeleteDialogComponent } from './proyect/delete-dialog/delete-dialog.component';
 import { StoryFormComponent } from './story-form/story-form.component';
 import { ProjectDialogComponent } from './proyect-list/project-dialog/project-dialog.component';
+import { StorieComponent } from './storie/storie.component';
+import { TaskFormComponent } from './task-form/task-form.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import { ProjectDialogComponent } from './proyect-list/project-dialog/project-di
     EpicFormComponent,
     DeleteDialogComponent,
     StoryFormComponent,
-    ProjectDialogComponent
+    ProjectDialogComponent,
+    StorieComponent,
+    TaskFormComponent
   ],
   imports: [
     CommonModule,
