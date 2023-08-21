@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FeaturesModule } from './modules/features/features.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { loggedGuard } from './guards/logged.guard';
 
 
 
@@ -15,7 +16,7 @@ const routes: Routes = [
     // { path: 'my-proyects/:proyectId/:epicId/:storieId', component: StorieComponent  },
     // { path: 'my-proyects/:proyectId/:epicId/:storieId/:taskId', component: TaskComponent  },
     
-    { path: '', loadChildren: () => import('./modules/features/features.module').then(m => m.FeaturesModule)},
+    { path: '',canActivate: [loggedGuard] , loadChildren: () => import('./modules/features/features.module').then(m => m.FeaturesModule)},
     { path: 'login', loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule)},
     { path: '**', component: PageNotFoundComponent }
 
