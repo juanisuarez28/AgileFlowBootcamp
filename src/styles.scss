@@ -6,6 +6,10 @@ body,html {
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+.mat-typography{
+  background-color: var(--backgroundcolor);
+}
+
 label,h1,h2,h3,a,input {
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
