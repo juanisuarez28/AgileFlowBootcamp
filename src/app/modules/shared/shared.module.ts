@@ -12,6 +12,10 @@ import { MaterialModule } from '../material/material.module';
 
 import { MatDialogModule } from '@angular/material/dialog';
 import { RouterModule } from '@angular/router';
+import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
+import { EpicFormComponent } from './epic-form/epic-form.component';
+import { ProjectDialogComponent } from './project-dialog/project-dialog.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -22,13 +26,17 @@ import { RouterModule } from '@angular/router';
     ProyectCardComponent,
     TaskCardComponent,
     DividerComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    EpicFormComponent,
+    DeleteDialogComponent,
+    ProjectDialogComponent
   ],
   imports: [
     CommonModule,
     MatDialogModule,
     MaterialModule,
-    RouterModule
+    RouterModule,
+    ReactiveFormsModule
   ],
   exports:[
     ButtonComponent,
@@ -36,7 +44,10 @@ import { RouterModule } from '@angular/router';
     GenericCardComponent,
     ProyectCardComponent,
     TaskCardComponent,
-    DividerComponent
+    DividerComponent,
+    EpicFormComponent,
+    DeleteDialogComponent,
+    ProjectDialogComponent
   ]
 })
 export class SharedModule { }
