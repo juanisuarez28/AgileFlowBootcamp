@@ -1,8 +1,10 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { ProyectComponent } from '../proyect.component';
+
 import { FormBuilder, FormControl, FormGroup,Validators } from '@angular/forms';
-import { ProjectService } from '../../../core/services/project.service';
+import { ProyectComponent } from '../../features/proyect/proyect.component';
+import { ProjectService } from '../../core/services/project.service';
+
 
 @Component({
   selector: 'app-epic-form',

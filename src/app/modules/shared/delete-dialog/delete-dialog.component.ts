@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
-import { ProyectComponent } from '../proyect.component';
+
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { ProyectComponent } from '../../features/proyect/proyect.component';
 
 @Component({
   selector: 'app-delete-dialog',

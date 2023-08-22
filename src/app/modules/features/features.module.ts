@@ -14,11 +14,10 @@ import { FooterComponent } from './footer/footer.component';
 import { MaterialModule } from '../material/material.module';
 import { SharedModule } from '../shared/shared.module';
 import { MyStoriesComponent } from './my-stories/my-stories.component';
-import { EpicFormComponent } from './proyect/epic-form/epic-form.component';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { DeleteDialogComponent } from './proyect/delete-dialog/delete-dialog.component';
+
 import { StoryFormComponent } from './story-form/story-form.component';
-import { ProjectDialogComponent } from './proyect-list/project-dialog/project-dialog.component';
 import { StorieComponent } from './storie/storie.component';
 import { TaskFormComponent } from './task-form/task-form.component';
 
@@ -34,10 +33,7 @@ import { TaskFormComponent } from './task-form/task-form.component';
     HeaderComponent,
     FooterComponent,
     MyStoriesComponent,
-    EpicFormComponent,
-    DeleteDialogComponent,
     StoryFormComponent,
-    ProjectDialogComponent,
     StorieComponent,
     TaskFormComponent
   ],

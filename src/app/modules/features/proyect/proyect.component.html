@@ -1,16 +1,19 @@
-<p>proyect works!</p>
 <div class="proyect">
-    <app-generic-card [title]="'proyect info'" [description]="'proyect.description cambiar por proyect card'"></app-generic-card>
+    
+    <app-proyect-card [project]="project"  (editOutPut)="editProjectDialog(project)"
+                                            (deleteOutPut)="deleteProject(project)"></app-proyect-card>
     <app-divider></app-divider>
     <app-button [text]="'Add epic'" [icon]="'plus'" (buttonEvent)="newEpicDialog()" ></app-button>
     <ul  *ngFor="let epica of epics; index as i;">
         <li>
             <app-generic-card 
-                [title]="epica.name" 
-                [description]="epica.description" 
-                (editOutPut)="editDialog(epica,i)"
-                (deleteOutPut)="deleteDialog(epica,i)"
+                [epica]="epica" 
+                (editOutPut)="editDialog(epica)"
+                (deleteOutPut)="deleteDialog(epica)"
             ></app-generic-card>
         </li>
     </ul>
+    <app-label [text]="'Loading Epics...'" *ngIf="epics.length == 0 && !cantEpicsIsZero && !errorGetEpics"></app-label>
+    <app-label [text]="'There are no epics in this project'" *ngIf="cantEpicsIsZero"></app-label>
+    <app-label [text]="'Error to get Epics'" *ngIf="errorGetEpics"></app-label>
 </div>

@@ -38,6 +38,20 @@ export class ProjectsService {
     );
     
   }
+  public getProjectById( proyectId: string){
+    return this.http.get<PostProjectsResponse>
+      (this.baseUrl+'/projects/'+proyectId,{ headers: {'auth': this.tokenStorageService.getToken()||""}
+      }).pipe(
+      map( resp => {
+        if (resp.status == "success"){
+          resp.data =  Project.projectFromJson(resp.data) 
+        }
+        return resp
+      
+      })
+    );
+    
+  }
 
   public newProject(newProject: any): Observable<any> {
 

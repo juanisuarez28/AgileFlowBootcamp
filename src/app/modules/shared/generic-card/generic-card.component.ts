@@ -1,4 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Epica } from '../../models/epic.modle';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-generic-card',
@@ -6,12 +8,25 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./generic-card.component.scss']
 })
 export class GenericCardComponent {
-  @Input() title='Titulo:...';
-  @Input() description='Descripcion: ....';
+  @Input() epica!: Epica;
 
   @Output() editOutPut = new EventEmitter();
   @Output() deleteOutPut = new EventEmitter();
+  projectId: string="";
 
+  constructor(private route: ActivatedRoute,
+              private router: Router,
+     ){}
+
+  ngOnInit(): void {
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+    const projectId = this.route.snapshot.paramMap.get('projectId')
+    if (projectId != null){
+      this.projectId =projectId;
+    }
+
+  }
   editEvent(){
     console.log("editEvent");
     
@@ -23,5 +38,12 @@ export class GenericCardComponent {
     
     this.deleteOutPut.emit()
 
+  }
+
+  redirect(){
+    console.log('/my-projects/'+this.projectId+'/'+this.epica._id);
+    const url = "'/my-projects/'+this.projectId+'/'+this.epica._id";
+    console.log("URL: ",url);
+    this.router.navigateByUrl(url);
   }
 }

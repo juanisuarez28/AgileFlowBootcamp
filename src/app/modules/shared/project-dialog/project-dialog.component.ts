@@ -1,8 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, FormControl, FormGroup,Validators } from '@angular/forms';
-import { ProyectListComponent } from '../proyect-list.component';
-import { UserService } from '../../../core/services/user.service';
+import { ProyectListComponent } from '../../features/proyect-list/proyect-list.component';
+import { UserService } from '../../core/services/user.service';
 import { map } from 'rxjs/operators';
 import { User } from 'src/app/modules/models/user.model';
 

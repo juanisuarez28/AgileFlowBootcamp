@@ -3,9 +3,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { ProjectsService } from '../../core/services/projects/projects.service';
 import { MatDialog } from '@angular/material/dialog';
-import { DeleteDialogComponent } from '../proyect/delete-dialog/delete-dialog.component';
-import { ProjectDialogComponent } from './project-dialog/project-dialog.component';
+import { ProjectDialogComponent } from '../../shared/project-dialog/project-dialog.component';
 import { Project } from '../../models/cproject.model';
+import { DeleteDialogComponent } from '../../shared/delete-dialog/delete-dialog.component';
+
+
 @Component({
   selector: 'app-proyect-list',
   templateUrl: './proyect-list.component.html',
@@ -34,9 +36,12 @@ export class ProyectListComponent implements OnInit, OnDestroy{
       console.log("RESPUESTA API (get) /projects : ",resp);
       if( resp.status == "success"){
         this.projects = resp.data;
+        this.errorGetProjects = false;
         if(this.projects.length == 0){
           this.cantProjectsIsZero = true;
-        } 
+        }else{
+          this.cantProjectsIsZero = false;
+        }
       }else{
         this.errorGetProjects = true;
       }
