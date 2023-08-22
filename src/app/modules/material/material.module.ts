@@ -59,8 +59,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
 		MatCheckboxModule,
 		MatProgressSpinnerModule,
 		MatProgressBarModule,
-		MatExpansionModule
-
+		MatExpansionModule,
+		
 		
 	]
 })

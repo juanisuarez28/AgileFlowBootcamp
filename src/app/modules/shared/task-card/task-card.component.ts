@@ -8,6 +8,9 @@ import { Task } from '../../models/ctask.model';
 })
 export class TaskCardComponent {
   @Input() task !: Task; 
+  @Input() projectId !: string; 
+  @Input() epicId !: string; 
+  @Input() storyId !: string; 
 
   @Output() editOutPut = new EventEmitter();
   @Output() deleteOutPut = new EventEmitter();

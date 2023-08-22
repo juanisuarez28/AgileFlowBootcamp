@@ -7,16 +7,19 @@
         </mat-form-field>
 
         
-        <mat-form-field color="primary">
+        <mat-form-field color="primary" hintLabel="Minimum 10 characters">
             <mat-label>Description</mat-label>
             <textarea matInput
               name=""
               id=""
               cols="30"
               rows="10"
-              placeholder="" required
+              placeholder=""
               formControlName="description"
+              minlength="10"
+              #desc
             ></textarea>
+            <mat-hint align="end">{{desc.value.length}}/10</mat-hint>
         </mat-form-field>
 
         <mat-form-field>
@@ -29,6 +32,9 @@
 
     <mat-dialog-actions>
       <button mat-button mat-dialog-close>Cancel</button>
-      <button mat-button mat-dialog-close cdkFocusInitial type="submit">Submit</button>
+      <button mat-button cdkFocusInitial type="submit">Submit</button>
     </mat-dialog-actions>
+
+    <mat-label class="alert" *ngIf="invalid">Invalid form</mat-label>
+
 </form>

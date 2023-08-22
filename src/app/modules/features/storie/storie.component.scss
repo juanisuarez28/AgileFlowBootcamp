@@ -20,4 +20,23 @@
         padding: 0;
         
     }
+
+    .story-card{
+        background-color: var(--darkColorSoft);
+    }
+
+    mat-card-header{
+        display: flex;
+        justify-content: space-evenly;
+        
+        p{
+            color: var(--mediumColor);
+        }
+    }
+
+    .card-footer{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 }

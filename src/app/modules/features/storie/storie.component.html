@@ -1,15 +1,105 @@
 <div class="task">
+  <mat-card class="story-card">
+    <mat-card-header class="card-header">
+      <h3>Story<!-- {{ story.name }} --></h3>
+      <p>
+        Assigned: Juan, Facu, Lauta
+        <!-- {{ story.assignedTo }} -->
+      </p>
+    </mat-card-header>
+    <mat-divider></mat-divider>
 
-    <app-button [text]="'Add Task'" [icon]="'plus'" (buttonEvent)="addTask()" ></app-button>
-    
-    <ul *ngFor="let task of tasks; index as i;">
-        <li>
-            <app-task-card
-            [task]="task"
-            (editOutPut)="updateTask(task,i)"
-            (deleteOutPut)="deleteTask(task, i)"
-            (doneToggle)="toggleTask(i)"
-            ></app-task-card>
-        </li>
+    <mat-card-content>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque
+        ullam numquam nesciunt animi corporis possimus explicabo officia? Non
+        blanditiis quas officiis maiores natus corporis accusantium facere!
+        Voluptatem in distinctio dolor?
+        <!-- {{ story.description }} -->
+      </p>
+    </mat-card-content>
+
+    <mat-divider></mat-divider>
+
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Self aware panel
+          </mat-panel-title>
+          <mat-panel-description>
+            Currently I am 
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <p>I'm visible because I am open</p>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Self aware panel
+          </mat-panel-title>
+          <mat-panel-description>
+            Currently I am 
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <p>I'm visible because I am open</p>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Self aware panel
+          </mat-panel-title>
+          <mat-panel-description>
+            Currently I am 
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <p>I'm visible because I am open</p>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <div class="card-footer">
+      <div class="dates">
+        <p>
+          Created at:
+          <!-- {{ story.created | date : "shortDate" }} -->
+        </p>
+        <p>
+          Due:
+          <!-- {{ story.due | date : "shortDate" }} -->
+        </p>
+        <p>
+          Status:
+          <!-- {{ story.status }} -->
+        </p>
+      </div>
+      <mat-card-actions>
+        <button mat-icon-button class="example-icon" (click)="updateStory()">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </mat-card-actions>
+    </div>
+  </mat-card>
+
+  <app-divider></app-divider>
+  <app-button
+    [text]="'Add Task'"
+    [icon]="'plus'"
+    (buttonEvent)="addTask()"
+  ></app-button>
+
+  <mat-card>
+    <ul *ngFor="let task of tasks">
+      <li>
+        <app-task-card
+          [task]="task"
+          [projectId]="projectId"
+          [epicId]="epicId"
+          [storyId]="storyId"
+          (editOutPut)="updateTask(task)"
+          (deleteOutPut)="deleteTask(task, 'Delete task')"
+          (doneToggle)="toggleTask(task, 'Check task')"
+        ></app-task-card>
+      </li>
     </ul>
+  </mat-card>
 </div>

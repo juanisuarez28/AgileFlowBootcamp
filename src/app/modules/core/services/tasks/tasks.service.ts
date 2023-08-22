@@ -1,6 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
-import { Task } from 'src/app/modules/models/ctask.model';
+import { BehaviorSubject, Observable, Subject, map } from 'rxjs';
+import { TokenStorageService } from 'src/app/modules/auth/token-storage.service';
+import { GetTasksResponse, PostTasksResponse, Task } from 'src/app/modules/models/ctask.model';
 
 @Injectable({
   providedIn: 'root'
@@ -8,31 +10,57 @@ import { Task } from 'src/app/modules/models/ctask.model';
 export class TasksService {
 
   private tasks : Task[] = [];
-  private tasks$ = new Subject<Task[]>
+  private  baseUrl: string = " https://lamansysfaketaskmanagerapi.onrender.com/api";
+
 
   tasksData : BehaviorSubject<Task[]> = new BehaviorSubject<Task[]>(this.tasks);
 
-  constructor() { }
+  constructor(private http: HttpClient, private tokenStorageService :TokenStorageService) {}
 
-  public getTasks$(){
-    return this.tasksData.asObservable();
+
+  public getTasksApi(id : string){
+    return this.http.get<GetTasksResponse>
+    (this.baseUrl + '/stories/'+ id +'/tasks', {headers : {'auth' : this.tokenStorageService.getToken() || ""}
+  }).pipe(
+    map(response => {
+      if(response.status == "succes"){
+        response.data = response.data.map(tasks =>{
+          return Task.taskFromJson(tasks)
+        });
+      }
+      return response;
+    })
+  )
   }
 
-  public addTask(newTask : Task){
-    this.tasks.unshift(newTask)
-    this.tasks$.next(this.tasks)
+ 
+  public newTask(newTask : any) : Observable<any>{
+    return this.http.post<PostTasksResponse>(this.baseUrl + '/tasks', newTask, {
+      headers : {'auth' : this.tokenStorageService.getToken() || ""}
+    }).pipe(result =>{
+      return result
+    })
   }
 
-  public deleteTask(id : number){
-    this.tasks.splice (id, 1);
+  public deleteTask(id : string) : Observable<any>{
+    return this.http.delete(this.baseUrl + '/tasks/' + id, {headers : {'auth': this.tokenStorageService.getToken() || ""}
+  }).pipe(result =>{
+    return result
   }
-
-  public editTask(task : Task, id : number){
-
-  }
-
-  public toggleTask(id : number){
     
+  )
   }
+
+  public editTask(task : Task, id : string): Observable<any>{
+    return this.http.put<PostTasksResponse>(
+      this.baseUrl+'/tasks/' + id, task, {headers: {'auth': this.tokenStorageService.getToken()||""}}
+    ).pipe(result =>{
+      return result
+    })
+  }
+/* 
+  public doneToggle(id : string) : Observable<any>{
+    return 
+  } */
 
 }

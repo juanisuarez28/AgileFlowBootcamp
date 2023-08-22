@@ -1,3 +1,8 @@
+export interface GetStoriesResponse {
+    status: string;
+    data:   Story[];
+}
+
 
 
 export interface GetStoriesResponse {

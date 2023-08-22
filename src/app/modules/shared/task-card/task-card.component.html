@@ -1,5 +1,5 @@
 <mat-card>
-    <a routerLink="">
+    <a [routerLink]="'/my-projects'+ projectId + '/'+ epicId + '/' + storyId" >
       <mat-card-header class="card-header">
         <h3>{{ task.name }}</h3>
         

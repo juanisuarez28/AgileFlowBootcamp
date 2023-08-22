@@ -10,6 +10,7 @@ import { StorieComponent } from '../storie/storie.component';
 })
 export class TaskFormComponent implements OnInit {
   taskForm !: FormGroup;
+  invalid : boolean = false;
 
   constructor(private fb: FormBuilder, public dialogRef : MatDialogRef<StorieComponent>,
     @Inject(MAT_DIALOG_DATA) 
@@ -20,7 +21,7 @@ export class TaskFormComponent implements OnInit {
   ngOnInit() : void {
     this.taskForm = this.fb.group({
       name : new FormControl(this.data.name, Validators.required),
-      description: new FormControl(this.data.description, Validators.required),
+      description: new FormControl(this.data.description, Validators.minLength(10)),
       story : new FormControl(this.data.story),
       created: new FormControl(this.data.created),
       due: new FormControl(this.data.due),
@@ -35,8 +36,10 @@ export class TaskFormComponent implements OnInit {
       
       this.dialogRef.close(this.taskForm)
     }else{
-      console.log("Invalid form");
+      this.invalid = true;
       
     }
   }
 }
+
+
