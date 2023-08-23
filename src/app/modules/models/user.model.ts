@@ -3,6 +3,25 @@ export interface GetUsersResponse {
     data: User[];
 }
 
+export interface GetUserResponse {
+    status: string;
+    data: User;
+}
+
+export interface Name {
+    first: string;
+    last:  string;
+}
+
+export interface UserInterface {
+    name:     Name;
+    _id:      string;
+    email:    string;
+    username: string;
+    __v:      number;
+}
+
+
 export class User {
     constructor(
         public name:     Name,
@@ -25,17 +44,4 @@ export class User {
     getName(){
         return this.name.first+" "+this.name.last;
     }
-}
-
-export interface Name {
-    first: string;
-    last:  string;
-}
-
-export interface UserInterface {
-    name:     Name;
-    _id:      string;
-    email:    string;
-    username: string;
-    __v:      number;
 }

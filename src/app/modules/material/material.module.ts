@@ -14,6 +14,10 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatExpansionModule} from '@angular/material/expansion';
+
 
 @NgModule({
 	declarations: [],
@@ -32,7 +36,10 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 		MatInputModule,
 		MatDatepickerModule,
 		MatNativeDateModule,
-		MatCheckboxModule
+		MatCheckboxModule,
+		MatProgressSpinnerModule,
+		MatProgressBarModule,
+		MatExpansionModule
 		
 	],
 	exports: [
@@ -49,7 +56,11 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 		MatInputModule,
 		MatDatepickerModule,
 		MatNativeDateModule,
-		MatCheckboxModule
+		MatCheckboxModule,
+		MatProgressSpinnerModule,
+		MatProgressBarModule,
+		MatExpansionModule
+
 		
 	]
 })
