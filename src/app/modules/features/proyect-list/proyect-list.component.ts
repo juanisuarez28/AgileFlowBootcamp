@@ -73,7 +73,7 @@ export class ProyectListComponent implements OnInit, OnDestroy{
         if (resp.success = "success"){
           this.getProjects();
         }
-      });;
+      });
     })
   }
 

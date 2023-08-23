@@ -55,14 +55,14 @@
               <button
                 mat-icon-button
                 class="example-icon"
-                (click)="deleteStory(i, 'historia')"
+                (click)="deleteStory(story, 'historia')"
               >
                 <mat-icon>delete</mat-icon>
               </button>
               <button
                 mat-icon-button
                 class="example-icon"
-                (click)="updateStory(story, i)"
+                (click)="updateStory(story)"
               >
                 <mat-icon>edit</mat-icon>
               </button>
@@ -71,5 +71,8 @@
         </mat-card>
       </li>
     </ul>
+    <app-label [text]="'Loading projects...'" *ngIf="stories.length == 0 && !cantStoriesIsZero && !errorGetStories"></app-label>
+    <app-label [text]="'No existen proyectos'" *ngIf="cantStoriesIsZero"></app-label>
+    <app-label [text]="'Error to get projects'" *ngIf="errorGetStories"></app-label>
   </div>
 </div>
