@@ -13,7 +13,7 @@ import { DeleteDialogComponent } from '../../shared/delete-dialog/delete-dialog.
   templateUrl: './proyect-list.component.html',
   styleUrls: ['./proyect-list.component.scss']
 })  
-export class ProyectListComponent implements OnInit, OnDestroy{
+export class ProyectListComponent implements OnInit{
   projects : Project[]=[];
   projects$: Observable<Project[]> = new Observable<Project[]>();
   projectsServiceSubscription: Subscription = new Subscription();
@@ -83,15 +83,17 @@ export class ProyectListComponent implements OnInit, OnDestroy{
     });
     
     dialogRef.afterClosed().subscribe(result => {
-      this.projectsService.deleteProject(project.getId()).subscribe(resp => {
-        if (resp.success = "success"){
-          console.log( "Exito al eliminar proyecto: ", resp)
-          this.getProjects();
-        }else{
-          console.log("Error al eliminar proyecto ", resp);
-          
-        }
-      });
+      if(result===true){
+        this.projectsService.deleteProject(project.getId()).subscribe(resp => {
+          if (resp.success = "success"){
+            console.log( "Exito al eliminar proyecto: ", resp)
+            this.getProjects();
+          }else{
+            console.log("Error al eliminar proyecto ", resp);
+            
+          }
+        });
+      }
     });
   }
 
@@ -102,10 +104,6 @@ export class ProyectListComponent implements OnInit, OnDestroy{
         this.getProjects();
       }
     });
-  }
-
-  ngOnDestroy(): void {
-    this.projectsServiceSubscription.unsubscribe();
   }
 }
 

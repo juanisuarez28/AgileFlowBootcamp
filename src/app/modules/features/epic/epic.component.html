@@ -31,8 +31,7 @@
     <ul>
       <li *ngFor="let story of stories; let i = index">
         <mat-card>
-          <a routerLink="">
-            <mat-card-header class="card-header">
+            <mat-card-header [routerLink]="'/my-projects/'+projectId+'/'+epicId+'/'+story._id" class="card-header">
               <h3>{{ story.name }}</h3>
               <p>Assigned: {{ story.assignedTo }}</p>
             </mat-card-header>
@@ -43,7 +42,6 @@
                 {{ story.description }}
               </p>
             </mat-card-content>
-          </a>
 
           <div class="card-footer">
             <div class="dates">
@@ -55,7 +53,7 @@
               <button
                 mat-icon-button
                 class="example-icon"
-                (click)="deleteStory(story, 'historia')"
+                (click)="deleteStory(story)"
               >
                 <mat-icon>delete</mat-icon>
               </button>
@@ -71,8 +69,8 @@
         </mat-card>
       </li>
     </ul>
-    <app-label [text]="'Loading projects...'" *ngIf="stories.length == 0 && !cantStoriesIsZero && !errorGetStories"></app-label>
-    <app-label [text]="'No existen proyectos'" *ngIf="cantStoriesIsZero"></app-label>
-    <app-label [text]="'Error to get projects'" *ngIf="errorGetStories"></app-label>
+    <app-label [text]="'Loading stories...'" *ngIf="stories.length == 0 && !cantStoriesIsZero && !errorGetStories"></app-label>
+    <app-label [text]="'No existen stories'" *ngIf="cantStoriesIsZero"></app-label>
+    <app-label [text]="'Error to get stories'" *ngIf="errorGetStories"></app-label>
   </div>
 </div>

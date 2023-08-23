@@ -15,11 +15,6 @@ export class StoriesService{
   stories : Story[] = [];
   private  baseUrl: string = " https://lamansysfaketaskmanagerapi.onrender.com/api";
 
-  private stories$ = new Subject<Story[]>
-
-  storiesData: BehaviorSubject<Story[]> = new BehaviorSubject<Story[]>(this.stories)
-
-
   constructor(private http: HttpClient, private tokenStorageService :TokenStorageService){}
 
   public getStories(epicId : string){
@@ -38,10 +33,7 @@ export class StoriesService{
   }
 
   public addStory(newStory: Story):Observable<any> {
-    this.stories.unshift(newStory)
-    this.stories$.next(this.stories); 
-
-    return this.http.post<PostStoriesResponse>(this.baseUrl+'/projects', newStory, {headers: {'auth': this.tokenStorageService.getToken()||""}}).pipe( result =>{
+    return this.http.post<PostStoriesResponse>(this.baseUrl+'/stories', newStory, {headers: {'auth': this.tokenStorageService.getToken()||""}}).pipe( result =>{
       console.log("result: ", result);
       return result;
     });
