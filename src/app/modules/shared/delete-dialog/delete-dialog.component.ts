@@ -17,10 +17,6 @@ export class DeleteDialogComponent {
 
   ) { }
 
-  deleteEpic(){
-    console.log("Delete epic");
-    this.dialogRef.close(this.data);
-  }
 }
 
 export interface deleteData{
