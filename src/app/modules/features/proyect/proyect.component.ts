@@ -107,15 +107,17 @@ export class ProyectComponent implements OnInit {
     });
     
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The DELETE dialog was closed');
-      console.log('result: ' + result.name);
-      this.epicService.deleteEpic(epica._id).subscribe(resp =>{
-        console.log("resultado of delete epic :", resp);
-        
-        if(resp.status == "success"){
-          this.getEpics();
-        }
-      })
+      if(result === true){
+        console.log('The DELETE dialog was closed');
+        console.log('result: ' + result.name);
+        this.epicService.deleteEpic(epica._id).subscribe(resp =>{
+          console.log("resultado of delete epic :", resp);
+          
+          if(resp.status == "success"){
+            this.getEpics();
+          }
+        })
+      }
     });
   }
   

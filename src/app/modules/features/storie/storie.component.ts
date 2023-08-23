@@ -5,7 +5,7 @@ import { Observable, Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { TasksService } from '../../core/services/tasks/tasks.service';
 import { TaskFormComponent } from '../task-form/task-form.component';
-import { ConfirmDialogComponent } from '../../shared/confirm-dialog/confirm-dialog.component';
+import { DeleteDialogComponent } from '../../shared/delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-storie',
@@ -52,9 +52,9 @@ updateTask(task : Task, id : number){
   })
 }
 
-deleteTask(id: number, type :string){
-  let dialogRef = this.dialog.open(ConfirmDialogComponent,{
-    data :{ id: id, type : type}
+deleteTask(task : Task, id: number){
+  let dialogRef = this.dialog.open(DeleteDialogComponent,{
+    data: {type: "Tarea ", name:task.name},  
   });
 
   dialogRef.afterClosed().subscribe((result) =>{

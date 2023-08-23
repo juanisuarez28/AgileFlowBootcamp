@@ -7,7 +7,6 @@ import { ProyectCardComponent } from './proyect-card/proyect-card.component';
 import { TaskCardComponent } from './task-card/task-card.component';
 import { DividerComponent } from './divider/divider.component';
 
-import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { MaterialModule } from '../material/material.module';
 
 import { MatDialogModule } from '@angular/material/dialog';
@@ -26,7 +25,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     ProyectCardComponent,
     TaskCardComponent,
     DividerComponent,
-    ConfirmDialogComponent,
     EpicFormComponent,
     DeleteDialogComponent,
     ProjectDialogComponent

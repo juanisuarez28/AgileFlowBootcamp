@@ -1,16 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 import { Story } from 'src/app/modules/models/cstory.model';
 import { StoriesService } from '../../core/services/stories/stories.service';
-import {
-  MatDialog,
-  MatDialogRef,
-  MatDialogModule,
-} from '@angular/material/dialog';
-import { ConfirmDialogComponent } from '../../shared/confirm-dialog/confirm-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 import { StoryFormComponent } from '../story-form/story-form.component';
-import { Epic } from '../../models/cepic.model';
 import { ActivatedRoute } from '@angular/router';
+import { DeleteDialogComponent } from '../../shared/delete-dialog/delete-dialog.component';
+
+
 
 @Component({
   selector: 'app-epic',
@@ -18,17 +14,17 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./epic.component.scss'],
 })
 export class EpicComponent implements OnInit {
-  
+
+  projectId: string | null="";
   epicId: string="";
   stories: Story[] = [];
-  stories$: Observable<Story[]> = new Observable<Story[]>();
-  storiesSubscription : Subscription = new Subscription();
   errorGetStories : boolean = false;
   cantStoriesIsZero : boolean = false;
 
   constructor(private ss: StoriesService, public dialog: MatDialog, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
+    this.projectId=this.route.snapshot.paramMap.get('projectId');
     const epicId=this.route.snapshot.paramMap.get('epicId');
     //let storiesSubscription = this.stories$.subscribe((stories) => (this.stories = stories));
 
@@ -40,6 +36,7 @@ export class EpicComponent implements OnInit {
 
   getStories(){
     this.ss.getStories(this.epicId).subscribe(resp =>{
+      console.log("Respuesta al hacer getStories ", resp);
       if(resp.status=="success"){
         this.stories=resp.data;
         if(this.stories.length==0){
@@ -51,16 +48,16 @@ export class EpicComponent implements OnInit {
     });
   }
 
-
   addStory() {
     let dialogRef = this.dialog.open(StoryFormComponent,{
-      data : {name : '', description : '', epic : this.epicId ,sprint: '', owner : '',assignedTo : [], points : '',created: new Date(), due :'', start :'', end :'', status : '', option : 'Add new story'}
+      data : {name : '', description : '', epic : this.epicId ,sprint: '', owner : '',assignedTo : [""], points : '',created: new Date(), due :'', start :'', end :'', status : '', option : 'Add new story'}
     })
 
     dialogRef.afterClosed().subscribe(result =>{      
       if (result.value != undefined){
         this.ss.addStory(result.value).subscribe(resp => {
-          if(resp){
+          console.log( "respuesta de creacion de una nueva storie: ", resp)
+          if(resp.status == "success"){
             this.getStories();
           }
         })
@@ -78,7 +75,7 @@ export class EpicComponent implements OnInit {
       if (result.value != undefined){
         this.ss.editStory(result.value, story.getId()).subscribe(resp =>{
           console.log( "respuesta de edicion de una storie: ", resp)
-          if (resp.status = "success"){
+          if (resp.status == "success"){
             this.getStories();
           }
         })
@@ -86,19 +83,16 @@ export class EpicComponent implements OnInit {
   })
   }
 
-
-  deleteStory(story: Story, type : string) {
-    let dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      data : {
-        id : story.getId(),
-        type : type
-      }
+  deleteStory(story: Story) {
+    let dialogRef = this.dialog.open(DeleteDialogComponent, {
+      data: {type: "Story ", name: story.name},
     });
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result === true) {
         this.ss.deleteStory(story.getId()).subscribe(resp =>{
-          if(resp.success=="success"){
+          console.log("Storie a eliminar: ", resp);
+          if(resp.status =="success"){
             console.log("exito al eliminar story");
             this.getStories();
           }else{

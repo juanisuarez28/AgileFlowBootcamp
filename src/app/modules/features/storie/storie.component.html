@@ -7,7 +7,7 @@
             <app-task-card
             [task]="task"
             (editOutPut)="updateTask(task,i)"
-            (deleteOutPut)="deleteTask(i, 'task')"
+            (deleteOutPut)="deleteTask(task, i)"
             (doneToggle)="toggleTask(i)"
             ></app-task-card>
         </li>

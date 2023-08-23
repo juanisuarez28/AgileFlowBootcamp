@@ -31,6 +31,7 @@ export class ProjectDialogComponent implements OnInit{
       description : new FormControl(this.data.description, Validators.required),
       icon : new FormControl(this.data.icon, Validators.required)
     })
+    
     this.userService.getUsers().subscribe( resp => {
   
       this.users = resp;
