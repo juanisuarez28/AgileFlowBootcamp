@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {NgIf} from '@angular/common';
+import { HeaderService } from '../../core/services/header.service';
 
 
 @Component({
@@ -12,10 +13,9 @@ import {NgIf} from '@angular/common';
 })
 export class MainComponent {
 
-  rutaActual: string= "Home";
+  
+  constructor(){  }
 
-  changeRutaActual(rutaActual : string){
-    this.rutaActual=rutaActual;
-  }
-
+  
+  
 }

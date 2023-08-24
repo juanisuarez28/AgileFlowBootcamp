@@ -13,6 +13,7 @@ import { MaterialModule } from './modules/material/material.module';
 import { PresentationModule } from './modules/presentation/presentation.module';
 import {  RouterModule } from '@angular/router';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { HeaderService } from './modules/core/services/header.service';
 
 
 registerLocaleData(localeEsAr, 'es-AR');
@@ -41,7 +42,9 @@ registerLocaleData(localeEsAr, 'es-AR');
   exports:[
   ],
   providers: [
-    { provide: LOCALE_ID, useValue: 'es-AR' }
+    { provide: LOCALE_ID, useValue: 'es-AR' },
+    HeaderService
+
   ],
   bootstrap: [AppComponent]
 })
