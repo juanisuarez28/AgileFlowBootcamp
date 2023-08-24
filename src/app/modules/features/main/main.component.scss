@@ -29,6 +29,11 @@ mat-sidenav{
     justify-content: center;
     align-items: center;
     background-color: var(--darkColor);
+
+    img{
+        display: flex;
+        height: 5rem;
+    }
 }
 .navigation{
     display: flex;

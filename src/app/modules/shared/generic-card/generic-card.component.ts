@@ -40,10 +40,4 @@ export class GenericCardComponent {
 
   }
 
-  redirect(){
-    console.log('/my-projects/'+this.projectId+'/'+this.epica._id);
-    const url = "'/my-projects/'+this.projectId+'/'+this.epica._id";
-    console.log("URL: ",url);
-    this.router.navigateByUrl(url);
-  }
 }

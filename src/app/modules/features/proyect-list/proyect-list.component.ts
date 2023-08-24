@@ -55,6 +55,7 @@ export class ProyectListComponent implements OnInit{
 
     dialogRef.afterClosed().subscribe(result =>{
       console.log("dialog close, result value: ", result.value);
+      //loading
       this.newProject(result.value);
     })
   }
@@ -68,10 +69,12 @@ export class ProyectListComponent implements OnInit{
 
     dialogRef.afterClosed().subscribe(result =>{
       console.log("dialog EDIT close, result value: ",result.value);
+      //loading true
       this.projectsService.editProject(result.value, project.getId()).subscribe( resp =>{
         console.log( "respuesta de EDICION de nuyevo projecto: ", resp)
         if (resp.success = "success"){
           this.getProjects();
+          //loading false
         }
       });
     })
