@@ -16,7 +16,6 @@ import { EpicFormComponent } from './epic-form/epic-form.component';
 import { ProjectDialogComponent } from './project-dialog/project-dialog.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
-
 @NgModule({
   declarations: [
     ButtonComponent,
@@ -27,7 +26,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     DividerComponent,
     EpicFormComponent,
     DeleteDialogComponent,
-    ProjectDialogComponent
+    ProjectDialogComponent,
   ],
   imports: [
     CommonModule,

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable} from '@angular/core';
 import { BehaviorSubject, Observable, Subject, map } from 'rxjs';
 import { TokenStorageService } from 'src/app/modules/auth/token-storage.service';
-import { Story, GetStoriesResponse, PostStoriesResponse } from 'src/app/modules/models/cstory.model';
+import { Story, GetStoriesResponse, PostStoriesResponse, GetStoryResponse } from 'src/app/modules/models/cstory.model';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +30,33 @@ export class StoriesService{
           
         })
     );
+  }
+
+  public getAllStories(){
+    return this.http.get<GetStoriesResponse>(this.baseUrl + "/stories", {headers: {'auth' : this.tokenStorageService.getToken() || ""}
+  }).pipe(
+    map( response =>{
+      if(response.status == "success"){
+        response.data = response.data.map(stories =>{
+          return Story.storyFromJson(stories);
+        })
+      }
+      return response;
+    })
+  )
+  }
+
+  public getStoryById(storyId : string){
+    return this.http.get<GetStoryResponse>
+    (this.baseUrl + '/stories/' + storyId, {headers: {'auth': this.tokenStorageService.getToken()||""}
+  }).pipe(
+    map(response =>{
+      if(response.status = "success"){
+        response.data = Story.storyFromJson(response.data)
+      }
+      return response;
+    })
+  )
   }
 
   public addStory(newStory: Story):Observable<any> {

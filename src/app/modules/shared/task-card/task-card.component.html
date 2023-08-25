@@ -1,5 +1,4 @@
-<mat-card>
-    <a [routerLink]="'/my-projects'+ projectId + '/'+ epicId + '/' + storyId" >
+<mat-card [ngClass]="{'done' : task.done}">
       <mat-card-header class="card-header">
         <h3>{{ task.name }}</h3>
         
@@ -11,7 +10,7 @@
           {{ task.description }}
         </p>
       </mat-card-content>
-    </a>
+    
 
     <div class="card-footer">
       <div class="dates">
@@ -20,8 +19,6 @@
         
       </div>
       <mat-card-actions>
-
-        <mat-checkbox color="primary" (click)="doneToggle()" [checked]="task.done"></mat-checkbox>
         
         <button
           mat-icon-button

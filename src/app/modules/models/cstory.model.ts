@@ -5,9 +5,9 @@ export interface GetStoriesResponse {
 
 
 
-export interface GetStoriesResponse {
+export interface GetStoryResponse {
     status: string;
-    data:   Story[];
+    data:   Story;
 }
 
 export interface PostStoriesResponse {

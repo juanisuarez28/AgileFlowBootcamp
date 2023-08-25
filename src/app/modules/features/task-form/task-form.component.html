@@ -30,6 +30,15 @@
             <mat-datepicker #due></mat-datepicker>
         </mat-form-field>
 
+        <mat-form-field>
+          <mat-label>Done</mat-label>
+          <mat-select formControlName="done">
+              <mat-option [value]="true">Done</mat-option>
+              <mat-option [value]="false">Not done</mat-option>
+          </mat-select>
+      </mat-form-field>
+
+
     <mat-dialog-actions>
       <button mat-button mat-dialog-close>Cancel</button>
       <button mat-button cdkFocusInitial type="submit">Submit</button>

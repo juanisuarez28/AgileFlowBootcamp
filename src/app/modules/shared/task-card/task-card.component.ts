@@ -26,10 +26,5 @@ export class TaskCardComponent {
     this.deleteOutPut.emit();
   }
 
-  doneToggle(){
-    this.toggleOutPut.emit();
-    
-  }
-
 
 }

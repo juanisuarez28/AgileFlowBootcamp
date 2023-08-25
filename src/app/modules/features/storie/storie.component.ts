@@ -20,6 +20,10 @@ export class StorieComponent {
   epicId: string;
   storyId: string;
 
+  showStory : boolean = false;
+  errorGetStory: boolean = false;
+
+
   story !: Story;
 
   tasks: Task[] = [];
@@ -47,21 +51,24 @@ export class StorieComponent {
     this.getTasks();
   }
 
-  getStory(){/* 
-    this.storiesService.getStory(this.storyId).subscribe(response =>{
+  getStory(){
+    this.storiesService.getStoryById(this.storyId).subscribe(response =>{
       if(response.status =="success"){
         this.story = response.data
+        console.log(this.story);
+        
+        this.showStory = true;
       }else{
-        console.log("no story");
+        this.errorGetStory = true
         
       }
-    }) */
+    })
   }
 
   getTasks() {
     this.ts.getTasksApi(this.storyId).subscribe((response) => {
       if (response.status == 'success') {
-        this.tasks = response.data;
+        this.tasks = response.data;        
         if (this.tasks.length == 0) {
           this.errorNoTasks = true;
         }
@@ -121,39 +128,25 @@ export class StorieComponent {
 
   deleteTask(task: Task, type: string) {
     let dialogRef = this.dialog.open(DeleteDialogComponent, {
-      data: { task: task, type: type },
+      data: { type: "Task", name : task.name },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      this.ts.deleteTask(task._id).subscribe((response) => {
-        if ((response.success = 'success')) {
-          this.getTasks();
-        } else {
-          //handle error
-        }
-      });
-    });
-  }
-
-  toggleTask(task: Task, type: string) {
-    let dialogRef = this.dialog.open(DeleteDialogComponent, {
-      data: { task: task, type: type },
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log(result);
-
-      /* this.ts.doneToggle(task._id).subscribe(response =>{
-      if(response.success = "succes"){
-        this.getTasks();
-      }else{
-        //handle error
+      if(result ===true){
+        this.ts.deleteTask(task._id).subscribe(response => {
+          if(response.success = "success"){
+            this.getTasks();
+          }else{
+            //handle error
+          }
+        })
       }
-    }) */
     });
   }
 
   updateStory(){
+    
+    console.log("update");
     
     let dialogRef = this.dialog.open(StoryFormComponent,{
       data : {name : this.story.name, description : this.story.description, 
@@ -163,18 +156,17 @@ export class StorieComponent {
         end :this.story.finished, status : this.story.status, option : 'Edit'}
     })
 
-    dialogRef.afterClosed().subscribe((result) => {/* 
+    dialogRef.afterClosed().subscribe((result) => {
       this.storiesService.editStory(result.value, this.storyId).subscribe((response) => {
-        if ((response.success = 'success')) {
-          this.getTasks();
+        console.log(response);
+        
+        if ((response.status = 'success')) {
+          this.getStory();
         }
-      }); */
+      });
     });
   }
 
-  ngOnDestroy() {
-    this.tasksSubscription.unsubscribe();
-  }
 }
 
 export interface formTask {

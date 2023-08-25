@@ -1,1 +1,52 @@
-<p>my-stories works!</p>
+<div>
+    <p  *ngIf="stories == undefined && !errorGetStories">
+        Loading stories
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </p>
+
+    
+
+    <ul>
+      <li *ngFor="let story of stories; let i = index">
+        
+        <mat-card *ngIf="story != undefined">
+            <mat-card-header [routerLink]="'/my-stories/'+ story._id" class="card-header">
+              <h3>{{ story.name }}</h3>
+              <p>Assigned: {{ story.assignedTo }}</p>
+            </mat-card-header>
+            <mat-divider></mat-divider>
+
+            <mat-card-content>
+              <p>
+                {{ story.description }}
+              </p>
+            </mat-card-content>
+
+          <div class="card-footer">
+            <div class="dates">
+              <p>Created at: {{ story.created | date : "shortDate" }}</p>
+              <p>Due: {{ story.due | date : "shortDate" }}</p>
+              <p>Status: {{ story.status }}</p>
+            </div>
+            <mat-card-actions>
+              <button
+                mat-icon-button
+                class="example-icon"
+                (click)="deleteStory(story)"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+              <button
+                mat-icon-button
+                class="example-icon"
+                (click)="updateStory(story)"
+              >
+                <mat-icon>edit</mat-icon>
+              </button>
+            </mat-card-actions>
+          </div>
+        </mat-card>
+      </li>
+    </ul>
+    
+  </div>

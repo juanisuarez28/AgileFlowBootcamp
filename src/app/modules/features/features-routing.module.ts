@@ -21,6 +21,8 @@ const routes: Routes = [
       { path: 'my-projects/:projectId/:epicId/:storieId/:taskId', component: TaskComponent },
       { path: 'settings', component: SettingsComponent },
       { path: 'my-stories', component: MyStoriesComponent },
+      { path: 'my-stories/:storieId', component: StorieComponent },
+
 
     ]
   } 

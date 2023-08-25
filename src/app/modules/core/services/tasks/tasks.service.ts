@@ -58,9 +58,13 @@ export class TasksService {
       return result
     })
   }
-/* 
-  public doneToggle(id : string) : Observable<any>{
-    return 
-  } */
+
+  public doneToggle(task: Task, id : string) : Observable<any>{
+    return this.http.put<PostTasksResponse>(
+      this.baseUrl+'/tasks/' + id, task, {headers: {'auth': this.tokenStorageService.getToken()||""}}
+    ).pipe(result =>{
+      return result
+    })
+  }
 
 }
