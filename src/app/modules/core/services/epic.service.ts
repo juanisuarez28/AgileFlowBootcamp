@@ -41,6 +41,18 @@ export class EpicService {
       );
   }
 
+  getEpicById(id : string){
+    return this.http.get<PostEpicsResponse>(this.baseUrl + '/epics/' + id, { headers: {'auth': this.tokenStorageService.getToken()||""}
+      }).pipe(
+        map( resp =>{
+            if(resp.status == "success"){
+              //resp.data= Epic.epicFromJson
+            }
+            return resp;
+          } 
+        ));
+  }
+
   saveEpic(newEpic : Epica){
     console.log("Epic Service, newEpic:", newEpic);
     

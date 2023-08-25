@@ -78,6 +78,7 @@ export class StoriesService{
     return this.http.put<PostStoriesResponse>(this.baseUrl+'/stories/'+id, story, {headers: {'auth': this.tokenStorageService.getToken()||""}}).pipe( result =>{
       console.log("result: ", result);
       return result;
-    });  }
+    });  
+  }
 
 }

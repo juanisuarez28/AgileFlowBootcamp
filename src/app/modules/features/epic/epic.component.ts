@@ -5,6 +5,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { StoryFormComponent } from '../story-form/story-form.component';
 import { ActivatedRoute } from '@angular/router';
 import { DeleteDialogComponent } from '../../shared/delete-dialog/delete-dialog.component';
+import { Epica } from '../../models/epic.modle';
+import { EpicService } from '../../core/services/epic.service';
+import { EpicFormComponent } from '../../shared/epic-form/epic-form.component';
+import { TokenStorageService } from '../../auth/token-storage.service';
 
 
 
@@ -14,14 +18,14 @@ import { DeleteDialogComponent } from '../../shared/delete-dialog/delete-dialog.
   styleUrls: ['./epic.component.scss'],
 })
 export class EpicComponent implements OnInit {
-
+  epic!: Epica;
   projectId: string | null="";
   epicId: string="";
   stories: Story[] = [];
   errorGetStories : boolean = false;
   cantStoriesIsZero : boolean = false;
 
-  constructor(private ss: StoriesService, public dialog: MatDialog, private route: ActivatedRoute) {}
+  constructor(private ss: StoriesService, private epicService: EpicService ,public dialog: MatDialog, private route: ActivatedRoute, private tokenService : TokenStorageService) {}
 
   ngOnInit(): void {
     this.projectId=this.route.snapshot.paramMap.get('projectId');
@@ -31,7 +35,14 @@ export class EpicComponent implements OnInit {
     if(epicId!=null){
       this.epicId=epicId;
       this.getStories();
+      this.getEpic();
     }
+  }
+
+  getEpic(){
+    this.epicService.getEpicById(this.epicId).subscribe(resp => {
+      this.epic=resp.data;
+    })
   }
 
   getStories(){
@@ -103,6 +114,51 @@ export class EpicComponent implements OnInit {
       }
     });
   }
+
+  editDialog(epica: Epica): void {
+    const dialogRef = this.dialog.open(EpicFormComponent, {
+      data: { project: epica.project, name: epica.name, description: epica.description, icon: epica.icon, option:"Edit" },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result.value != undefined){
+        this.epicService.editEpic(result.value,epica._id).subscribe(resp=>{
+          if(resp.status == "success"){
+            this.getEpic();
+          }
+        })
+      }
+    });
+  }
+
+  deleteDialog(epica: Epica): void {    
+    
+    const dialogRef = this.dialog.open(DeleteDialogComponent, {
+      data:{type:" Epica", name: epica.name},
+    });
+    
+    dialogRef.afterClosed().subscribe(result => {
+      if(result === true){
+        console.log('The DELETE dialog was closed');
+        console.log('result: ' + result.name);
+        this.epicService.deleteEpic(epica._id).subscribe(resp =>{          
+          if(resp.status == "success"){
+            console.log("exito al eliminar la epica", resp);
+            this.getEpic();
+          }else{
+            console.log("Error al eliminar epica" , resp);
+            
+          }
+        })
+      }
+    });
+  }
+
+  getOwner(){
+    const user = this.tokenService.getUser();    
+    return user;
+  }
+
 
 }
 

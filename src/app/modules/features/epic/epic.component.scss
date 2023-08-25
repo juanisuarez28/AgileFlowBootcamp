@@ -3,6 +3,10 @@
     background-color: var(--darkColorSoft);
 }
 
+app-generic-card{
+    margin: 2rem;
+}
+
 mat-card{
     margin: 16px;
     background-color: var(--elementBackgroundColor);
@@ -26,11 +30,15 @@ a{
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    p{
+        font-size: 0.8rem;
+    }
 }
 
-.dates{
-    
 
+
+.dates{
     p{
         margin: 0;
     }
