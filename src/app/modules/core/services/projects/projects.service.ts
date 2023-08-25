@@ -4,6 +4,7 @@ import { Observable, Subject } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { GetProjectsResponse, PostProjectsResponse, Project } from 'src/app/modules/models/cproject.model';
 import { TokenStorageService } from '../../../auth/token-storage.service';
+import { EpicService } from '../epic.service';
 
 
 @Injectable({
@@ -15,9 +16,9 @@ export class ProjectsService {
   private  baseUrl: string = " https://lamansysfaketaskmanagerapi.onrender.com/api";
   
 
-  constructor(private http: HttpClient, private tokenStorageService :TokenStorageService) {
-    
-  }
+  constructor(private http: HttpClient, 
+              private tokenStorageService :TokenStorageService,
+              private epicService: EpicService ) {  }
  
 
   
@@ -76,11 +77,13 @@ export class ProjectsService {
   public deleteProject(projectId:string): Observable<any> {
     console.log("Project Service, delete Project id: ", projectId);
     //Comprobar que no posea epicas
-    return this.http.delete(this.baseUrl+'/projects/'+projectId, {headers: {'auth': this.tokenStorageService.getToken()||""}}).pipe( result =>{
-      console.log("result of delete: ", result);
-      return result;
-    });
-    
+    /* if ( this.epicService.existsEpics(projectId) ){ */
+      return this.http.delete(this.baseUrl+'/projects/'+projectId, {headers: {'auth': this.tokenStorageService.getToken()||""}}).pipe( result =>{
+        console.log("result of delete: ", result);
+        return result;
+      });
+
+       
   }
 
 }

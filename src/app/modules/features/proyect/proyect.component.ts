@@ -28,7 +28,7 @@ export class ProyectComponent implements OnInit {
   constructor(private route: ActivatedRoute, 
               private dialog: MatDialog, 
               private epicService : EpicService,
-              private projectService: ProjectsService) { }
+              private projectsService: ProjectsService) { }
 
   ngOnInit(): void {
     const projectId = this.route.snapshot.paramMap.get('projectId')
@@ -41,7 +41,7 @@ export class ProyectComponent implements OnInit {
     }
   }
   getProject(){
-    this.projectService.getProjectById(this.projectId).subscribe( resp =>{
+    this.projectsService.getProjectById(this.projectId).subscribe( resp =>{
       this.project = resp.data;
     })
   }
@@ -131,7 +131,7 @@ export class ProyectComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result =>{
       console.log("dialog EDIT close, result value: ",result.value);
-      this.projectService.editProject(result.value, project.getId()).subscribe( resp =>{
+      this.projectsService.editProject(result.value, project.getId()).subscribe( resp =>{
         console.log( "respuesta de EDICION de nuyevo projecto: ", resp)
         if (resp.success = "success"){
           this.getProject();
@@ -146,7 +146,7 @@ export class ProyectComponent implements OnInit {
     });
     
     dialogRef.afterClosed().subscribe(result => {
-      this.projectService.deleteProject(project.getId()).subscribe(resp => {
+      this.projectsService.deleteProject(project.getId()).subscribe(resp => {
         if (resp.success = "success"){
           console.log( "Exito al eliminar proyecto: ", resp)
           this.getProject();

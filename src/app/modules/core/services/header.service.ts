@@ -9,8 +9,8 @@ export class HeaderService {
 
   rutaActual: string = ''; // Variable para almacenar la ruta actual
   rutaActual$ = new BehaviorSubject<string>("");
-  firstLevelRoute: boolean = false;
-  firstLevelRoute$ = new BehaviorSubject<boolean>(false);
+  firstLevelRoute: boolean = true;
+  firstLevelRoute$ = new BehaviorSubject<boolean>(true);
 
   constructor(private router: Router, private route: ActivatedRoute) {
     this.router.events

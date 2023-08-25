@@ -3,7 +3,6 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 import { FormBuilder, FormControl, FormGroup,Validators } from '@angular/forms';
 import { ProyectComponent } from '../../features/proyect/proyect.component';
-import { ProjectService } from '../../core/services/project.service';
 
 
 @Component({
@@ -19,7 +18,6 @@ export class EpicFormComponent {
     public dialogRef: MatDialogRef<ProyectComponent>,
     @Inject(MAT_DIALOG_DATA) public data: epicaForm,
     private formBuilder : FormBuilder,
-    private projectService: ProjectService
 
   ) { }
 

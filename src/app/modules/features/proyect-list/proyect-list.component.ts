@@ -6,6 +6,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { ProjectDialogComponent } from '../../shared/project-dialog/project-dialog.component';
 import { Project } from '../../models/cproject.model';
 import { DeleteDialogComponent } from '../../shared/delete-dialog/delete-dialog.component';
+import { EpicService } from '../../core/services/epic.service';
+import { DeleteErrorDialogComponent } from '../../shared/delete-error-dialog/delete-error-dialog.component';
 
 
 @Component({
@@ -17,12 +19,12 @@ export class ProyectListComponent implements OnInit{
   projects : Project[]=[];
   projects$: Observable<Project[]> = new Observable<Project[]>();
   projectsServiceSubscription: Subscription = new Subscription();
-  errorGetProjects : boolean = false;
-  cantProjectsIsZero : boolean = false;
-  
+  errorGetProjects: boolean = false;
+  cantProjectsIsZero: boolean = false;
 
-  constructor( public projectsService : ProjectsService, public dialog : MatDialog){
-    
+
+  constructor(public projectsService: ProjectsService, public dialog: MatDialog, private epicService: EpicService) {
+
   }
 
   ngOnInit(): void {
@@ -30,49 +32,51 @@ export class ProyectListComponent implements OnInit{
     //this.projects$ = this.projectsService.getProjects$(); // se accede al observable
     //this.projectsServiceSubscription=this.projects$.subscribe(projects => this.projects = projects);// nos suscribimos a los cambios
   }
-  
-  getProjects(){
-    this.projectsService.getProjectApi().subscribe( resp => {
-      console.log("RESPUESTA API (get) /projects : ",resp);
-      if( resp.status == "success"){
+
+  getProjects() {
+    this.projectsService.getProjectApi().subscribe(resp => {
+      console.log("RESPUESTA API (get) /projects : ", resp);
+      if (resp.status == "success") {
         this.projects = resp.data;
         this.errorGetProjects = false;
-        if(this.projects.length == 0){
+        if (this.projects.length == 0) {
           this.cantProjectsIsZero = true;
-        }else{
+        } else {
           this.cantProjectsIsZero = false;
         }
-      }else{
+      } else {
         this.errorGetProjects = true;
       }
     });
   }
 
-  newProjectDialog(): void{
-    let dialogRef=this.dialog.open(ProjectDialogComponent,{
-      data: {option: " Agregar nuevo",name: "", members: [""], description: "", }
+  newProjectDialog(): void {
+    let dialogRef = this.dialog.open(ProjectDialogComponent, {
+      data: { option: " Agregar nuevo", name: "", members: [""], description: "", }
     });
 
-    dialogRef.afterClosed().subscribe(result =>{
+    dialogRef.afterClosed().subscribe(result => {
       console.log("dialog close, result value: ", result.value);
       //loading
       this.newProject(result.value);
     })
   }
 
-  editProjectDialog(project: Project): void{
-    let dialogRef=this.dialog.open(ProjectDialogComponent,{
-      data: { option: " Editar", name: project.getName(), 
-              members: project.getMembers(), description: project.getDescription(),
-              icon: project.icon}
+  editProjectDialog(project: Project): void {
+    let dialogRef = this.dialog.open(ProjectDialogComponent, {
+      data: {
+        option: " Editar", name: project.getName(),
+        members: project.getMembers(), description: project.getDescription(),
+        icon: project.icon
+      }
     });
 
-    dialogRef.afterClosed().subscribe(result =>{
-      console.log("dialog EDIT close, result value: ",result.value);
+    dialogRef.afterClosed().subscribe(result => {
+      console.log("dialog EDIT close, result value: ", result.value);
       //loading true
-      this.projectsService.editProject(result.value, project.getId()).subscribe( resp =>{
-        console.log( "respuesta de EDICION de nuyevo projecto: ", resp)
-        if (resp.success = "success"){
+      this.projectsService.editProject(result.value, project.getId()).subscribe(resp => {
+        console.log("respuesta de EDICION de nuyevo projecto: ", resp)
+        if (resp.success = "success") {
           this.getProjects();
           //loading false
         }
@@ -80,37 +84,47 @@ export class ProyectListComponent implements OnInit{
     })
   }
 
-  deleteProject(project : Project){
+  deleteProject(project: Project) {
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
-      data: {type: "Proyecto ", name:project.getName()},
+      data: { type: "Proyecto ", name: project.getName() },
     });
-    
+
     dialogRef.afterClosed().subscribe(result => {
-      if(result===true){
-        this.projectsService.deleteProject(project.getId()).subscribe(resp => {
-          if (resp.success = "success"){
-            console.log( "Exito al eliminar proyecto: ", resp)
-            this.getProjects();
-          }else{
-            console.log("Error al eliminar proyecto ", resp);
-            
-          }
-        });
-      }
+      let existEpicas: boolean = false;
+      this.epicService.getEpics(project.getId()).subscribe(resp => {
+        const epics = resp.data;
+        existEpicas = (epics.length > 0);        
+        if ( !existEpicas){
+          console.log("entro");
+          this.projectsService.deleteProject(project.getId()).subscribe(resp => {
+            if (resp.success = "success") {
+              console.log("Exito al eliminar proyecto: ", resp)
+              this.getProjects();
+            } else {
+              console.log("Error al eliminar proyecto ", resp);
+    
+            }
+          });
+        }else{
+          const errordialog = this.dialog.open(DeleteErrorDialogComponent,{
+            data: { type: "Proyecto", elemento: "epica/s" }}
+          );
+        }
+      })
     });
   }
 
-  newProject(newProject: formProject){
-    this.projectsService.newProject(newProject).subscribe( resp =>{
-      console.log( "respuesta de crearcion de nuevo projecto: ", resp)
-      if (resp.success = "success"){
+  newProject(newProject: formProject) {
+    this.projectsService.newProject(newProject).subscribe(resp => {
+      console.log("respuesta de crearcion de nuevo projecto: ", resp)
+      if (resp.success = "success") {
         this.getProjects();
       }
     });
   }
 }
 
-export interface formProject{
+export interface formProject {
   name: string;
   members: string[];
   description: string;

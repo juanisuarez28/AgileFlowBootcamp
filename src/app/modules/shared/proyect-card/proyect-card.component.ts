@@ -6,12 +6,12 @@ import { Project } from '../../models/cproject.model';
   styleUrls: ['./proyect-card.component.scss']
 })
 export class ProyectCardComponent {
-  @Input() title='';
-  @Input() description='';
-  @Input() members=[''];
+
   @Input() project!: Project;
+  @Input() mostrarDelete: boolean = false;
   @Output() editOutPut = new EventEmitter();
   @Output() deleteOutPut = new EventEmitter();
+
 
   editEvent(){
     console.log("editEvent");
