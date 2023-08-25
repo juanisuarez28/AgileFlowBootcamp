@@ -5,6 +5,10 @@ mat-card{
     background-color: var(--elementBackgroundColor);
 }
 
+mat-card:hover {
+    filter: drop-shadow(10px 10px 5px black );
+}
+
 a{
     color: var(--textColor);
 }
@@ -15,3 +19,7 @@ a{
     align-items: center;
 }
 
+.done{
+    text-decoration: line-through;
+    filter: grayscale(80%);
+}
