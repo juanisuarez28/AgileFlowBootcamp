@@ -9,6 +9,8 @@ import { DeleteDialogComponent } from '../../shared/delete-dialog/delete-dialog.
 import { ActivatedRoute } from '@angular/router';
 import { StoriesService } from '../../core/services/stories/stories.service';
 import { StoryFormComponent } from '../story-form/story-form.component';
+import { LoadingDialogComponent } from '../../shared/loading-dialog/loading-dialog.component';
+import { DialogNotificationComponent } from '../../shared/dialog-notification/dialog-notification.component';
 
 @Component({
   selector: 'app-storie',
@@ -20,7 +22,7 @@ export class StorieComponent {
   epicId: string;
   storyId: string;
 
-  showStory : boolean = false;
+  showStory: boolean = false;
   errorGetStory: boolean = false;
 
 
@@ -51,16 +53,16 @@ export class StorieComponent {
     this.getTasks();
   }
 
-  getStory(){
-    this.storiesService.getStoryById(this.storyId).subscribe(response =>{
-      if(response.status =="success"){
+  getStory() {
+    this.storiesService.getStoryById(this.storyId).subscribe(response => {
+      if (response.status == "success") {
         this.story = response.data
         console.log(this.story);
-        
+
         this.showStory = true;
-      }else{
+      } else {
         this.errorGetStory = true
-        
+
       }
     })
   }
@@ -68,7 +70,7 @@ export class StorieComponent {
   getTasks() {
     this.ts.getTasksApi(this.storyId).subscribe((response) => {
       if (response.status == 'success') {
-        this.tasks = response.data;        
+        this.tasks = response.data;
         if (this.tasks.length == 0) {
           this.errorNoTasks = true;
         }
@@ -91,19 +93,34 @@ export class StorieComponent {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
+      const loadingDialog = this.dialog.open(LoadingDialogComponent)
       if (result.value != undefined) {
-        this.newTask(result.value);
+        // this.newTask(result.value);
+        this.ts.newTask(result.value).subscribe((response) => {
+          loadingDialog.close();
+          if ((response.succes = 'succes')) {
+            this.getTasks();
+            this.dialog.open(DialogNotificationComponent, {
+              data: { title: "Success adding Task: " + result.value.name, mensaje: "The task has been added" }
+            })
+          } else {
+            this.dialog.open(DialogNotificationComponent, {
+              data: { title: "Error adding Task: " + result.value.name, mensaje: "Error in comunication with Database." }
+            })
+
+          }
+        });
       }
     });
   }
 
-  newTask(newTask: formTask) {
+  /* newTask(newTask: formTask) {
     this.ts.newTask(newTask).subscribe((response) => {
       if ((response.succes = 'succes')) {
         this.getTasks();
       }
     });
-  }
+  } */
 
   updateTask(task: Task): void {
     let dialogRef = this.dialog.open(TaskFormComponent, {
@@ -118,9 +135,19 @@ export class StorieComponent {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
+      const loadingDialog = this.dialog.open(LoadingDialogComponent)
       this.ts.editTask(result.value, task._id).subscribe((response) => {
+        loadingDialog.close();
         if ((response.success = 'success')) {
           this.getTasks();
+          this.dialog.open(DialogNotificationComponent, {
+            data: { title: "Success editing task: " + result.value.name, mensaje: "The task has been edited" }
+          })
+        } else {
+          this.dialog.open(DialogNotificationComponent, {
+            data: { title: "Error adding Task: " + result.value.name, mensaje: "Error in comunication with Database." }
+          })
+
         }
       });
     });
@@ -128,38 +155,48 @@ export class StorieComponent {
 
   deleteTask(task: Task, type: string) {
     let dialogRef = this.dialog.open(DeleteDialogComponent, {
-      data: { type: "Task", name : task.name },
+      data: { type: "Task", name: task.name },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      if(result ===true){
+      if (result === true) {
+        const loadingDialog = this.dialog.open(LoadingDialogComponent);
         this.ts.deleteTask(task._id).subscribe(response => {
-          if(response.success = "success"){
+          loadingDialog.close()
+          if (response.success = "success") {
             this.getTasks();
-          }else{
-            //handle error
+            this.dialog.open(DialogNotificationComponent, {
+              data: { title: "Success deleting Task: " + task.name, mensaje: "The task has been deleted" }
+            })
+          } else {
+            this.dialog.open(DialogNotificationComponent, {
+              data: { title: "Error deleting Task: " + task.name, mensaje: "Error in comunication with Database." }
+            })
+
           }
         })
       }
     });
   }
 
-  updateStory(){
-    
+  updateStory() {
+
     console.log("update");
-    
-    let dialogRef = this.dialog.open(StoryFormComponent,{
-      data : {name : this.story.name, description : this.story.description, 
-        epic : this.story.epic ,sprint: this.story.sprint, owner : this.story.owner,
-        assignedTo : this.story.assignedTo, points : this.story.points,
-        created: this.story.created, due :this.story.due, start :this.story.started,
-        end :this.story.finished, status : this.story.status, option : 'Edit'}
+
+    let dialogRef = this.dialog.open(StoryFormComponent, {
+      data: {
+        name: this.story.name, description: this.story.description,
+        epic: this.story.epic, sprint: this.story.sprint, owner: this.story.owner,
+        assignedTo: this.story.assignedTo, points: this.story.points,
+        created: this.story.created, due: this.story.due, start: this.story.started,
+        end: this.story.finished, status: this.story.status, option: 'Edit'
+      }
     })
 
     dialogRef.afterClosed().subscribe((result) => {
       this.storiesService.editStory(result.value, this.storyId).subscribe((response) => {
         console.log(response);
-        
+
         if ((response.status = 'success')) {
           this.getStory();
         }

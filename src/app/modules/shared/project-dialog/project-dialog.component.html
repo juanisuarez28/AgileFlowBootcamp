@@ -20,8 +20,8 @@
       <input matInput formControlName="icon" required>
     </mat-form-field>
   </div>
-  <div mat-dialog-actions>
-      <button mat-button mat-dialog-close type="submit" cdkFocusInitial>Agregar</button>
+  <div mat-dialog-actions align="center">
+      <button mat-button mat-dialog-close type="submit" cdkFocusInitial >{{data.option}}</button>
       <button mat-button (click)="onCancelClick()">Cancelar</button>
     </div>
 </form>

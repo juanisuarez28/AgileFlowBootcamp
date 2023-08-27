@@ -16,7 +16,8 @@ import { EpicFormComponent } from './epic-form/epic-form.component';
 import { ProjectDialogComponent } from './project-dialog/project-dialog.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { OwnerPComponent } from './owner-p/owner-p.component';
-import { DeleteErrorDialogComponent } from './delete-error-dialog/delete-error-dialog.component';
+import { LoadingDialogComponent } from './loading-dialog/loading-dialog.component';
+import { DialogNotificationComponent } from './dialog-notification/dialog-notification.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { DeleteErrorDialogComponent } from './delete-error-dialog/delete-error-d
     DeleteDialogComponent,
     ProjectDialogComponent,
     OwnerPComponent,
-    DeleteErrorDialogComponent,
+    LoadingDialogComponent,
+    DialogNotificationComponent,
   ],
   imports: [
     CommonModule,
@@ -51,7 +53,6 @@ import { DeleteErrorDialogComponent } from './delete-error-dialog/delete-error-d
     DeleteDialogComponent,
     ProjectDialogComponent,
     OwnerPComponent,
-    DeleteErrorDialogComponent,
   ]
 })
 export class SharedModule { }

@@ -7,7 +7,8 @@ import { ProjectDialogComponent } from '../../shared/project-dialog/project-dial
 import { Project } from '../../models/cproject.model';
 import { DeleteDialogComponent } from '../../shared/delete-dialog/delete-dialog.component';
 import { EpicService } from '../../core/services/epic.service';
-import { DeleteErrorDialogComponent } from '../../shared/delete-error-dialog/delete-error-dialog.component';
+import { LoadingDialogComponent } from '../../shared/loading-dialog/loading-dialog.component';
+import { DialogNotificationComponent } from '../../shared/dialog-notification/dialog-notification.component';
 
 
 @Component({
@@ -58,7 +59,21 @@ export class ProyectListComponent implements OnInit{
     dialogRef.afterClosed().subscribe(result => {
       console.log("dialog close, result value: ", result.value);
       //loading
-      this.newProject(result.value);
+      const loading = this.dialog.open(LoadingDialogComponent);
+      this.projectsService.newProject(result.value).subscribe(resp => {
+        console.log("respuesta de crearcion de nuevo projecto: ", resp)
+        loading.close()
+        if (resp.success = "success") {
+          this.getProjects();
+          this.dialog.open(DialogNotificationComponent,{
+            data: { title: "Success adding Project: "+result.value.name, mensaje: "The project has been added" }});
+        }else{
+          this.dialog.open(DialogNotificationComponent,{
+            data: { title: "Error adding Project:"+result.value.name, mensaje: "Error in comunication with Database" }});
+        }
+      });
+
+      // this.newProject(result.value);
     })
   }
 
@@ -71,14 +86,22 @@ export class ProyectListComponent implements OnInit{
       }
     });
 
+
     dialogRef.afterClosed().subscribe(result => {
-      console.log("dialog EDIT close, result value: ", result.value);
+      
+      const loading = this.dialog.open(LoadingDialogComponent)
       //loading true
       this.projectsService.editProject(result.value, project.getId()).subscribe(resp => {
         console.log("respuesta de EDICION de nuyevo projecto: ", resp)
+        loading.close()
         if (resp.success = "success") {
           this.getProjects();
           //loading false
+          this.dialog.open(DialogNotificationComponent,{
+            data: { title: "Success editing Project", mensaje: "This project has been edited" }});
+        }else{
+          this.dialog.open(DialogNotificationComponent,{
+            data: { title: "Error editing Project", mensaje: "Error in comunication with Database" }});
         }
       });
     })
@@ -91,23 +114,30 @@ export class ProyectListComponent implements OnInit{
 
     dialogRef.afterClosed().subscribe(result => {
       let existEpicas: boolean = false;
+      const loading = this.dialog.open(LoadingDialogComponent);
       this.epicService.getEpics(project.getId()).subscribe(resp => {
         const epics = resp.data;
         existEpicas = (epics.length > 0);        
         if ( !existEpicas){
-          console.log("entro");
           this.projectsService.deleteProject(project.getId()).subscribe(resp => {
+            loading.close();
             if (resp.success = "success") {
               console.log("Exito al eliminar proyecto: ", resp)
+              this.dialog.open(DialogNotificationComponent,{
+                data: { title: "Success deleting Project: "+project.getName(), mensaje: "This project has been deleted" }});
               this.getProjects();
             } else {
               console.log("Error al eliminar proyecto ", resp);
-    
-            }
-          });
-        }else{
-          const errordialog = this.dialog.open(DeleteErrorDialogComponent,{
-            data: { type: "Proyecto", elemento: "epica/s" }}
+              this.dialog.open(DialogNotificationComponent,{
+                data: { title: "Error deleting Project", mensaje: "Error in comunication with Database" }}
+                );
+                
+              }
+            });
+          }else{
+            loading.close();
+            this.dialog.open(DialogNotificationComponent,{
+            data: { title: "Error deleting Project", mensaje: "You can't delete it, this project contains epic/s" }}
           );
         }
       })
@@ -115,6 +145,7 @@ export class ProyectListComponent implements OnInit{
   }
 
   newProject(newProject: formProject) {
+    
     this.projectsService.newProject(newProject).subscribe(resp => {
       console.log("respuesta de crearcion de nuevo projecto: ", resp)
       if (resp.success = "success") {
