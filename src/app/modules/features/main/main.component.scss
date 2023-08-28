@@ -28,8 +28,12 @@ mat-sidenav{
     flex: 1;
     justify-content: center;
     align-items: center;
-    background-color: var(--darkColor);
-
+    @media (prefers-color-scheme: light) {
+        background-color: var(--mediumColor);
+    }
+    @media (prefers-color-scheme: dark) {
+        background-color: var(--darkColor);
+    }
     img{
         display: flex;
         height: 5rem;

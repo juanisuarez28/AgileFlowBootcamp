@@ -14,19 +14,12 @@ button {
     
     border-radius: 0.25rem;
     box-sizing: border-box;
+    transition: 0.3s;
     
-    @media (prefers-color-scheme: light) {
-        color: var(--darkColor);
-        border-color: var(--darkColor);
-        background: var(--mediumColor);
-    }
-    @media (prefers-color-scheme: dark) {  
-        
-        border-color: var(--lightColor);
-        color: var(--lightColor);
-        background: var(--darkColorSoft);
-       
-    }
+    color: var(--textColor);
+    border-color: var(--textColor);
+    background: var(--elementBackgroundColor);
+    
     &:active{
         border-color: rgba(172, 255, 47, 0.529);
     }
@@ -40,4 +33,8 @@ button i::before {
     padding: 0rem;
     
     background: transparent;
+}
+
+button:hover{
+    filter: saturate(300%);
 }

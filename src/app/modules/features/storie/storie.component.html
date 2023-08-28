@@ -1,8 +1,10 @@
 <div class="task">
+
   <p  *ngIf="story == undefined && !errorGetStory">
-    Loading story
+    Loading story...
     <mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </p>
+
   <mat-card class="story-card" *ngIf="story != undefined">
     <mat-card-header class="card-header">
       <h3>{{story.name}}</h3>
@@ -69,8 +71,8 @@
     (buttonEvent)="addTask()"
   ></app-button>
 
-  <p *ngIf=" tasks == undefined && !errorGetTasks">
-    Loading tasks
+  <p *ngIf=" tasks.length == 0 && !errorGetTasks && !errorNoTasks">
+    Loading tasks...
     <mat-progress-bar mode="indeterminate"></mat-progress-bar>
   </p>
 
@@ -87,4 +89,6 @@
          ></app-task-card>
       </li>
     </ul>
+    <app-label [text]="'There are no tasks in this story'" *ngIf="errorNoTasks"></app-label>
+    <app-label [text]="'Error to get Epics'" *ngIf="errorGetTasks"></app-label>
 </div>

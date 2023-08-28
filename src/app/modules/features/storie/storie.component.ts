@@ -22,7 +22,6 @@ export class StorieComponent {
   epicId: string;
   storyId: string;
 
-  showStory: boolean = false;
   errorGetStory: boolean = false;
 
 
@@ -58,8 +57,6 @@ export class StorieComponent {
       if (response.status == "success") {
         this.story = response.data
         console.log(this.story);
-
-        this.showStory = true;
       } else {
         this.errorGetStory = true
 

@@ -1,4 +1,9 @@
-
+nav{
+  mat-toolbar{
+    color: var(--textColor);
+    background-color: var(--elementBackgroundColor);
+  }
+}
 
 .example-spacer {
     flex: 1 1 auto;

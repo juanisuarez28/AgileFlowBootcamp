@@ -4,9 +4,11 @@
     row-gap: 1rem;
     margin: 1rem;
     width: 42rem;
+    color: var(--textColor);
     @media (max-width: 750px) {
         width: 90dvw;
     }
+    
     
     align-items: center;
     justify-content: center;

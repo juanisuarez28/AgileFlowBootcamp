@@ -1,6 +1,10 @@
 <div class="proyect">
+    <p *ngIf="project == undefined">
+        Loading project...
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </p>
     
-    <app-proyect-card [project]="project"  (editOutPut)="editProjectDialog(project)"
+    <app-proyect-card [project]="project" *ngIf="project != undefined"  (editOutPut)="editProjectDialog(project)"
                                             (deleteOutPut)="deleteProject(project)"></app-proyect-card>
     <app-divider></app-divider>
     <app-button [text]="'Add epic'" [icon]="'plus'" (buttonEvent)="newEpicDialog()" ></app-button>
@@ -13,7 +17,11 @@
             ></app-generic-card>
         </li>
     </ul>
-    <app-label [text]="'Loading Epics...'" *ngIf="epics.length == 0 && !cantEpicsIsZero && !errorGetEpics"></app-label>
+    
+    <p *ngIf="epics.length == 0 && !cantEpicsIsZero && !errorGetEpics">
+        Loading epics...
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </p>
     <app-label [text]="'There are no epics in this project'" *ngIf="cantEpicsIsZero"></app-label>
     <app-label [text]="'Error to get Epics'" *ngIf="errorGetEpics"></app-label>
 </div>
