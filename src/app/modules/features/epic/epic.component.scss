@@ -11,39 +11,14 @@ app-generic-card{
     margin: 2rem;
 }
 
-mat-card{
-    margin: 16px;
-    background-color: var(--elementBackgroundColor);
-}
-
 ul{
     list-style: none;
     padding: 0;
 }
 
+
 a{
     color: var(--textColor);
 }
 
-.card-header{
-    display: flex;
-    justify-content: space-between;
-}
 
-.card-footer{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    p{
-        font-size: 0.8rem;
-    }
-}
-
-
-
-.dates{
-    p{
-        margin: 0;
-    }
-}

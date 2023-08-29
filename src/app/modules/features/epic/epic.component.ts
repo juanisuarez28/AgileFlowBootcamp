@@ -22,16 +22,13 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./epic.component.scss'],
 })
 export class EpicComponent implements OnInit {
-  user!:User;
   users!:User[];
-  owner!:User;
   epic!: Epica;
   projectId: string | null="";
   epicId: string="";
   stories: Story[] = [];
   errorGetStories : boolean = false;
   cantStoriesIsZero : boolean = false;
-
 
   constructor(private ss: StoriesService, private epicService: EpicService ,public dialog: MatDialog, private route: ActivatedRoute, private userService : UserService, private tokenService: TokenStorageService) {}
 

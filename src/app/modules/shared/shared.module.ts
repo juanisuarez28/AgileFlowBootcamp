@@ -18,6 +18,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { OwnerPComponent } from './owner-p/owner-p.component';
 import { LoadingDialogComponent } from './loading-dialog/loading-dialog.component';
 import { DialogNotificationComponent } from './dialog-notification/dialog-notification.component';
+import { StoryCardComponent } from './story-card/story-card.component';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { DialogNotificationComponent } from './dialog-notification/dialog-notifi
     OwnerPComponent,
     LoadingDialogComponent,
     DialogNotificationComponent,
+    StoryCardComponent,
   ],
   imports: [
     CommonModule,
@@ -53,6 +55,7 @@ import { DialogNotificationComponent } from './dialog-notification/dialog-notifi
     DeleteDialogComponent,
     ProjectDialogComponent,
     OwnerPComponent,
+    StoryCardComponent,
   ]
 })
 export class SharedModule { }
