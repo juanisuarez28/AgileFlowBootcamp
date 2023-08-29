@@ -5,64 +5,7 @@
     <mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </p>
 
-  <mat-card class="story-card" *ngIf="story != undefined">
-    <mat-card-header class="card-header">
-      <h3>{{story.name}}</h3>
-    </mat-card-header>
-    <mat-divider></mat-divider>
-
-    <mat-card-content>
-      <p>
-        {{ story.description }}
-      </p>
-    </mat-card-content>
-
-    <mat-divider></mat-divider>
-
-    <mat-accordion>
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            Important dates:
-          </mat-panel-title>
-          
-        </mat-expansion-panel-header>
-        <p>
-          Created at:
-          {{ story.created | date : "shortDate" }}
-        </p>
-        <p>
-          Due:
-          {{ story.due | date : "shortDate" }}
-        </p>
-        <p>
-          Status:
-          {{ story.status }}
-        </p>
-      </mat-expansion-panel>
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            Assigned to:
-          </mat-panel-title>
-          <mat-panel-description>
-            
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-        <p *ngIf="story.assignedTo.length == 0">There's no one assigned</p>
-        <p>{{story.assignedTo}}</p>
-      </mat-expansion-panel>
-      
-    </mat-accordion>
-
-   
-      <mat-card-actions align="end">
-        <button mat-icon-button class="example-icon" (click)="updateStory()">
-          <mat-icon>edit</mat-icon>
-        </button>
-      </mat-card-actions>
-    
-  </mat-card>
+  <app-story-card *ngIf="story != undefined" [story]="story" (editOutPut)="updateStory()" [type]="'inside'"></app-story-card>
 
   <app-divider></app-divider>
   <app-button

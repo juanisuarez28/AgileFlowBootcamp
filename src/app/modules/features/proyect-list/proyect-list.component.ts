@@ -9,6 +9,8 @@ import { DeleteDialogComponent } from '../../shared/delete-dialog/delete-dialog.
 import { EpicService } from '../../core/services/epic.service';
 import { LoadingDialogComponent } from '../../shared/loading-dialog/loading-dialog.component';
 import { DialogNotificationComponent } from '../../shared/dialog-notification/dialog-notification.component';
+import { User } from '../../models/user.model';
+import { UserService } from '../../core/services/user.service';
 
 
 @Component({
@@ -154,6 +156,7 @@ export class ProyectListComponent implements OnInit{
     });
   }
 }
+
 
 export interface formProject {
   name: string;

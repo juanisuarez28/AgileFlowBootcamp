@@ -9,7 +9,7 @@ import { ActivatedRoute, Route, Router } from '@angular/router';
 })
 export class GenericCardComponent {
   @Input() epica!: Epica;
-
+  @Input() type!:string;
   @Output() editOutPut = new EventEmitter();
   @Output() deleteOutPut = new EventEmitter();
   projectId: string="";

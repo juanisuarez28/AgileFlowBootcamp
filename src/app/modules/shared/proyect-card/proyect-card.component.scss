@@ -8,7 +8,6 @@
 }
 
 .mat-mdc-card-header , .mat-mdc-card-content{
-    padding-top: 0.5rem;
     color: black;
 }
 
@@ -30,3 +29,9 @@ i{
 .mat-mdc-card-subtitle {
     color: rgba(0, 0, 0, 0.54);
 }
+
+.members-container {
+    display: flex;
+    padding-bottom: 0.5rem;
+    gap: 10px; 
+  }

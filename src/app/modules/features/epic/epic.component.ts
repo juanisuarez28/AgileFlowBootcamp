@@ -10,7 +10,7 @@ import { EpicService } from '../../core/services/epic.service';
 import { EpicFormComponent } from '../../shared/epic-form/epic-form.component';
 import { UserService } from '../../core/services/user.service';
 import { TokenStorageService } from '../../auth/token-storage.service';
-import { User} from '../../models/user.model';
+import { User } from '../../models/user.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -22,60 +22,57 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./epic.component.scss'],
 })
 export class EpicComponent implements OnInit {
-  users!:User[];
   epic!: Epica;
-  projectId: string | null="";
-  epicId: string="";
+  projectId: string | null = "";
+  epicId: string = "";
   stories: Story[] = [];
-  errorGetStories : boolean = false;
-  cantStoriesIsZero : boolean = false;
+  errorGetStories: boolean = false;
+  cantStoriesIsZero: boolean = false;
 
-  constructor(private ss: StoriesService, private epicService: EpicService ,public dialog: MatDialog, private route: ActivatedRoute, private userService : UserService, private tokenService: TokenStorageService) {}
+  constructor(private ss: StoriesService, private epicService: EpicService, public dialog: MatDialog, private route: ActivatedRoute, private userService: UserService, private tokenService: TokenStorageService) { }
 
   ngOnInit(): void {
-    this.projectId=this.route.snapshot.paramMap.get('projectId');
-    const epicId=this.route.snapshot.paramMap.get('epicId');
-    this.getUsers();
-    
+    this.projectId = this.route.snapshot.paramMap.get('projectId');
+    const epicId = this.route.snapshot.paramMap.get('epicId');
     //let storiesSubscription = this.stories$.subscribe((stories) => (this.stories = stories));
 
-    if(epicId!=null){
-      this.epicId=epicId;
+    if (epicId != null) {
+      this.epicId = epicId;
       this.getStories();
       this.getEpic();
     }
   }
 
-  getEpic(){
+  getEpic() {
     this.epicService.getEpicById(this.epicId).subscribe(resp => {
-      this.epic=resp.data;
+      this.epic = resp.data;
     })
   }
 
-  getStories(){
-    this.ss.getStories(this.epicId).subscribe(resp =>{
+  getStories() {
+    this.ss.getStories(this.epicId).subscribe(resp => {
       console.log("Respuesta al hacer getStories ", resp);
-      if(resp.status=="success"){
-        this.stories=resp.data;
-        if(this.stories.length==0){
-          this.cantStoriesIsZero=true;
+      if (resp.status == "success") {
+        this.stories = resp.data;
+        if (this.stories.length == 0) {
+          this.cantStoriesIsZero = true;
         }
-      }else{
-        this.errorGetStories=true;
+      } else {
+        this.errorGetStories = true;
       }
     });
   }
 
   addStory() {
-    let dialogRef = this.dialog.open(StoryFormComponent,{
-      data : {name : '', description : '', epic : this.epicId ,sprint: '', owner : '',assignedTo : [""], points : '',created: new Date(), due :'', start :'', end :'', status : '', option : 'Add new story'}
+    let dialogRef = this.dialog.open(StoryFormComponent, {
+      data: { name: '', description: '', epic: this.epicId, sprint: '', owner: '', assignedTo: [""], points: '', created: new Date(), due: '', start: '', end: '', status: '', option: 'Add new story' }
     })
 
-    dialogRef.afterClosed().subscribe(result =>{      
-      if (result.value != undefined){
+    dialogRef.afterClosed().subscribe(result => {
+      if (result.value != undefined) {
         this.ss.addStory(result.value).subscribe(resp => {
-          console.log( "respuesta de creacion de una nueva storie: ", resp)
-          if(resp.status == "success"){
+          console.log("respuesta de creacion de una nueva storie: ", resp)
+          if (resp.status == "success") {
             this.getStories();
           }
         })
@@ -83,39 +80,39 @@ export class EpicComponent implements OnInit {
     })
   }
 
-  updateStory(story : Story){
-    let dialogRef = this.dialog.open(StoryFormComponent,{
-      data : {name : story.name, description : story.description, epic : story.epic ,sprint: story.sprint, owner : story.owner,assignedTo : story.assignedTo, points : story.points,created: story.created, due :story.due, start :story.started, end :story.finished, status : story.status, option : 'Edit'}
+  updateStory(story: Story) {
+    let dialogRef = this.dialog.open(StoryFormComponent, {
+      data: { name: story.name, description: story.description, epic: story.epic, sprint: story.sprint, owner: story.owner, assignedTo: story.assignedTo, points: story.points, created: story.created, due: story.due, start: story.started, end: story.finished, status: story.status, option: 'Edit' }
     })
 
-    dialogRef.afterClosed().subscribe(result =>{
-      
-      if (result.value != undefined){
-        this.ss.editStory(result.value, story.getId()).subscribe(resp =>{
-          console.log( "respuesta de edicion de una storie: ", resp)
-          if (resp.status == "success"){
+    dialogRef.afterClosed().subscribe(result => {
+
+      if (result.value != undefined) {
+        this.ss.editStory(result.value, story.getId()).subscribe(resp => {
+          console.log("respuesta de edicion de una storie: ", resp)
+          if (resp.status == "success") {
             this.getStories();
           }
         })
       }
-  })
+    })
   }
 
   deleteStory(story: Story) {
     let dialogRef = this.dialog.open(DeleteDialogComponent, {
-      data: {type: "Story ", name: story.name},
+      data: { type: "Story ", name: story.name },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result === true) {
-        this.ss.deleteStory(story.getId()).subscribe(resp =>{
+        this.ss.deleteStory(story.getId()).subscribe(resp => {
           console.log("Storie a eliminar: ", resp);
-          if(resp.status =="success"){
+          if (resp.status == "success") {
             console.log("exito al eliminar story");
             this.getStories();
-          }else{
+          } else {
             console.log("error al eliminar story");
-            
+
           }
         });
       }
@@ -124,13 +121,13 @@ export class EpicComponent implements OnInit {
 
   editDialog(epica: Epica): void {
     const dialogRef = this.dialog.open(EpicFormComponent, {
-      data: { project: epica.project, name: epica.name, description: epica.description, icon: epica.icon, option:"Edit" },
+      data: { project: epica.project, name: epica.name, description: epica.description, icon: epica.icon, option: "Edit" },
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result.value != undefined){
-        this.epicService.editEpic(result.value,epica._id).subscribe(resp=>{
-          if(resp.status == "success"){
+      if (result.value != undefined) {
+        this.epicService.editEpic(result.value, epica._id).subscribe(resp => {
+          if (resp.status == "success") {
             this.getEpic();
           }
         })
@@ -138,43 +135,27 @@ export class EpicComponent implements OnInit {
     });
   }
 
-  deleteDialog(epica: Epica): void {    
-    
+  deleteDialog(epica: Epica): void {
+
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
-      data:{type:" Epica", name: epica.name},
+      data: { type: " Epica", name: epica.name },
     });
-    
+
     dialogRef.afterClosed().subscribe(result => {
-      if(result === true){
+      if (result === true) {
         console.log('The DELETE dialog was closed');
         console.log('result: ' + result.name);
-        this.epicService.deleteEpic(epica._id).subscribe(resp =>{          
-          if(resp.status == "success"){
+        this.epicService.deleteEpic(epica._id).subscribe(resp => {
+          if (resp.status == "success") {
             console.log("exito al eliminar la epica", resp);
             this.getEpic();
-          }else{
-            console.log("Error al eliminar epica" , resp);
-            
+          } else {
+            console.log("Error al eliminar epica", resp);
+
           }
         })
       }
     });
-  }
-
-  getUsers(){
-    this.userService.getUsers().subscribe(
-      users => {
-        this.users=users;
-      })
-  }
-
-  getUsersOfStory(ids: string[]): User[]{
-    return this.users.filter(user => ids.includes(user._id));
-  }
-
-  getOwner(id: string){
-    return this.users.find(user => id===user._id)?.getName();
-    
   }
 
 }

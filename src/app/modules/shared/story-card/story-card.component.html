@@ -3,7 +3,7 @@
         <mat-card-title [routerLink]="'/my-projects/'+projectId+'/'+epicId+'/'+story._id">{{ story.name
             }}</mat-card-title>
         <p class="ownerText">
-            Owner: {{owner}}
+            Owner: {{getOwner(story.owner)}}
         </p>
     </mat-card-header>
     <mat-divider></mat-divider>
@@ -11,7 +11,7 @@
     <mat-card-content>
         <ul>
             Asigned to:
-            <li *ngFor="let us of usuarios">
+            <li *ngFor="let us of getUsersOfStory(story.assignedTo)">
                 {{us.name.first}} {{us.name.last}}
             </li>
         </ul>
@@ -27,7 +27,7 @@
             <p>Status: {{ story.status }}</p>
         </div>
         <mat-card-actions>
-            <button mat-icon-button class="example-icon" (click)="deleteStory()">
+            <button *ngIf="type !='inside'" mat-icon-button class="example-icon" (click)="deleteStory()">
                 <mat-icon>delete</mat-icon>
             </button>
             <button mat-icon-button class="example-icon" (click)="updateStory()">
