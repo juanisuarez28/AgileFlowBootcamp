@@ -10,13 +10,22 @@
       <li *ngFor="let story of stories; let i = index">
         
         <mat-card *ngIf="story != undefined">
-            <mat-card-header [routerLink]="'/my-stories/'+ story._id" class="card-header">
+            <mat-card-header class="card-header">
               <h3>{{ story.name }}</h3>
-              <p>Assigned: {{ story.assignedTo }}</p>
+              <p class="ownerText">
+                Owner: {{getOwner(story.owner)}}
+            </p>
             </mat-card-header>
             <mat-divider></mat-divider>
 
             <mat-card-content>
+              <ul>
+                Asigned to:
+                <li *ngFor="let us of getUsersOfStory(story.assignedTo)">
+                    {{us.name.first}} {{us.name.last}}
+                </li>
+            </ul>
+            <app-divider></app-divider>
               <p>
                 {{ story.description }}
               </p>
@@ -32,7 +41,7 @@
               <button
                 mat-icon-button
                 class="example-icon"
-                (click)="deleteStory(story)"
+                (click)="deleteStory(story, 'Delete task')"
               >
                 <mat-icon>delete</mat-icon>
               </button>

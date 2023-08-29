@@ -111,13 +111,6 @@ export class StorieComponent {
     });
   }
 
-  /* newTask(newTask: formTask) {
-    this.ts.newTask(newTask).subscribe((response) => {
-      if ((response.succes = 'succes')) {
-        this.getTasks();
-      }
-    });
-  } */
 
   updateTask(task: Task): void {
     let dialogRef = this.dialog.open(TaskFormComponent, {
@@ -132,6 +125,7 @@ export class StorieComponent {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
+      if (result === true) {
       const loadingDialog = this.dialog.open(LoadingDialogComponent)
       this.ts.editTask(result.value, task._id).subscribe((response) => {
         loadingDialog.close();
@@ -144,9 +138,9 @@ export class StorieComponent {
           this.dialog.open(DialogNotificationComponent, {
             data: { title: "Error adding Task: " + result.value.name, mensaje: "Error in comunication with Database." }
           })
-
         }
       });
+      }
     });
   }
 

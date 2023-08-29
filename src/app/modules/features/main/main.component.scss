@@ -3,6 +3,7 @@
 mat-sidenav{
     width: 20rem;
     border-radius: 0.5rem;
+    justify-content: space-between;
     
     
     @media (max-width:560px) {
@@ -15,6 +16,10 @@ mat-sidenav{
     @media (prefers-color-scheme: dark) {
         background-color: var(--darkColorSoft);
     }
+}
+
+.router{
+   flex-grow: 2;
 }
 
 .flex-container{
@@ -78,6 +83,7 @@ mat-sidenav{
         background-color: var(--mediumColor);
     }
 }
+
 mat-sidenav-content{
     display: flex;
     flex-direction: column;

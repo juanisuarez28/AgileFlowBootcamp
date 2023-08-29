@@ -5,6 +5,10 @@ import { ActivatedRoute } from '@angular/router';
 import { Story } from '../../models/cstory.model';
 import { StoryFormComponent } from '../story-form/story-form.component';
 import { DeleteDialogComponent } from '../../shared/delete-dialog/delete-dialog.component';
+import { UserService } from '../../core/services/user.service';
+import { User } from '../../models/user.model';
+import { LoadingDialogComponent } from '../../shared/loading-dialog/loading-dialog.component';
+import { DialogNotificationComponent } from '../../shared/dialog-notification/dialog-notification.component';
 
 @Component({
   selector: 'app-my-stories',
@@ -13,15 +17,18 @@ import { DeleteDialogComponent } from '../../shared/delete-dialog/delete-dialog.
 })
 export class MyStoriesComponent {
 
-  constructor(private ss: StoriesService, public dialog: MatDialog, private route: ActivatedRoute) {}
+  constructor(private ss: StoriesService, public dialog: MatDialog,
+     private userService: UserService,) {}
 
   stories !: Story[];
   cantStoriesIsZero: boolean = false;
   errorGetStories : boolean = false;
   showStories : boolean = false;
+  users : User[] = [];
 
   ngOnInit(){
     this.getStories();
+    this.getUsers();
   }
 
   getStories(){
@@ -57,28 +64,48 @@ export class MyStoriesComponent {
   })
   }
 
-  deleteStory(story: Story) {
+
+  deleteStory(story: Story, type: string) {
     let dialogRef = this.dialog.open(DeleteDialogComponent, {
-      data: {type: "Story ", name: story.name},
+      data: { type: "Story", name: story.name },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result === true) {
-        this.ss.deleteStory(story.getId()).subscribe(resp =>{
-          console.log("Storie a eliminar: ", resp);
-          if(resp.status =="success"){
-            console.log("exito al eliminar story");
+        const loadingDialog = this.dialog.open(LoadingDialogComponent);
+        this.ss.deleteStory(story._id).subscribe(response => {
+          loadingDialog.close()
+          if (response.success = "success") {
             this.getStories();
-          }else{
-            console.log("error al eliminar story");
-            
+            this.dialog.open(DialogNotificationComponent, {
+              data: { title: "Success deleting story: " + story.name, mensaje: "The task has been deleted" }
+            })
+          } else {
+            this.dialog.open(DialogNotificationComponent, {
+              data: { title: "Error deleting story: " + story.name, mensaje: "Error in comunication with Database." }
+            })
+
           }
-        });
+        })
       }
     });
   }
 
-  
+  getUsers() {
+    this.userService.getUsers().subscribe(
+      users => {
+        this.users = users;
+      })
+  }
+
+  getUsersOfStory(ids: string[]): User[] {
+    return this.users.filter(user => ids.includes(user._id));
+  }
+
+  getOwner(id: string) {
+    return this.users.find(user => id === user._id)?.getName();
+
+  }
 
   
 }

@@ -1,6 +1,18 @@
 mat-card {
     margin: 16px;
     background-color: var(--elementBackgroundColor);
+    transition: 0.3s;
+}
+
+mat-card:hover {
+    @media (prefers-color-scheme: light){
+        filter: drop-shadow(10px 10px 5px #7fa0a0 );
+
+    }
+    @media (prefers-color-scheme: dark){
+
+        filter: drop-shadow(10px 10px 5px #002121 );
+    }
 }
 
 mat-card-title {

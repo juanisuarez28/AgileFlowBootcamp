@@ -6,7 +6,12 @@ footer{
     color: var(--textColor);
     display: flex;
     justify-content: space-around;
+    align-items: center;
 
+    img{
+        height: 8rem;
+        cursor: pointer;
+    }
 
     div{
 

@@ -5,10 +5,22 @@
     background-color: var(--lightColorStrong);
     box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.2);
     max-width: 50rem;
+    transition: 0.3s;
 }
 
 .mat-mdc-card-header , .mat-mdc-card-content{
     color: black;
+}
+
+mat-card:hover {
+    @media (prefers-color-scheme: light){
+        filter: drop-shadow(10px 10px 5px #7fa0a0 );
+
+    }
+    @media (prefers-color-scheme: dark){
+
+        filter: drop-shadow(10px 10px 5px #002121 );
+    }
 }
 
 .mat-mdc-card-title {
