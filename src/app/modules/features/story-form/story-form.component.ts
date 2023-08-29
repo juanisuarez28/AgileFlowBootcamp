@@ -35,6 +35,8 @@ export class StoryFormComponent implements OnInit{
       started: new FormControl(this.data.start),
       finished: new FormControl(this.data.end),
       status: new FormControl(this.data.status),
+      owner: new FormControl(this.data.owner),
+
     });
 
    
@@ -62,4 +64,6 @@ export interface storyForms{
   end : Date;
   status : String; 
   option : string;
+  owner : string;
+
 }
