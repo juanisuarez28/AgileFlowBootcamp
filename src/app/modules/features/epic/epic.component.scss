@@ -7,8 +7,58 @@
     background-color: var(--darkColorSoft);
 }
 
-app-generic-card{
-    margin: 2rem;
+.container{
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+    margin: 1rem;
+    width: 42rem;
+    padding: 0;
+    @media (max-width: 750px) {
+        width: 90dvw;
+    }
+}
+
+
+mat-card{
+    display:flex;
+    justify-content: center;
+    width: 100%;
+    @media (prefers-color-scheme: light) {
+        background-color: var(--lightColorStrong);
+        color: black;
+        i{
+            color: black;
+        }
+        i:hover{
+            transition: all 0.2s linear;
+            transform: scale(1.1);
+            color: white;
+            background-color: var(--mediumColor);
+        }
+        mat-card-header:hover{
+            color: white;
+        }
+    }
+
+    @media (prefers-color-scheme: dark) {
+        background-color: var(--lightColorStrong);
+        color: white;
+        i{
+            color: white;
+        }
+        i:hover{
+            transition: all 0.2s linear;
+            transform: scale(1.1);
+            color: black;
+            background-color: var(--mediumColor);
+        }
+        mat-card-header:hover{
+            color: black;
+        }
+        
+    }
+    
 }
 
 ul{

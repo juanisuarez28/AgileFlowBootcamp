@@ -8,11 +8,7 @@
   <app-story-card *ngIf="story != undefined" [story]="story" (editOutPut)="updateStory()" [type]="'inside'"></app-story-card>
 
   <app-divider></app-divider>
-  <app-button
-    [text]="'Add Task'"
-    [icon]="'plus'"
-    (buttonEvent)="addTask()"
-  ></app-button>
+  <app-button [text]="'Add Task'" [icon]="'plus'" (buttonEvent)="addTask()"></app-button>
 
   <p *ngIf=" tasks.length == 0 && !errorGetTasks && !errorNoTasks">
     Loading tasks...

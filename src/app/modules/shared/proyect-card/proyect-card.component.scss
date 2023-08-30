@@ -1,11 +1,56 @@
 .mat-mdc-card{
-    margin: 2rem;
     padding: 0.2rem;
-    border-radius: 1rem;
+    margin: 1rem 0;
+    border-radius: 0.25rem;
     background-color: var(--lightColorStrong);
     box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.2);
     max-width: 50rem;
     transition: 0.3s;
+        
+    @media (prefers-color-scheme: light) {
+        background-color: var(--lightColorStrong);
+        color: black;
+        i{
+            color: black;
+        }
+        i:hover{
+            transition: all 0.2s linear;
+            transform: scale(1.1);
+            color: white;
+            background-color: var(--mediumColor);
+        }
+        mat-card-header:hover{
+            color: white;
+        }
+    }
+
+    @media (prefers-color-scheme: dark) {
+        background-color: var(--lightColorStrong);
+        color: white;
+        i{
+            color: white;
+        }
+        i:hover{
+            transition: all 0.2s linear;
+            transform: scale(1.1);
+            color: black;
+            background-color: var(--mediumColor);
+        }
+        mat-card-header:hover{
+            color: black;
+        }
+        
+    }
+    .mat-mdc-card-header , .mat-mdc-card-content{
+        padding-top: 0.5rem;
+        // color: black;
+    }
+    
+    .mat-mdc-card-title {
+        font-size: 1.5rem;   
+        cursor: pointer;
+        
+    }
 }
 
 .mat-mdc-card-header , .mat-mdc-card-content{
@@ -29,13 +74,15 @@ mat-card:hover {
  
 }
 
-.mdc-card__actions{
-    min-height: 0px;
-    color: black;
-}
+
+
 
 i{
     margin-left: 0.4rem;
+    font-size: 1.5rem;
+    border-radius: 0.5rem;
+    padding:  0.25rem;
+    cursor: pointer;
 }
 
 .mat-mdc-card-subtitle {
