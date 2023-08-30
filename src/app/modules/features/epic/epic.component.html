@@ -2,8 +2,8 @@
   <p  *ngIf="epic == undefined">
     Loading epic...
     <app-load-bar></app-load-bar>
-</p>
-  <app-generic-card *ngIf="epic != undefined" [type]="'inside'" [epica]="epic" (editOutPut)="editDialog(epic)" (deleteOutPut)="deleteDialog(epic)"></app-generic-card>
+  </p>
+  <app-generic-card *ngIf="epic != undefined" [type]="'inside'" [epica]="epic" (editOutPut)="editDialog(epic)" ></app-generic-card>
 
   <app-divider></app-divider>
   <app-button

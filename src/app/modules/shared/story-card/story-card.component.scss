@@ -13,6 +13,7 @@ mat-card {
         padding: 0;
         p{
             margin: 0;
+            overflow-wrap: break-word;
         }
     }
 
@@ -98,6 +99,9 @@ mat-card:hover {
 
 mat-card-title {
     font-size: 1.5rem;
+    // inline-size: 36rem;
+    // overflow-wrap: break-word;
+    word-break: break-all;
 }
 
 ul {

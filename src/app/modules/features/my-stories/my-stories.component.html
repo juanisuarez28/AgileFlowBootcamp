@@ -1,7 +1,7 @@
-<div>
+<div class="container">
     <p  *ngIf="stories == undefined && !errorGetStories">
         Loading stories
-        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        <app-load-bar></app-load-bar>
     </p>
 
     

@@ -125,7 +125,7 @@ export class StorieComponent {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      if (result === true) {
+      if (result.value != undefined ) {
         const loadingDialog = this.dialog.open(LoadingDialogComponent)
         this.ts.editTask(result.value, task._id).subscribe((response) => {
           loadingDialog.close();

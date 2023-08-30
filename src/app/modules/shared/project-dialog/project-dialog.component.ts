@@ -48,9 +48,6 @@ export class ProjectDialogComponent implements OnInit{
     }
   }
 
-  onCancelClick() {
-    this.dialogRef.close();
-  }
 
 }
 

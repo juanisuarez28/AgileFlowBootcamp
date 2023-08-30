@@ -14,6 +14,8 @@ import { User } from '../../models/user.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { LoadingDialogComponent } from '../../shared/loading-dialog/loading-dialog.component';
+import { DialogNotificationComponent } from '../../shared/dialog-notification/dialog-notification.component';
+import { TasksService } from '../../core/services/tasks/tasks.service';
 
 
 
@@ -30,7 +32,7 @@ export class EpicComponent implements OnInit {
   errorGetStories: boolean = false;
   cantStoriesIsZero: boolean = false;
 
-  constructor(private ss: StoriesService, private epicService: EpicService, public dialog: MatDialog, private route: ActivatedRoute, private userService: UserService, private tokenService: TokenStorageService) { }
+  constructor(private ss: StoriesService, private tasksService: TasksService, private epicService: EpicService, public dialog: MatDialog, private route: ActivatedRoute, private userService: UserService, private tokenService: TokenStorageService) { }
 
   ngOnInit(): void {
     this.projectId = this.route.snapshot.paramMap.get('projectId');
@@ -55,10 +57,10 @@ export class EpicComponent implements OnInit {
       console.log("Respuesta al hacer getStories ", resp);
       if (resp.status == "success") {
         this.stories = resp.data;
-        this.errorGetStories= false;
+        this.errorGetStories = false;
         if (this.stories.length == 0) {
           this.cantStoriesIsZero = true;
-        }else{
+        } else {
           this.cantStoriesIsZero = false;
         }
       } else {
@@ -76,9 +78,17 @@ export class EpicComponent implements OnInit {
       if (result.value != undefined) {
         const loading = this.dialog.open(LoadingDialogComponent)
         this.ss.addStory(result.value).subscribe(resp => {
+          loading.close()
           console.log("respuesta de creacion de una nueva storie: ", resp)
           if (resp.status == "success") {
             this.getStories();
+            this.dialog.open(DialogNotificationComponent, {
+              data: { title: "Success adding Storie: " + result.value.name, mensaje: "The storie has been added" }
+            })
+          } else {
+            this.dialog.open(DialogNotificationComponent, {
+              data: { title: "Error adding Storie: " + result.value.name, mensaje: "Error in comunication with Database." }
+            })
           }
         })
       }
@@ -92,34 +102,60 @@ export class EpicComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
 
-      
       if (result.value != undefined) {
         const loading = this.dialog.open(LoadingDialogComponent)
         this.ss.editStory(result.value, story.getId()).subscribe(resp => {
+          loading.close()
           console.log("respuesta de edicion de una storie: ", resp)
           if (resp.status == "success") {
             this.getStories();
+            this.dialog.open(DialogNotificationComponent, {
+              data: { title: "Success editing Storie: " + result.value.name, mensaje: "The storie has been edited" }
+            })
+          } else {
+            this.dialog.open(DialogNotificationComponent, {
+              data: { title: "Error editing Storie: " + result.value.name, mensaje: "Error in comunication with Database." }
+            })
+
           }
         })
       }
     })
   }
-
+  //TODO ver si se elimina este metodo
   deleteStory(story: Story) {
     let dialogRef = this.dialog.open(DeleteDialogComponent, {
       data: { type: "Story ", name: story.name },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      if (result === true) {
-        this.ss.deleteStory(story.getId()).subscribe(resp => {
-          console.log("Storie a eliminar: ", resp);
-          if (resp.status == "success") {
-            console.log("exito al eliminar story");
-            this.getStories();
-          } else {
-            console.log("error al eliminar story");
 
+      if (result === true) {
+        const loading = this.dialog.open(LoadingDialogComponent)
+        let existsTask: boolean = false;
+        this.tasksService.getTasksApi(story._id).subscribe(resp => {
+          existsTask = (resp.data.length > 0)
+          if (!existsTask) {
+            this.ss.deleteStory(story.getId()).subscribe(resp => {
+              loading.close()
+              if (resp.status == "success") {
+                console.log("exito al eliminar story");
+                this.getStories();
+                this.dialog.open(DialogNotificationComponent, {
+                  data: { title: "Success deleting Storie: " + story.name, mensaje: "The storie has been deleted" }
+                })
+              } else {
+                this.dialog.open(DialogNotificationComponent, {
+                  data: { title: "Error deleting Storie: " + story.name, mensaje: "Error in comunication with Database." }
+                })
+
+              }
+            });
+          } else {
+            loading.close()
+            this.dialog.open(DialogNotificationComponent, {
+              data: { title: "Error deleting Storie: " + story.name, mensaje: "You can't delete it, this storie contains task/s." }
+            })
           }
         });
       }
@@ -133,36 +169,28 @@ export class EpicComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result.value != undefined) {
+        const loading = this.dialog.open(LoadingDialogComponent);
+
         this.epicService.editEpic(result.value, epica._id).subscribe(resp => {
+          loading.close()
           if (resp.status == "success") {
             this.getEpic();
-          }
-        })
-      }
-    });
-  }
-
-  deleteDialog(epica: Epica): void {
-
-    const dialogRef = this.dialog.open(DeleteDialogComponent, {
-      data: { type: " Epica", name: epica.name },
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result === true) {
-        console.log('The DELETE dialog was closed');
-        console.log('result: ' + result.name);
-        this.epicService.deleteEpic(epica._id).subscribe(resp => {
-          if (resp.status == "success") {
-            console.log("exito al eliminar la epica", resp);
-            this.getEpic();
+            this.dialog.open(DialogNotificationComponent, {
+              data: { title: "Success editing Epic: " + epica.name, mensaje: "The Epic has been edited" }
+            })
           } else {
-            console.log("Error al eliminar epica", resp);
-
+            this.dialog.open(DialogNotificationComponent, {
+              data: { title: "Error editing Epic: " + epica.name, mensaje: "Error in comunication with Database." }
+            })
           }
-        })
+         })
       }
     });
   }
+
+
+
+
+
 
 }

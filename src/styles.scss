@@ -12,8 +12,9 @@ body,html {
   background-color: var(--backgroundcolor);
 }
 
-label,h1,h2,h3,a,input {
+label,h1,h2,h3,a,input,p, mat-card-title {
     font-family: Roboto, "Helvetica Neue", sans-serif;
+    word-break: break-all;
 }
 :root {
     font-size: 16px;

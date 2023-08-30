@@ -1,15 +1,16 @@
 <mat-card>
-    <mat-card-header class="card-header" *ngIf="type != 'mystories'" [routerLink]="'/my-projects/'+projectId+'/'+epicId+'/'+story._id">
-            
-                <mat-card-title >{{ story.name
-                }}</mat-card-title>
+    <mat-card-header  *ngIf="type != 'mystories'" [routerLink]="'/my-projects/'+projectId+'/'+epicId+'/'+story._id">
+        <div class="title">
+            <mat-card-title >{{ story.name}}</mat-card-title>
+        </div>
                 <p class="ownerText">
                     Owner: {{getOwner(story.owner)}}
                 </p>
         </mat-card-header>
         <mat-card-header *ngIf="type == 'mystories'" [routerLink]="'/my-stories/'+story._id">
-            <mat-card-title >{{ story.name
-            }}</mat-card-title>
+            <div class="title">
+                <mat-card-title >{{ story.name}}</mat-card-title>
+            </div>
             <p class="ownerText">
                 Owner: {{getOwner(story.owner)}}
             </p>
