@@ -24,7 +24,6 @@ export class StorieComponent {
 
   errorGetStory: boolean = false;
 
-
   story !: Story;
 
   tasks: Task[] = [];
@@ -42,9 +41,7 @@ export class StorieComponent {
     this.epicId = this.route.snapshot.params['epicId'];
     this.storyId = this.route.snapshot.params['storieId'];
 
-    console.log(this.projectId);
-    console.log(this.epicId);
-    console.log(this.storyId);
+
   }
 
   ngOnInit(): void {
@@ -70,6 +67,8 @@ export class StorieComponent {
         this.tasks = response.data;
         if (this.tasks.length == 0) {
           this.errorNoTasks = true;
+        }else{
+          this.errorNoTasks = false
         }
       } else {
         this.errorGetTasks = true;
@@ -113,6 +112,7 @@ export class StorieComponent {
 
 
   updateTask(task: Task): void {
+
     let dialogRef = this.dialog.open(TaskFormComponent, {
       data: {
         name: task.name,

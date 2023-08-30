@@ -1,13 +1,19 @@
 <mat-card>
-    <mat-card-header>
-        <div class="title" [routerLink]="'/my-projects/'+projectId+'/'+epicId+'/'+story._id">
-            <mat-card-title>{{ story.name
+    <mat-card-header class="card-header" *ngIf="type != 'mystories'" [routerLink]="'/my-projects/'+projectId+'/'+epicId+'/'+story._id">
+            
+                <mat-card-title >{{ story.name
                 }}</mat-card-title>
-        </div>
-        <p class="ownerText">
-            Owner: {{getOwner(story.owner)}}
-        </p>
-    </mat-card-header>
+                <p class="ownerText">
+                    Owner: {{getOwner(story.owner)}}
+                </p>
+        </mat-card-header>
+        <mat-card-header *ngIf="type == 'mystories'" [routerLink]="'/my-stories/'+story._id">
+            <mat-card-title >{{ story.name
+            }}</mat-card-title>
+            <p class="ownerText">
+                Owner: {{getOwner(story.owner)}}
+            </p>
+        </mat-card-header>
     <mat-divider></mat-divider>
 
     <mat-card-content>
@@ -31,7 +37,7 @@
         <mat-card-actions>
 
             <i class="fa-regular fa-pen-to-square" (click)="updateStory()"></i>
-            <i *ngIf="type!='inside'" class="fa-regular fa-trash-can" (click)="deleteStory()"></i>
+            <i *ngIf="type!='inside' && type != 'mystories'" class="fa-regular fa-trash-can" (click)="deleteStory()"></i>
 
         </mat-card-actions>
     </div>

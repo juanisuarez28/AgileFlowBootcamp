@@ -6,7 +6,6 @@ import { ProyectListComponent } from './proyect-list/proyect-list.component';
 import { ProyectComponent } from './proyect/proyect.component';
 import { EpicComponent } from './epic/epic.component';
 import { StorieComponent } from './storie/storie.component';
-import { TaskComponent } from './task/task.component';
 import { SettingsComponent } from './settings/settings.component';
 import { MyStoriesComponent } from './my-stories/my-stories.component';
 
@@ -18,7 +17,6 @@ const routes: Routes = [
       { path: 'my-projects/:projectId', component: ProyectComponent },
       { path: 'my-projects/:projectId/:epicId', component: EpicComponent },
       { path: 'my-projects/:projectId/:epicId/:storieId', component: StorieComponent },
-      { path: 'my-projects/:projectId/:epicId/:storieId/:taskId', component: TaskComponent },
       { path: 'settings', component: SettingsComponent },
       { path: 'my-stories', component: MyStoriesComponent },
       { path: 'my-stories/:storieId', component: StorieComponent },

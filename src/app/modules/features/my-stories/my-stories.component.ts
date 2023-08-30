@@ -23,7 +23,6 @@ export class MyStoriesComponent {
   stories !: Story[];
   cantStoriesIsZero: boolean = false;
   errorGetStories : boolean = false;
-  showStories : boolean = false;
   users : User[] = [];
 
   ngOnInit(){
@@ -36,12 +35,11 @@ export class MyStoriesComponent {
     this.ss.getAllStories().subscribe(response => {
       if(response.status == "success"){
         this.stories = response.data;
-        this.showStories = true;
         if(this.stories.length == 0){
           this.cantStoriesIsZero = true;
-        }else{
-          this.errorGetStories = true;
         }
+      }else{
+        this.errorGetStories = true;
       }
     })
   }

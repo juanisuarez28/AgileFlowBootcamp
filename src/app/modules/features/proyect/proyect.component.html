@@ -1,7 +1,7 @@
 <div class="proyect">
     <p *ngIf="project == undefined">
         Loading project...
-        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        <app-load-bar></app-load-bar>
     </p>
     
     <app-proyect-card [project]="project" *ngIf="project != undefined"  (editOutPut)="editProjectDialog(project)"
@@ -20,7 +20,7 @@
     
     <p *ngIf="epics.length == 0 && !cantEpicsIsZero && !errorGetEpics">
         Loading epics...
-        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        <app-load-bar></app-load-bar>
     </p>
     <app-label [text]="'There are no epics in this project'" *ngIf="cantEpicsIsZero"></app-label>
     <app-label [text]="'Error to get Epics'" *ngIf="errorGetEpics"></app-label>

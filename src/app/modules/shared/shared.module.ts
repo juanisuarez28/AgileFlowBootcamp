@@ -19,6 +19,7 @@ import { OwnerPComponent } from './owner-p/owner-p.component';
 import { LoadingDialogComponent } from './loading-dialog/loading-dialog.component';
 import { DialogNotificationComponent } from './dialog-notification/dialog-notification.component';
 import { StoryCardComponent } from './story-card/story-card.component';
+import { LoadBarComponent } from './load-bar/load-bar.component';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { StoryCardComponent } from './story-card/story-card.component';
     LoadingDialogComponent,
     DialogNotificationComponent,
     StoryCardComponent,
+    LoadBarComponent,
   ],
   imports: [
     CommonModule,
@@ -56,6 +58,7 @@ import { StoryCardComponent } from './story-card/story-card.component';
     ProjectDialogComponent,
     OwnerPComponent,
     StoryCardComponent,
+    LoadBarComponent
   ]
 })
 export class SharedModule { }

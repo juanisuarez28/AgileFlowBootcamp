@@ -8,7 +8,6 @@ import { MainComponent } from './main/main.component';
 import { ProyectComponent } from './proyect/proyect.component';
 import { ProyectListComponent } from './proyect-list/proyect-list.component';
 import { SettingsComponent } from './settings/settings.component';
-import { TaskComponent } from './task/task.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { MaterialModule } from '../material/material.module';
@@ -29,7 +28,6 @@ import { TaskFormComponent } from './task-form/task-form.component';
     ProyectComponent ,
     ProyectListComponent,
     SettingsComponent,
-    TaskComponent,
     HeaderComponent,
     FooterComponent,
     MyStoriesComponent,

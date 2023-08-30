@@ -4,6 +4,13 @@
     row-gap: 1rem;
     margin: 1rem;
     width: 42rem;
+    color: var(--textColor);
+
+    .progress-bar{
+        color: var(--textColor);
+        background-color: var(--mediumColor)
+    }
+
     @media (max-width: 750px) {
         width: 90dvw;
     }

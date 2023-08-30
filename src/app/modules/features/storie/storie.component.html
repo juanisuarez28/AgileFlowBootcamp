@@ -2,17 +2,21 @@
 
   <p  *ngIf="story == undefined && !errorGetStory">
     Loading story...
-    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    <app-load-bar></app-load-bar>
+    <app-label [text]="'Error to getting story'" *ngIf="errorGetStory"></app-label>
+
 </p>
 
-  <app-story-card *ngIf="story != undefined" [story]="story" (editOutPut)="updateStory()" [type]="'inside'"></app-story-card>
+  <app-story-card *ngIf="projectId == undefined && epicId == undefined" [story]="story" (editOutPut)="updateStory()" [type]="'mystories'"></app-story-card>
+
+  <app-story-card *ngIf="story != undefined && projectId != undefined && epicId != undefined" [story]="story" [projectId]="projectId" [epicId]="epicId" (editOutPut)="updateStory()" [type]="'inside'"></app-story-card>
 
   <app-divider></app-divider>
   <app-button [text]="'Add Task'" [icon]="'plus'" (buttonEvent)="addTask()"></app-button>
 
-  <p *ngIf=" tasks.length == 0 && !errorGetTasks && !errorNoTasks">
+  <p  *ngIf=" tasks.length == 0 && !errorGetTasks && !errorNoTasks">
     Loading tasks...
-    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    <app-load-bar></app-load-bar>
   </p>
 
     <ul *ngFor="let task of tasks" >
@@ -29,5 +33,5 @@
       </li>
     </ul>
     <app-label [text]="'There are no tasks in this story'" *ngIf="errorNoTasks"></app-label>
-    <app-label [text]="'Error to get Epics'" *ngIf="errorGetTasks"></app-label>
+    <app-label [text]="'Error getting tasks'" *ngIf="errorGetTasks"></app-label>
 </div>
