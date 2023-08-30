@@ -1,39 +1,29 @@
 <mat-card [ngClass]="{'done' : task.done}">
-      <mat-card-header class="card-header">
-        <h3>{{ task.name }}</h3>
+      <mat-card-header >
+        <mat-card-title>{{ task.name }}</mat-card-title>
         
       </mat-card-header>
       <mat-divider></mat-divider>
 
+      
       <mat-card-content>
         <p>
-          {{ task.description }}
+          Description: {{ task.description }}
         </p>
       </mat-card-content>
     
-
-    <div class="card-footer">
-      <div class="dates">
-        <p>Created at: {{task.created | date : "shortDate" }}</p>
-        <p>Due: {{ task.due | date : "shortDate" }}</p>
+      
+      <mat-divider></mat-divider>
+      <div class="footer">
+        <div >
+          <p>Created at: {{task.created | date : "shortDate" }}</p>
+          <p>Due: {{ task.due | date : "shortDate" }}</p>
+        </div>
         
+        <mat-card-actions align="end">
+          <i class="fa-regular fa-pen-to-square" (click)="editEvent()"></i>
+          <i class="fa-regular fa-trash-can" (click)="deleteEvent()"></i>
+        </mat-card-actions>
       </div>
-      <mat-card-actions>
-        
-        <button
-          mat-icon-button
-          class="example-icon"
-          (click)="deleteEvent()"
-        >
-          <mat-icon>delete</mat-icon>
-        </button>
-        <button
-          mat-icon-button
-          class="example-icon"
-          (click)="editEvent()"
-        >
-          <mat-icon>edit</mat-icon>
-        </button>
-      </mat-card-actions>
-    </div>
+    
   </mat-card>

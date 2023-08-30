@@ -3,9 +3,9 @@ mat-card{
     justify-content: center;
     width: 100%;
     transition: 0.3s;
+    background-color: var(--mediumColor);
     
     @media (prefers-color-scheme: light) {
-        background-color: var(--elementBackgroundColor);
         color: black;
         i{
             color: black;
@@ -18,11 +18,11 @@ mat-card{
         }
         mat-card-header:hover{
             color: white;
+            background-color: var(--darkColorSoft );
         }
     }
 
     @media (prefers-color-scheme: dark) {
-        background-color: var(--elementBackgroundColor);
         color: white;
         i{
             color: white;
@@ -31,10 +31,11 @@ mat-card{
             transition: all 0.2s linear;
             transform: scale(1.1);
             color: black;
-            background-color: var(--darkColorSoft);
+            background-color: var(--lightColorStrong);
         }
         mat-card-header:hover{
             color: black;
+            background-color: var(--lightColorStrong);
         }
         
     }
@@ -56,7 +57,6 @@ mat-card{
     }
     mat-card-header:hover{
         transition: all 0.2s linear;
-        background-color: var(--darkColorSoft );
         border-radius: 0.25rem;
         cursor: pointer;
     }

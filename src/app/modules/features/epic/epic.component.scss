@@ -14,8 +14,17 @@
     margin: 1rem;
     width: 42rem;
     padding: 0;
+    align-items: center;
+    justify-content: center;
+
     @media (max-width: 750px) {
         width: 90dvw;
+    }
+    app-divider,app-generic-card{
+        width: 100%;
+    }
+    app-proyect-card{
+        width: 100%;
     }
 }
 
@@ -64,6 +73,9 @@ mat-card{
 ul{
     list-style: none;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
 }
 
 

@@ -34,8 +34,8 @@ export class StoryFormComponent implements OnInit{
       due: new FormControl(this.data.due),
       started: new FormControl(this.data.start),
       finished: new FormControl(this.data.end),
-      status: new FormControl(this.data.status),
-      owner: new FormControl(this.data.owner),
+      status: new FormControl(this.data.status,  Validators.required),
+      owner: new FormControl(this.data.owner, Validators.required),
 
     });
 

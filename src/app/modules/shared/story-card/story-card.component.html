@@ -1,7 +1,9 @@
 <mat-card>
-    <mat-card-header class="card-header">
-        <mat-card-title [routerLink]="'/my-projects/'+projectId+'/'+epicId+'/'+story._id">{{ story.name
-            }}</mat-card-title>
+    <mat-card-header>
+        <div class="title" [routerLink]="'/my-projects/'+projectId+'/'+epicId+'/'+story._id">
+            <mat-card-title>{{ story.name
+                }}</mat-card-title>
+        </div>
         <p class="ownerText">
             Owner: {{getOwner(story.owner)}}
         </p>
@@ -12,27 +14,25 @@
         <ul>
             Asigned to:
             <li *ngFor="let us of getUsersOfStory(story.assignedTo)">
-                {{us.name.first}} {{us.name.last}}
+               - {{us.name.first}} {{us.name.last}} - 
             </li>
         </ul>
         <p>
             Description: {{ story.description }}
         </p>
     </mat-card-content>
-
-    <div class="card-footer">
+    <mat-divider></mat-divider>
+    <div class="footer">
         <div class="dates">
             <p>Created at: {{ story.created | date : "shortDate" }}</p>
             <p>Due: {{ story.due | date : "shortDate" }}</p>
             <p>Status: {{ story.status }}</p>
         </div>
         <mat-card-actions>
-            <button *ngIf="type !='inside'" mat-icon-button class="example-icon" (click)="deleteStory()">
-                <mat-icon>delete</mat-icon>
-            </button>
-            <button mat-icon-button class="example-icon" (click)="updateStory()">
-                <mat-icon>edit</mat-icon>
-            </button>
+
+            <i class="fa-regular fa-pen-to-square" (click)="updateStory()"></i>
+            <i *ngIf="type!='inside'" class="fa-regular fa-trash-can" (click)="deleteStory()"></i>
+
         </mat-card-actions>
     </div>
 </mat-card>

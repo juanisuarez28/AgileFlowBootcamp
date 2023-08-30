@@ -79,7 +79,7 @@
 
         <mat-form-field>
             <mat-label>Owner</mat-label>
-            <mat-select multiple required formControlName="owner">
+            <mat-select multiple required formControlName="owner" >
                 <mat-option *ngFor="let user of users" [value]="user._id"> {{user.getName()}}</mat-option>
                 
             </mat-select>
@@ -87,6 +87,6 @@
 
     <mat-dialog-actions>
       <button mat-button mat-dialog-close>Cancel</button>
-      <button mat-button mat-dialog-close cdkFocusInitial type="submit">Submit</button>
+      <button mat-button cdkFocusInitial type="submit">Submit</button>
     </mat-dialog-actions>
 </form>

@@ -3,15 +3,13 @@
 
   <app-divider></app-divider>
   <app-button
-    [text]="'Add Task'"
+    [text]="'Add Story'"
     [icon]="'plus'"
     (buttonEvent)="addStory()"
   ></app-button>
 
   <div>
-  <button mat-icon-button class="example-icon" (click)="addStory()">
-    <mat-icon>add</mat-icon>
-  </button>
+
 
     <ul>
       <li *ngFor="let story of stories; let i = index">

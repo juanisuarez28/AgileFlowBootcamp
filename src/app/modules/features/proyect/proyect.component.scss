@@ -5,13 +5,13 @@
     margin: 1rem;
     width: 42rem;
     color: var(--textColor);
+    align-items: center;
+    justify-content: center;
 
     @media (max-width: 750px) {
         width: 90dvw;
     }
     
-    align-items: center;
-    justify-content: center;
     app-divider,app-generic-card{
         width: 100%;
     }
