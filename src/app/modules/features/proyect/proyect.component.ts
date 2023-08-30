@@ -128,8 +128,8 @@ export class ProyectComponent implements OnInit {
       //Comprobar que no contenga stories
       console.log('The DELETE dialog was closed');
 
-      const loading = this.dialog.open(LoadingDialogComponent);
       if(result === true){
+        const loading = this.dialog.open(LoadingDialogComponent);
 
         let existsStories : boolean=false;
         this.storiesService.getStories(epica._id).subscribe( resp =>{

@@ -13,6 +13,7 @@ import { TokenStorageService } from '../../auth/token-storage.service';
 import { User } from '../../models/user.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { LoadingDialogComponent } from '../../shared/loading-dialog/loading-dialog.component';
 
 
 
@@ -54,8 +55,11 @@ export class EpicComponent implements OnInit {
       console.log("Respuesta al hacer getStories ", resp);
       if (resp.status == "success") {
         this.stories = resp.data;
+        this.errorGetStories= false;
         if (this.stories.length == 0) {
           this.cantStoriesIsZero = true;
+        }else{
+          this.cantStoriesIsZero = false;
         }
       } else {
         this.errorGetStories = true;
@@ -70,6 +74,7 @@ export class EpicComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result.value != undefined) {
+        const loading = this.dialog.open(LoadingDialogComponent)
         this.ss.addStory(result.value).subscribe(resp => {
           console.log("respuesta de creacion de una nueva storie: ", resp)
           if (resp.status == "success") {
@@ -87,7 +92,9 @@ export class EpicComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
 
+      
       if (result.value != undefined) {
+        const loading = this.dialog.open(LoadingDialogComponent)
         this.ss.editStory(result.value, story.getId()).subscribe(resp => {
           console.log("respuesta de edicion de una storie: ", resp)
           if (resp.status == "success") {

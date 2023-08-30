@@ -90,8 +90,8 @@ export class StorieComponent {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      const loadingDialog = this.dialog.open(LoadingDialogComponent)
       if (result.value != undefined) {
+        const loadingDialog = this.dialog.open(LoadingDialogComponent)
         // this.newTask(result.value);
         this.ts.newTask(result.value).subscribe((response) => {
           loadingDialog.close();
@@ -126,20 +126,21 @@ export class StorieComponent {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result === true) {
-      const loadingDialog = this.dialog.open(LoadingDialogComponent)
-      this.ts.editTask(result.value, task._id).subscribe((response) => {
-        loadingDialog.close();
-        if ((response.success = 'success')) {
-          this.getTasks();
-          this.dialog.open(DialogNotificationComponent, {
-            data: { title: "Success editing task: " + result.value.name, mensaje: "The task has been edited" }
-          })
-        } else {
-          this.dialog.open(DialogNotificationComponent, {
-            data: { title: "Error adding Task: " + result.value.name, mensaje: "Error in comunication with Database." }
-          })
-        }
-      });
+        const loadingDialog = this.dialog.open(LoadingDialogComponent)
+        this.ts.editTask(result.value, task._id).subscribe((response) => {
+          loadingDialog.close();
+          if ((response.success = 'success')) {
+            this.getTasks();
+            this.dialog.open(DialogNotificationComponent, {
+              data: { title: "Success editing task: " + result.value.name, mensaje: "The task has been edited" }
+            })
+          } else {
+            this.dialog.open(DialogNotificationComponent, {
+              data: { title: "Error adding Task: " + result.value.name, mensaje: "Error in comunication with Database." }
+            })
+
+          }
+        });
       }
     });
   }

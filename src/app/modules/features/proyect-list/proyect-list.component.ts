@@ -90,22 +90,25 @@ export class ProyectListComponent implements OnInit{
 
 
     dialogRef.afterClosed().subscribe(result => {
+      if (result != undefined){
+
+        const loading = this.dialog.open(LoadingDialogComponent)
+        //loading true
+        this.projectsService.editProject(result.value, project.getId()).subscribe(resp => {
+          console.log("respuesta de EDICION de nuyevo projecto: ", resp)
+          loading.close()
+          if (resp.success = "success") {
+            this.getProjects();
+            //loading false
+            this.dialog.open(DialogNotificationComponent,{
+              data: { title: "Success editing Project", mensaje: "This project has been edited" }});
+          }else{
+            this.dialog.open(DialogNotificationComponent,{
+              data: { title: "Error editing Project", mensaje: "Error in comunication with Database" }});
+          }
+        });
+      }
       
-      const loading = this.dialog.open(LoadingDialogComponent)
-      //loading true
-      this.projectsService.editProject(result.value, project.getId()).subscribe(resp => {
-        console.log("respuesta de EDICION de nuyevo projecto: ", resp)
-        loading.close()
-        if (resp.success = "success") {
-          this.getProjects();
-          //loading false
-          this.dialog.open(DialogNotificationComponent,{
-            data: { title: "Success editing Project", mensaje: "This project has been edited" }});
-        }else{
-          this.dialog.open(DialogNotificationComponent,{
-            data: { title: "Error editing Project", mensaje: "Error in comunication with Database" }});
-        }
-      });
     })
   }
 
@@ -115,34 +118,37 @@ export class ProyectListComponent implements OnInit{
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      let existEpicas: boolean = false;
-      const loading = this.dialog.open(LoadingDialogComponent);
-      this.epicService.getEpics(project.getId()).subscribe(resp => {
-        const epics = resp.data;
-        existEpicas = (epics.length > 0);        
-        if ( !existEpicas){
-          this.projectsService.deleteProject(project.getId()).subscribe(resp => {
-            loading.close();
-            if (resp.success = "success") {
-              console.log("Exito al eliminar proyecto: ", resp)
+      if (result != undefined){
+      
+        let existEpicas: boolean = false;
+        const loading = this.dialog.open(LoadingDialogComponent);
+        this.epicService.getEpics(project.getId()).subscribe(resp => {
+          const epics = resp.data;
+          existEpicas = (epics.length > 0);        
+          if ( !existEpicas){
+            this.projectsService.deleteProject(project.getId()).subscribe(resp => {
+              loading.close();
+              if (resp.success = "success") {
+                console.log("Exito al eliminar proyecto: ", resp)
+                this.dialog.open(DialogNotificationComponent,{
+                  data: { title: "Success deleting Project: "+project.getName(), mensaje: "This project has been deleted" }});
+                this.getProjects();
+              } else {
+                console.log("Error al eliminar proyecto ", resp);
+                this.dialog.open(DialogNotificationComponent,{
+                  data: { title: "Error deleting Project", mensaje: "Error in comunication with Database" }}
+                  );
+                  
+                }
+              });
+            }else{
+              loading.close();
               this.dialog.open(DialogNotificationComponent,{
-                data: { title: "Success deleting Project: "+project.getName(), mensaje: "This project has been deleted" }});
-              this.getProjects();
-            } else {
-              console.log("Error al eliminar proyecto ", resp);
-              this.dialog.open(DialogNotificationComponent,{
-                data: { title: "Error deleting Project", mensaje: "Error in comunication with Database" }}
-                );
-                
-              }
-            });
-          }else{
-            loading.close();
-            this.dialog.open(DialogNotificationComponent,{
-            data: { title: "Error deleting Project", mensaje: "You can't delete it, this project contains epic/s" }}
-          );
-        }
-      })
+              data: { title: "Error deleting Project", mensaje: "You can't delete it, this project contains epic/s" }}
+            );
+          }
+        })
+      }
     });
   }
 
