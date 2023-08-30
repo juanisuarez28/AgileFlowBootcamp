@@ -12,7 +12,6 @@
     (buttonEvent)="addStory()"
   ></app-button>
 
-  <div>
     <p  *ngIf="stories.length == 0 && !cantStoriesIsZero && !errorGetStories">
       Loading epic...
       <app-load-bar></app-load-bar>
