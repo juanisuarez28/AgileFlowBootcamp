@@ -24,6 +24,38 @@ form{
                 width: 100%;
             }
         }
+        img{
+            height: 10rem;
+        }
+        mat-label{
+            color: white;
+        }
+        h2{
+            font-size: 1.5rem;
+            align-self: center;
+        }
+        app-divider{
+            width: 100%;
+        }
+        button{
+            background-color: var(--lightColorStrong);
+            font-weight: bold;
+
+        }
+        @media (prefers-color-scheme: light) {
+            h2, mat-hint, button{
+                color: var(--darkColor);
+            } 
+        }
+        @media (prefers-color-scheme: dark) {
+            h2, mat-hint{
+                color: white;
+            }
+            button{
+                color: var(--darkColorSoft);
+                
+            }
+        }
     }
 
 }
@@ -32,3 +64,4 @@ form{
     padding: 0;
     margin: 0;
 }
+
