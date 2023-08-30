@@ -46,7 +46,16 @@ export class MyStoriesComponent {
 
   updateStory(story : Story){
     let dialogRef = this.dialog.open(StoryFormComponent,{
-      data : {name : story.name, description : story.description, epic : story.epic ,sprint: story.sprint, owner : story.owner,assignedTo : story.assignedTo, points : story.points,created: story.created, due :story.due, start :story.started, end :story.finished, status : story.status, option : 'Edit'}
+      data : {name : story.name,
+         description : story.description,
+          epic : story.epic, 
+          sprint: story.sprint, 
+          owner : story.owner,
+          assignedTo : story.assignedTo, 
+          points : story.points,created: 
+          story.created, due :story.due, 
+          start :story.started, 
+          end :story.finished, status : story.status, option : 'Edit'}
     })
 
     dialogRef.afterClosed().subscribe(result =>{
