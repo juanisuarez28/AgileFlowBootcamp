@@ -4,8 +4,7 @@
         <app-load-bar></app-load-bar>
     </p>
     
-    <app-proyect-card [project]="project" *ngIf="project != undefined"  (editOutPut)="editProjectDialog(project)"
-                                            (deleteOutPut)="deleteProject(project)"></app-proyect-card>
+    <app-proyect-card [project]="project" *ngIf="project != undefined"  (editOutPut)="editProjectDialog(project)"></app-proyect-card>
     <app-divider></app-divider>
     <app-button [text]="'Add epic'" [icon]="'plus'" (buttonEvent)="newEpicDialog()" ></app-button>
     <ul  *ngFor="let epica of epics; index as i;">

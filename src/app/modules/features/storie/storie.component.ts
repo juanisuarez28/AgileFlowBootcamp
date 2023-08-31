@@ -53,7 +53,6 @@ export class StorieComponent {
     this.storiesService.getStoryById(this.storyId).subscribe(response => {
       if (response.status == "success") {
         this.story = response.data
-        console.log(this.story);
       } else {
         this.errorGetStory = true
 
@@ -173,7 +172,6 @@ export class StorieComponent {
 
   updateStory() {
 
-    console.log("update");
 
     let dialogRef = this.dialog.open(StoryFormComponent, {
       data: {
@@ -187,7 +185,6 @@ export class StorieComponent {
 
     dialogRef.afterClosed().subscribe((result) => {
       this.storiesService.editStory(result.value, this.storyId).subscribe((response) => {
-        console.log(response);
 
         if ((response.status = 'success')) {
           this.getStory();

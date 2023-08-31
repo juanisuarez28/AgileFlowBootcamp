@@ -2,9 +2,18 @@
     display: flex;
     flex-direction: column;
     row-gap: 1rem;
-    margin: 1rem 0;
-    padding: 0;
+    margin: 1rem;
     width: 42rem;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+
+    @media (max-width: 750px) {
+        width: 90dvw;
+    }
+    app-divider,app-generic-card, app-story-card, ul{
+        width: 100%;
+    }
 }
 .epic-card{
     background-color: var(--darkColorSoft);

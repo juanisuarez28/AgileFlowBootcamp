@@ -62,7 +62,6 @@ export class MyStoriesComponent {
       
       if (result.value != undefined){
         this.ss.editStory(result.value, story.getId()).subscribe(resp =>{
-          console.log( "respuesta de edicion de una storie: ", resp)
           if (resp.status == "success"){
             this.getStories();
           }

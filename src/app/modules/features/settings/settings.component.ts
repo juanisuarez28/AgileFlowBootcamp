@@ -27,9 +27,7 @@ export class SettingsComponent implements OnInit {
     this.userService.getUser(this.tokenService.getUser()).subscribe(response =>{
 
       if(response.status == "success"){
-        this.user = response.data
-        console.log(this.user);
-        
+        this.user = response.data        
       }else{
         this.errorGetUser = false;
       }

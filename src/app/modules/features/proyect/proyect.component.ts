@@ -62,7 +62,6 @@ export class ProyectComponent implements OnInit {
           this.cantEpicsIsZero = false;
         }
       } else {
-        console.log("error al obtener epics");
         this.errorGetEpics = true;
       }
     });
@@ -77,7 +76,6 @@ export class ProyectComponent implements OnInit {
       if (result.value != undefined) {
         const loading = this.dialog.open(LoadingDialogComponent);
         this.epicService.saveEpic(result.value).subscribe(resp => {
-          console.log("component response from service of saveEpic: ", resp);
           loading.close();
           if (resp.status == "success") {
             this.dialog.open(DialogNotificationComponent, {
@@ -129,8 +127,6 @@ export class ProyectComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      //Comprobar que no contenga stories
-      console.log('The DELETE dialog was closed');
 
       if (result === true) {
         const loading = this.dialog.open(LoadingDialogComponent);
@@ -140,7 +136,6 @@ export class ProyectComponent implements OnInit {
           existsStories = (resp.data.length > 0)
           if (!existsStories) {
             this.epicService.deleteEpic(epica._id).subscribe(resp => {
-              // console.log("resultado of delete epic :", resp);
               loading.close();
               if (resp.status == "success") {
                 this.getEpics();
@@ -148,7 +143,6 @@ export class ProyectComponent implements OnInit {
                   data: { title: "Success deleting Epic", mensaje: "This epic has been deleted" }
                 });
               } else {
-                //dialog al eliminar, error en comunicacion con api
                 this.dialog.open(DialogNotificationComponent, {
                   data: { title: "Error deleting Epic", mensaje: "Error in comunication with Database" }
                 }
@@ -156,7 +150,6 @@ export class ProyectComponent implements OnInit {
               }
             })
           } else {
-            //dialog no se puede eliminar, contiene stories
             loading.close();
             this.dialog.open(DialogNotificationComponent, {
               data: { title: "Error deleting Epic", mensaje: "You can't delete it, this epic contains storie/s" }
@@ -200,25 +193,6 @@ export class ProyectComponent implements OnInit {
     })
     
   }
-
-  deleteProject(project: Project) {
-    const dialogRef = this.dialog.open(DeleteDialogComponent, {
-      data: { type: "Proyecto ", name: project.getName() },
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      this.projectsService.deleteProject(project.getId()).subscribe(resp => {
-        if (resp.success = "success") {
-          console.log("Exito al eliminar proyecto: ", resp)
-          this.getProject();
-        } else {
-          console.log("Error al eliminar proyecto ", resp);
-
-        }
-      });
-    });
-  }
-
 }
 
 interface epica {

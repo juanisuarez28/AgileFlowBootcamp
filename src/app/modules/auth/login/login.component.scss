@@ -8,6 +8,9 @@ form{
     background-color: var(--mediumColor);
     width: 80%;
     border-radius: 0.5rem;
+
+   
+
     .displayContent{
         display: flex;
         flex-direction: column;
@@ -27,9 +30,7 @@ form{
         img{
             height: 10rem;
         }
-        mat-label{
-            color: white;
-        }
+        
         h2{
             font-size: 1.5rem;
             align-self: center;
@@ -59,7 +60,11 @@ form{
     }
 
 }
+
 .alert{
+    background-color: var(--textColor);
+    display: flex;
+    justify-content: center;
     color: red;
     padding: 0;
     margin: 0;

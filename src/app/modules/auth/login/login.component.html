@@ -8,6 +8,7 @@
         <mat-label>Username:</mat-label>
         <input #user minlength="4" matInput placeholder="username" formControlName="username" required />
         <mat-hint align="end">{{user.value.length}}/4</mat-hint>
+        <mat-hint *ngIf="loginForm.value.Password != ''">Enter your username</mat-hint>
       </mat-form-field>
   
       <mat-form-field>
@@ -17,7 +18,11 @@
         <mat-hint align="end">{{password.value.length}}/4</mat-hint>
         <mat-hint *ngIf="loginForm.value.Password != ''">Enter your password</mat-hint>
       </mat-form-field>
-      <mat-label class="alert" *ngIf="wrongLogin">Wrong User or Password </mat-label>
+
+      
+      <span class="alert">
+        <mat-label  *ngIf="wrongLogin"> {{errorMessage}} </mat-label>
+      </span>
   
       <div class="loginForm-buttons">
         <button mat-button cdkFocusInitial type="submit">Log In</button>  

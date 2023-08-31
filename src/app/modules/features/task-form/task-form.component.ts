@@ -31,9 +31,7 @@ export class TaskFormComponent implements OnInit {
 
 
   onSubmit(){
-    if(this.taskForm.valid){
-      console.log(this.taskForm.value);
-      
+    if(this.taskForm.valid){      
       this.dialogRef.close(this.taskForm)
     }else{
       this.invalid = true;

@@ -34,10 +34,8 @@ export class EpicFormComponent {
 
   onSubmit(){
     if(this.epicForm.valid){
-      // console.log("Form is valid, form:", this.epicForm," close dialog");
       this.dialogRef.close(this.epicForm);
     }else{
-      
       console.log("this form is not valid");
     }
   }

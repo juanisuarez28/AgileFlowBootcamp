@@ -15,16 +15,12 @@ export class HeaderComponent implements OnInit{
 
 
   logout(){
-    this.tokenService.signOut();
-    console.log(this.tokenService.getToken());
-    
+    this.tokenService.signOut();    
   }
   constructor(private headerService: HeaderService, private router: Router,private tokenService : TokenStorageService ){
   }
 
   ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
     this.headerService.getRutaActual$().subscribe( resp=>{
       this.rutaActual = resp;
     })
@@ -36,18 +32,17 @@ export class HeaderComponent implements OnInit{
   toggleNavBar(){
     this.toggle.emit();
   }
+
   previousLevel(){
     const currentUrl = this.router.url;
     const urlSegments = currentUrl.split('/').filter(segment => segment !== ''); // Remove empty segments
 
     if (urlSegments.length > 1) {
-      urlSegments.pop(); // Remove the last element
+      urlSegments.pop();
       const newUrl = `/${urlSegments.join('/')}`;
 
       this.router.navigateByUrl(newUrl);
     } else {
-      // Handle if there's only one segment or no segment left
-      console.log('Cannot go back further');
     }
   }
   

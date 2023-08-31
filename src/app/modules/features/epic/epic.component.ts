@@ -54,7 +54,6 @@ export class EpicComponent implements OnInit {
 
   getStories() {
     this.ss.getStories(this.epicId).subscribe(resp => {
-      console.log("Respuesta al hacer getStories ", resp);
       if (resp.status == "success") {
         this.stories = resp.data;
         this.errorGetStories = false;
@@ -79,7 +78,6 @@ export class EpicComponent implements OnInit {
         const loading = this.dialog.open(LoadingDialogComponent)
         this.ss.addStory(result.value).subscribe(resp => {
           loading.close()
-          console.log("respuesta de creacion de una nueva storie: ", resp)
           if (resp.status == "success") {
             this.getStories();
             this.dialog.open(DialogNotificationComponent, {
@@ -106,7 +104,6 @@ export class EpicComponent implements OnInit {
         const loading = this.dialog.open(LoadingDialogComponent)
         this.ss.editStory(result.value, story.getId()).subscribe(resp => {
           loading.close()
-          console.log("respuesta de edicion de una storie: ", resp)
           if (resp.status == "success") {
             this.getStories();
             this.dialog.open(DialogNotificationComponent, {
@@ -139,7 +136,6 @@ export class EpicComponent implements OnInit {
             this.ss.deleteStory(story.getId()).subscribe(resp => {
               loading.close()
               if (resp.status == "success") {
-                console.log("exito al eliminar story");
                 this.getStories();
                 this.dialog.open(DialogNotificationComponent, {
                   data: { title: "Success deleting Storie: " + story.name, mensaje: "The storie has been deleted" }

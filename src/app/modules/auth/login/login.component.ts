@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { AuthService } from '../../api-rest/services/auth.service';
 import { TokenStorageService } from '../token-storage.service';
 import { Router } from '@angular/router';
+import { catchError } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -14,6 +15,7 @@ export class LoginComponent {
   hide = true;
   respuesta: any;
   wrongLogin =false;
+  errorMessage : string = "";
 
   constructor(  private formBuilder : FormBuilder, 
                 private authService: AuthService, 
@@ -30,27 +32,34 @@ export class LoginComponent {
 
   onSubmit(){
     if(this.loginForm.valid){
-      console.log("Form is valid, form:", this.loginForm);
-      this.authService.postLogin(this.loginForm.value).subscribe(
+      this.authService.postLogin(this.loginForm.value).pipe(
+        catchError((error) => {
+          
+          this.handleError(error.error.message)
+
+          return [];
+        })
+      ).subscribe(
         (response)=>{
           this.respuesta = response; 
-          console.log(this.respuesta.success);
           
           if(this.respuesta.success){
             this.tokenService.saveToken(this.respuesta.token);//guarda el token
             this.tokenService.saveUser(this.respuesta.user._id);//guarda id del user
-            console.log(this.respuesta.token);
             this.router.navigateByUrl('/');
            }else{
-              console.log("Usuario no autorizado/registrado");
-              this.wrongLogin = true;
+              
+              this.handleError("Invalid username or password")
            }
         }
      ); 
-    }else{
-      
-      console.log("this form is not valid");
+    }else{     
     }
+  }
+
+  handleError(error : string){
+    this.wrongLogin = true;
+    this.errorMessage = error;
   }
 
   getpasswordInput() { 

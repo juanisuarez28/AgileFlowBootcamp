@@ -45,9 +45,7 @@ export class StoryFormComponent implements OnInit{
   onSubmit(){
     if(this.storyForm.valid){
       this.dialogRef.close(this.storyForm)
-    }else{
-      console.log("Invalid form");
-      
+    }else{      
     }
   }
 }

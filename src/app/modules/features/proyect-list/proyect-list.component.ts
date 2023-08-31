@@ -38,7 +38,6 @@ export class ProyectListComponent implements OnInit{
 
   getProjects() {
     this.projectsService.getProjectApi().subscribe(resp => {
-      console.log("RESPUESTA API (get) /projects : ", resp);
       if (resp.status == "success") {
         this.projects = resp.data;
         this.errorGetProjects = false;
@@ -59,11 +58,9 @@ export class ProyectListComponent implements OnInit{
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log("dialog close, result value: ", result.value);
       //loading
       const loading = this.dialog.open(LoadingDialogComponent);
       this.projectsService.newProject(result.value).subscribe(resp => {
-        console.log("respuesta de crearcion de nuevo projecto: ", resp)
         loading.close()
         if (resp.success = "success") {
           this.getProjects();
@@ -95,7 +92,6 @@ export class ProyectListComponent implements OnInit{
         const loading = this.dialog.open(LoadingDialogComponent)
         //loading true
         this.projectsService.editProject(result.value, project.getId()).subscribe(resp => {
-          console.log("respuesta de EDICION de nuyevo projecto: ", resp)
           loading.close()
           if (resp.success = "success") {
             this.getProjects();
@@ -129,12 +125,10 @@ export class ProyectListComponent implements OnInit{
             this.projectsService.deleteProject(project.getId()).subscribe(resp => {
               loading.close();
               if (resp.success = "success") {
-                console.log("Exito al eliminar proyecto: ", resp)
                 this.dialog.open(DialogNotificationComponent,{
                   data: { title: "Success deleting Project: "+project.getName(), mensaje: "This project has been deleted" }});
                 this.getProjects();
               } else {
-                console.log("Error al eliminar proyecto ", resp);
                 this.dialog.open(DialogNotificationComponent,{
                   data: { title: "Error deleting Project", mensaje: "Error in comunication with Database" }}
                   );
@@ -155,7 +149,6 @@ export class ProyectListComponent implements OnInit{
   newProject(newProject: formProject) {
     
     this.projectsService.newProject(newProject).subscribe(resp => {
-      console.log("respuesta de crearcion de nuevo projecto: ", resp)
       if (resp.success = "success") {
         this.getProjects();
       }
