@@ -2,7 +2,12 @@ nav{
   mat-toolbar{
     color: var(--textColor);
     background-color: var(--elementBackgroundColor);
-  
+    span{
+      font-weight: 500;
+    }
+    mat-icon{
+      vertical-align: super;
+    }
     @media (prefers-color-scheme: light) {
       button:hover{
         background-color: var(--darkColor);
