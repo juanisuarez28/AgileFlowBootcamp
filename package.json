@@ -27,8 +27,10 @@
     "@ngx-translate/http-loader": "^7.0.0",
     "bootstrap": "^5.3.1",
     "chart.js": "^3.1.1",
+    "html2canvas": "^1.4.1",
     "mdb-angular-ui-kit": "^4.1.0",
     "ng": "^0.0.0",
+    "puppeteer": "^21.1.1",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.12.0"

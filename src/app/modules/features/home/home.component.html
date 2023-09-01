@@ -1,1 +1,38 @@
-<p>home works!</p>
+<div class="home">
+    <p *ngIf="user == undefined && !errorGetUser">
+        Loading content
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </p>
+
+    <div *ngIf="user != undefined" class="title">
+        <h2>¡Bienvenido {{user.name.first}}! </h2>
+        <h5>¿En qué estarás trabajando hoy?</h5>
+    </div>
+
+    <div class="contenido">
+        <div class="stories">
+            <div *ngIf="stories!=undefined" class="story-title">
+                <h5>Stories recientes</h5>
+            </div>
+            <ul>
+                <li *ngFor="let story of stories">
+                    <app-preview-story *ngIf="stories!=undefined" [story]="story"></app-preview-story>
+                </li>
+            </ul>
+            <app-label [text]="'¡Que afortunado! No tienes stories asignadas'" *ngIf="cantStoriesIsZero"></app-label>
+            <app-label [text]="'Error obteniendo stories'" *ngIf="errorGetStories"></app-label>
+        </div>
+        <div class="projects">
+            <div *ngIf="projects!=undefined" class="project-title">
+                <h5>Aquí tienes tus proyectos!</h5>
+            </div>
+            <ul>
+                <li *ngFor="let project of projects">
+                    <app-preview-project *ngIf="projects!=undefined" [project]="project"></app-preview-project>
+                </li>
+            </ul>
+            <app-label [text]="'Aun no tienes proyectos, ve a My-projects y crea uno!'" *ngIf="cantProjectsIsZero"></app-label>
+            <app-label [text]="'Error obteniendo projects'" *ngIf="errorGetProjects"></app-label>
+        </div>
+    </div>
+</div>

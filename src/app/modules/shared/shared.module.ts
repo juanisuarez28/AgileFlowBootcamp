@@ -20,6 +20,8 @@ import { LoadingDialogComponent } from './loading-dialog/loading-dialog.componen
 import { DialogNotificationComponent } from './dialog-notification/dialog-notification.component';
 import { StoryCardComponent } from './story-card/story-card.component';
 import { LoadBarComponent } from './load-bar/load-bar.component';
+import { PreviewStoryComponent } from './preview-story/preview-story.component';
+import { PreviewProjectComponent } from './preview-project/preview-project.component';
 
 
 @NgModule({
@@ -38,13 +40,15 @@ import { LoadBarComponent } from './load-bar/load-bar.component';
     DialogNotificationComponent,
     StoryCardComponent,
     LoadBarComponent,
+    PreviewStoryComponent,
+    PreviewProjectComponent,
   ],
   imports: [
     CommonModule,
     MatDialogModule,
     MaterialModule,
-    RouterModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule
   ],
   exports:[
     ButtonComponent,
@@ -58,7 +62,9 @@ import { LoadBarComponent } from './load-bar/load-bar.component';
     ProjectDialogComponent,
     OwnerPComponent,
     StoryCardComponent,
-    LoadBarComponent
+    LoadBarComponent,
+    PreviewStoryComponent,
+    PreviewProjectComponent
   ]
 })
 export class SharedModule { }

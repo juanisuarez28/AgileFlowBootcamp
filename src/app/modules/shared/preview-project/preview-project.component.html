@@ -1,0 +1,11 @@
+<mat-card [routerLink]="'/my-projects/'+project._id">
+    <mat-card-header>
+        <div class="imagen">
+            <img src="assets/images/AgileFlow-favicon.png" alt="">
+        </div>
+        <div>
+            <mat-card-title>{{project.name}}</mat-card-title>
+            <mat-card-subtitle>{{project.description}}</mat-card-subtitle>
+        </div>
+    </mat-card-header>
+</mat-card>

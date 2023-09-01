@@ -1,0 +1,118 @@
+.home {
+    margin: 0;
+
+    .title {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        h2 {
+            margin-top: 1rem;
+        }
+
+        @media (prefers-color-scheme: light) {
+            h2 {
+                color: var(--darkColor);
+            }
+        }
+
+        @media (prefers-color-scheme: dark) {
+            h2 {
+                color: white;
+            }
+        }
+
+        h5 {
+            margin-top: 1rem;
+            color: var(--mediumColor);
+        }
+    }
+
+    .contenido {
+        margin: 0;
+        margin-top: 4rem;
+        display: flex;
+        justify-content: center;
+
+
+
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .story-title {
+            display: flex;
+            align-content: center;
+            height: 2.5rem;
+            background-color: var(--mediumColor);
+
+            @media (prefers-color-scheme: light) {
+                h5 {
+                    color: var(--darkColor);
+                }
+            }
+
+            @media (prefers-color-scheme: dark) {
+                h5 {
+                    color: white;
+                }
+            }
+
+            h5 {
+                padding: 0.75rem 0.75rem;
+            }
+        }
+
+        .stories,
+        .projects {
+            margin-left: 10%;
+        }
+
+        .projects {
+            margin-right: 10%;
+        }
+
+        .project-title {
+            display: flex;
+            align-content: center;
+            height: 2.5rem;
+            background-color: var(--mediumColor);
+
+            @media (prefers-color-scheme: light) {
+                h5 {
+                    color: var(--darkColor);
+                }
+            }
+
+            @media (prefers-color-scheme: dark) {
+                h5 {
+                    color: white;
+                }
+            }
+
+            h5 {
+                padding: 0.75rem 0.75rem;
+            }
+        }
+    }
+}
+
+@media (max-width: 1050px) {
+    .contenido{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .projects, .stories{
+        margin-left: 0;
+        margin-right: 0;
+        margin-bottom:4rem;
+    }
+
+    .story-title, .project-title{
+        width: 20rem;
+    }
+}
