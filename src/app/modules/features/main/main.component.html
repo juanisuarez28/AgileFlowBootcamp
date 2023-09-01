@@ -8,20 +8,24 @@
             </div>
 
             <div class=" navigation">
-              <div class="nav-button">
-                <app-label (click)="sidenav.toggle()" [text]="'HOME'" [pointerCursor]="true" [routerLink]="[ '/']" ></app-label>
+              <div class="nav-button" [routerLink]="[ '/']" (click)="sidenav.toggle()">
+                <!-- <app-label (click)="sidenav.toggle()" [text]="'HOME'" [pointerCursor]="true"  ></app-label> -->
+                <p>Home</p>
               </div>
-              <div class="nav-button">
-                <app-label (click)="sidenav.toggle()" [text]="'My Proyects'" [routerLink]="[ '/my-projects']" [pointerCursor]="true" ></app-label>
+              <div class="nav-button" [routerLink]="[ '/my-projects']" (click)="sidenav.toggle()">
+                <!-- <app-label (click)="sidenav.toggle()" [text]="'My Proyects'"  [pointerCursor]="true" ></app-label> -->
+                <p>My Projects</p>
               </div>
-              <div class="nav-button">
-                <app-label (click)="sidenav.toggle()" [text]="'My Stories'" [routerLink]="[ '/my-stories']" [pointerCursor]="true" ></app-label>
+              <div class="nav-button" [routerLink]="[ '/my-stories']" (click)="sidenav.toggle()">
+                <!-- <app-label (click)="sidenav.toggle()" [text]="'My Stories'"  [pointerCursor]="true" ></app-label> -->
+                <p>My stories</p>
               </div>
 
             </div>
 
-            <div class="nav-button">
-              <app-label (click)="sidenav.toggle()" [text]="'Settings'" [routerLink]="[ '/settings']" [pointerCursor]="true" ></app-label>
+            <div class="nav-button" (click)="sidenav.toggle()" [routerLink]="[ '/settings']">
+              <!-- <app-label (click)="sidenav.toggle()" [text]="'Settings'" [routerLink]="[ '/settings']" [pointerCursor]="true" ></app-label> -->
+              <p>Settings</p>
             </div>
           </div>
   </mat-sidenav>

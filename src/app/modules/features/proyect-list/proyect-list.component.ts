@@ -59,18 +59,21 @@ export class ProyectListComponent implements OnInit{
 
     dialogRef.afterClosed().subscribe(result => {
       //loading
-      const loading = this.dialog.open(LoadingDialogComponent);
-      this.projectsService.newProject(result.value).subscribe(resp => {
-        loading.close()
-        if (resp.success = "success") {
-          this.getProjects();
-          this.dialog.open(DialogNotificationComponent,{
-            data: { title: "Success adding Project: "+result.value.name, mensaje: "The project has been added" }});
-        }else{
-          this.dialog.open(DialogNotificationComponent,{
-            data: { title: "Error adding Project:"+result.value.name, mensaje: "Error in comunication with Database" }});
-        }
-      });
+      if(result != undefined){
+        
+        const loading = this.dialog.open(LoadingDialogComponent);
+        this.projectsService.newProject(result.value).subscribe(resp => {
+          loading.close()
+          if (resp.success = "success") {
+            this.getProjects();
+            this.dialog.open(DialogNotificationComponent,{
+              data: { title: "Success adding Project: "+result.value.name, mensaje: "The project has been added" }});
+          }else{
+            this.dialog.open(DialogNotificationComponent,{
+              data: { title: "Error adding Project:"+result.value.name, mensaje: "Error in comunication with Database" }});
+          }
+        });
+      }
 
       // this.newProject(result.value);
     })

@@ -79,7 +79,7 @@
 
         <mat-form-field>
             <mat-label>Owner</mat-label>
-            <mat-select multiple required formControlName="owner" >
+            <mat-select  required formControlName="owner" >
                 <mat-option *ngFor="let user of users" [value]="user._id"> {{user.getName()}}</mat-option>
                 
             </mat-select>
