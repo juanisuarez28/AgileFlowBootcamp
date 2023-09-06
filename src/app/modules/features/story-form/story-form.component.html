@@ -21,23 +21,23 @@
 
         <mat-form-field>
             <mat-label>Points</mat-label>
-            <mat-select formControlName="points" >
-                <mat-option value="1">1</mat-option>
-                <mat-option value="2">2</mat-option>
-                <mat-option value="3">3</mat-option>
-                <mat-option value="4">4</mat-option>
-                <mat-option value="5">5</mat-option>
+            <mat-select matInput formControlName="points" required> 
+                <mat-option [value]="1">1</mat-option>
+                <mat-option [value]="2">2</mat-option>
+                <mat-option [value]="3">3</mat-option>
+                <mat-option [value]="4">4</mat-option>
+                <mat-option [value]="5">5</mat-option>
             </mat-select>
         </mat-form-field>
 
-        <mat-form-field color="primary">
+        <!-- <mat-form-field color="primary">
             <mat-label>Sprint</mat-label>
-            <input type="text" matInput >
-        </mat-form-field>
+            <input type="text" matInput formControlName="sprint">
+        </mat-form-field> -->
 
         <mat-form-field>
             <mat-label>Due</mat-label>
-            <input matInput [matDatepicker]="due" formControlName="due">
+            <input matInput [matDatepicker]="due" formControlName="due" readonly>
             <mat-hint>DD/MM/YYYY</mat-hint>
             <mat-datepicker-toggle matIconSuffix [for]="due"></mat-datepicker-toggle>
             <mat-datepicker #due></mat-datepicker>
@@ -45,7 +45,7 @@
 
         <mat-form-field>
             <mat-label>Start</mat-label>
-            <input matInput [matDatepicker]="started" formControlName="started">
+            <input matInput [matDatepicker]="started" formControlName="started" readonly>
             <mat-hint>DD/MM/YYYY</mat-hint>
             <mat-datepicker-toggle matIconSuffix [for]="started"></mat-datepicker-toggle>
             <mat-datepicker #started></mat-datepicker>
@@ -53,7 +53,7 @@
 
         <mat-form-field>
             <mat-label>Finish</mat-label>
-            <input matInput [matDatepicker]="finished" formControlName="finished">
+            <input matInput [matDatepicker]="finished" formControlName="finished" readonly>
             <mat-hint>DD/MM/YYYY</mat-hint>
             <mat-datepicker-toggle matIconSuffix [for]="finished"></mat-datepicker-toggle>
             <mat-datepicker #finished></mat-datepicker>
@@ -69,7 +69,7 @@
 
         <mat-form-field>
             <mat-label>Status</mat-label>
-            <mat-select formControlName="status" required>
+            <mat-select matInput formControlName="status" required>
                 <mat-option value="todo">To do</mat-option>
                 <mat-option value="running">Running </mat-option>
                 <mat-option value="done">Done </mat-option>

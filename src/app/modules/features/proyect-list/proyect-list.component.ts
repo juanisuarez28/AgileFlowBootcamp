@@ -59,7 +59,7 @@ export class ProyectListComponent implements OnInit{
 
     dialogRef.afterClosed().subscribe(result => {
       //loading
-      if(result != undefined){
+      if(result.value != undefined){
         
         const loading = this.dialog.open(LoadingDialogComponent);
         this.projectsService.newProject(result.value).subscribe(resp => {
@@ -90,7 +90,7 @@ export class ProyectListComponent implements OnInit{
 
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result != undefined){
+      if (result.value != undefined){
 
         const loading = this.dialog.open(LoadingDialogComponent)
         //loading true
@@ -117,7 +117,9 @@ export class ProyectListComponent implements OnInit{
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result != undefined){
+      console.log("result:",result);
+      
+      if (result == true){
       
         let existEpicas: boolean = false;
         const loading = this.dialog.open(LoadingDialogComponent);

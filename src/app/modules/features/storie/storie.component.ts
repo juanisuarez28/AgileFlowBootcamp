@@ -66,7 +66,7 @@ export class StorieComponent {
         this.tasks = response.data;
         if (this.tasks.length == 0) {
           this.errorNoTasks = true;
-        }else{
+        } else {
           this.errorNoTasks = false
         }
       } else {
@@ -124,7 +124,7 @@ export class StorieComponent {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      if (result.value != undefined ) {
+      if (result.value != undefined) {
         const loadingDialog = this.dialog.open(LoadingDialogComponent)
         this.ts.editTask(result.value, task._id).subscribe((response) => {
           loadingDialog.close();
@@ -184,12 +184,23 @@ export class StorieComponent {
     })
 
     dialogRef.afterClosed().subscribe((result) => {
-      this.storiesService.editStory(result.value, this.storyId).subscribe((response) => {
+      if (result.value != undefined) {
 
-        if ((response.status = 'success')) {
-          this.getStory();
-        }
-      });
+        const loadingDialog = this.dialog.open(LoadingDialogComponent)
+        this.storiesService.editStory(result.value, this.storyId).subscribe((response) => {
+          loadingDialog.close()
+          if ((response.status = 'success')) {
+            this.getStory();
+            this.dialog.open(DialogNotificationComponent, {
+              data: { title: "Success editing Story: " + this.story.name, mensaje: "The task has been edited" }
+            })
+          } else {
+            this.dialog.open(DialogNotificationComponent, {
+              data: { title: "Error editing Story: " + this.story.name, mensaje: "Error in comunication with Database." }
+            })
+          }
+        });
+      }
     });
   }
 

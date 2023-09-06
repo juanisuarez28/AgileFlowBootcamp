@@ -24,7 +24,7 @@
 
         <mat-form-field>
             <mat-label>Due</mat-label>
-            <input matInput [matDatepicker]="due" formControlName="due">
+            <input matInput [matDatepicker]="due" formControlName="due" readonly  >
             <mat-hint>DD/MM/YYYY</mat-hint>
             <mat-datepicker-toggle matIconSuffix [for]="due"></mat-datepicker-toggle>
             <mat-datepicker #due></mat-datepicker>
@@ -45,5 +45,5 @@
     </mat-dialog-actions>
 
     <mat-label class="alert" *ngIf="invalid">Invalid form</mat-label>
-
+    
 </form>
